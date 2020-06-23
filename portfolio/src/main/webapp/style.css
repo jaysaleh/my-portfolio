@@ -2,6 +2,7 @@
   font-family: Helvetica;
 }
 
+/* Header styling */
 #header {
   align-items: center;
   display: flex;
@@ -30,6 +31,7 @@
   text-decoration: none;
 }
 
+/* Body styling */
 #body {
   align-items: center;
   display: flex;
@@ -63,6 +65,7 @@
   font-size: 26px;
 }
 
+/* a tag styling */
 a:visited{
   color: #000000;
 }
@@ -71,6 +74,7 @@ a:hover{
   color: #f6543c !important;
 }
 
+/* Footer styling */
 #footer {
   align-items: center;
   display: flex;
@@ -82,7 +86,7 @@ a:hover{
   width: 60%;
 }
 
-/* Styling of social media icons */
+/* Social media icons styling */
 .fa {
   font-size: 50px;
   padding: 10px;
