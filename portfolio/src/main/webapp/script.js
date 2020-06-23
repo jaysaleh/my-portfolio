@@ -20,7 +20,7 @@ const sleep = (milliseconds) => {
 }
 
 var slideIndex = 1;
-sleep(100).then(() => {
+sleep(50).then(() => {
   showSlides(slideIndex);
 })
 

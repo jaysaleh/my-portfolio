@@ -6,7 +6,7 @@
 
 /* Slideshow container */
 .slideshow-container {
-  max-width: "70%";
+  max-width: 1000px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -17,9 +17,10 @@
 /* Hide the images by default */
 .mySlides {
   display: none;
-  justify-content: center !important;
-  align-items: center !important;
+  /* justify-content: center !important;
+  align-items: center !important; */
   background-color: green;
+  text-align: center;
 }
 
 .mySlides h1, h3{
@@ -70,6 +71,7 @@
 
 .fas:hover {
     opacity: 0.3;
+    color: #f6543c;
 }
 
 .dot-container {
