@@ -1,9 +1,77 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+* {
+    box-sizing:border-box;
+    font-family: Helvetica;
+
 }
 
-#greeting-container {
-  margin-top: 20px;
+/* Slideshow container */
+.slideshow-container {
+  max-width: "70%";
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+  margin-top: 400px;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+  justify-content: center !important;
+  align-items: center !important;
+  background-color: green;
+}
+
+.mySlides h1, h3{
+    text-align: center;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+.fas {
+  padding: 10px;
+  font-size: 50px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.fas:hover {
+    opacity: 0.3;
+}
+
+.dot-container {
+    text-align: center;
 }
