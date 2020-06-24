@@ -1,7 +1,6 @@
-* {
-    box-sizing:border-box;
-    font-family: Helvetica;
-
+* { 
+  box-sizing:border-box;
+  font-family: Helvetica;
 }
 
 /* Header styling */
@@ -26,83 +25,119 @@
 }
 
 #header a {
-  color: #000000;
+  color: #000;
   font-size: 18px;
   font-weight: 200;
   padding-right: 35px;
   text-decoration: none;
 }
 
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  display: flex;
+/* Slides styling */
+#slideshow-container {
   align-items: center;
+  display: flex;
   justify-content: space-around;
   margin: auto;
   margin-top: 200px;
+  max-width: 1000px;
 }
 
-/* Hide the images by default */
 .mySlides {
   display: none;
-  /* justify-content: center !important;
-  align-items: center !important; */
   text-align: center;
 }
 
-.mySlides h1, h3{
-    text-align: center;
+.mySlides h1, 
+h3 {
+  text-align: center;
 }
 
-/* The dots/bullets/indicators */
+/* Image styling */
+.img-50 {
+  height: 50%;
+  width: 50%;
+}
+
+.img-60 {
+  height: 60%;
+  width: 60%;
+}
+
+.img-75 {
+  height: 75%;
+  width: 75%;
+}
+
+.img-80 {
+  height: 80%;
+  width: 80%;
+}
+
+/* Dot styling */
 .dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
   background-color: #bbb;
   border-radius: 50%;
+  cursor: pointer;
   display: inline-block;
+  height: 15px;
+  margin: 0 2px;
   transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-.fas {
-  padding: 10px;
-  font-size: 50px;
-  width: 50px;
-  text-align: center;
-  text-decoration: none;
-}
-
-
-.fas:hover {
-    opacity: 0.3;
-    color: #f6543c;
+  width: 15px;
 }
 
 .dot-container {
-    text-align: center;
+  text-align: center;
 }
+
+.active, 
+.dot:hover {
+  background-color: #717171;
+}
+
+/* Link styling */
+a:hover,
+#selected {
+  color: #f6543c !important;
+}
+
+/* Arrow styling */
+.fas {
+  font-size: 50px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  width: 50px;
+}
+
+.fas:hover {
+  color: #f6543c;
+  opacity: 0.3;
+}
+
+/* Fading animations */
+.fade {
+  animation-duration: 1.5s;
+  animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-name: fade;
+}
+
+@-webkit-keyframes fade {
+  from {
+    opacity: .4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: .4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+

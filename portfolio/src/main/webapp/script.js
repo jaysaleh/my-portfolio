@@ -12,28 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/* References: https://www.w3schools.com/howto/howto_js_slideshow.asp
- */
-
-const sleep = (milliseconds) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
-
 var slideIndex = 1;
-sleep(50).then(() => {
-  showSlides(slideIndex);
-})
+showSlides(slideIndex);
 
-// Next/previous controls
+// Next and previous controls
 function plusSlides(n) {
   showSlides(slideIndex += n);
 }
 
-// Dot control
+// Allows changing slides through the dots
 function currentSlide(n) {
   showSlides(slideIndex = n);
 }
 
+// Updated slides based on previous/next click or dot click
 function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("mySlides");
@@ -48,10 +40,8 @@ function showSlides(n) {
   }
 
   for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
+    slides[i].style.display = "none";
+    dots[i].className = dots[i].className.replace(" active", "");
   }
 
   slides[slideIndex-1].style.display = "block";
