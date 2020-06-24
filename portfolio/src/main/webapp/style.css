@@ -1,5 +1,5 @@
 * { 
-  box-sizing:border-box;
+  box-sizing: border-box;
   font-family: Helvetica;
 }
 
@@ -98,6 +98,14 @@ h3 {
 a:hover,
 #selected {
   color: #f6543c !important;
+}
+
+a:visited {
+  color: #000;
+}
+
+#cs-link {
+  text-decoration: none;
 }
 
 /* Arrow styling */

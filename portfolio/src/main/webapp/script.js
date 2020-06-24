@@ -12,39 +12,70 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/** @param slideIndex slide currently being displayed */
 var slideIndex = 1;
+
+/**
+ * Supported class states for dots and slides.
+ * @enum {string}
+ */
+const states = {
+  SHOW_DOT: ' active',
+  HIDE_DOT: '',
+  SHOW_SLIDE: 'block',
+  HIDE_SLIDE: 'none',
+}
+
 showSlides(slideIndex);
 
-// Next and previous controls
+/**
+ * Function computes which slide should be shown and class showSlides on that
+ * specific slide. Function is called when either arrows are pressed.
+ * @param {integer} n where n = 1 to go forward or n = -1 to go back
+ */
 function plusSlides(n) {
   showSlides(slideIndex += n);
 }
 
-// Allows changing slides through the dots
+/**
+ * Function calls showSlides on the slide that corresponds to the dot pressed.
+ * @param {integer} n where n is the number of the dot that is pressed
+ */
 function currentSlide(n) {
   showSlides(slideIndex = n);
 }
 
-// Updated slides based on previous/next click or dot click
+/**
+ * Function computes where the slide index is out of bounds and adjusts accordingly.
+ * Function then sets all slides and dots to be not active and sets respective slide
+ * and dot as active.
+ * @param {integer} n where n is the slide to be displayed
+ */
 function showSlides(n) {
-  var i;
   var slides = document.getElementsByClassName("mySlides");
   var dots = document.getElementsByClassName("dot");
+
+  // Wrap around if slideIndex is out of bounds
+  if (n < 1) {
+    slideIndex = slides.length;
+  }
   
   if (n > slides.length) {
     slideIndex = 1;
   }
   
-  if (n < 1) {
-    slideIndex = slides.length;
+  // Sets all slides to not display
+  for (var slide of slides) {
+    slide.style.display = states.HIDE_SLIDE;
   }
 
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-    dots[i].className = dots[i].className.replace(" active", "");
+  // Modifies className of each dot such that no dots are highlighted
+  for (var dot of dots){
+    dot.className = dot.className.replace(states.SHOW_DOT, states.HIDE_DOT);
   }
-
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
+  
+  // Activates slide and dot
+  slides[slideIndex-1].style.display = states.SHOW_SLIDE;
+  dots[slideIndex-1].className += states.SHOW_DOT;
 }
 
