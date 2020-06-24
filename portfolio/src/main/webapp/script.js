@@ -52,8 +52,8 @@ function currentSlide(n) {
  * @param {integer} n where n is the slide to be displayed
  */
 function showSlides(n) {
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
+  var slides = document.getElementsByClassName("mySlides"); /** Array<div> containing all slides in slideshow-container */
+  var dots = document.getElementsByClassName("dot"); /** Array<span> containing all dots in dot-container */
 
   // Wrap around if slideIndex is out of bounds
   if (n < 1) {
@@ -64,7 +64,7 @@ function showSlides(n) {
     slideIndex = 1;
   }
   
-  // Sets all slides to not display
+  // Sets style of all slides to not display
   for (var slide of slides) {
     slide.style.display = states.HIDE_SLIDE;
   }
