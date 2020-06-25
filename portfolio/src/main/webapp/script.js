@@ -26,14 +26,14 @@ const states = {
   HIDE_SLIDE: 'none',
 }
 
-showSlides(slideIndex);
+showSlide(slideIndex);
 
 /**
  * Computes which slide to show then shows that slide. Invoked when either arrows are pressed.
  * @param {integer} n where n = 1 to go forward or n = -1 to go back
  */
-function plusSlides(n) {
-  showSlides(slideIndex += n);
+function plusSlide(n) {
+  showSlide(slideIndex += n);
 }
 
 /**
@@ -41,16 +41,15 @@ function plusSlides(n) {
  * @param {integer} n where n is the number of the dot that is pressed
  */
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+  showSlide(slideIndex = n);
 }
 
 /**
- * If the slide index is out of bounds, adjust to wrap around.
- * Sets all slides and dots to be not active and sets slideIndex slide
- * and dot to be active.
+ * Shows the nth slide and dot. If nth slide is out of bounds, 
+ * wrap around to front or back.
  * @param {integer} n where n is the slide to be displayed
  */
-function showSlides(n) {  
+function showSlide(n) {  
   /** Array<div> containing all slides in slideshow-container */
   var slides = document.getElementsByClassName("mySlides");
   /** Array<span> containing all dots in dot-container */
