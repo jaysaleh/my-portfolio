@@ -45,9 +45,9 @@ function currentSlide(n) {
 }
 
 /**
- * When the slide index is out of bounds, adjust to wrap around. Then
- * set all slides and dots to be not active and sets slide and dot
- * with respect to slideIndex to be active.
+ * If the slide index is out of bounds, adjust to wrap around.
+ * Sets all slides and dots to be not active and sets slideIndex slide
+ * and dot to be active.
  * @param {integer} n where n is the slide to be displayed
  */
 function showSlides(n) {  
