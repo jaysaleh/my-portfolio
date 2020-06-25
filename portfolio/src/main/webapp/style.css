@@ -10,7 +10,7 @@
   justify-content: space-between;
   margin-left: auto;
   margin-right: auto;
-  width: 75%;
+  /* width: 75%; */
 }
 
 #header h1 {
@@ -32,12 +32,12 @@
 }
 
 #selected {
-  color: #f6543c !important;
+  color: #0cca4a !important;
   font-weight: bold !important;
 }
 
 #blog_body {
-  width: 65%;
+  /* width: 65%; */
   margin-left: auto;
   margin-right: auto;
 }
@@ -70,7 +70,7 @@
 
 #body_text h1{
   color: #f6543c;
-  font-size: 55px;
+  /* font-size: 55px; */
 }
 
 /* #body_text p{
@@ -113,18 +113,45 @@ a:hover{
 
 /* Font Sizing */
 @media (min-width:800px) {
-  #body_text p{
-    font-size: 14px !important;
+  #header {
+    width: 95% !important;
   }
-}
-
-@media (min-width:1200px) {
+  #blog_body {
+    width: 85% !important;
+  }  
+  #body_text h1{
+    font-size: 35px !important;
+  }
   #body_text p{
     font-size: 18px !important;
   }
 }
 
+@media (min-width:1200px) {
+  #header {
+    width: 85% !important;
+  }
+  #blog_body {
+    width: 75% !important;
+  }  
+  #body_text h1{
+    font-size: 45px !important;
+  }
+  #body_text p{
+    font-size: 20px !important;
+  }
+}
+
 @media (min-width:1600px) {
+  #header {
+    width: 75% !important;
+  }
+  #blog_body {
+    width: 65% !important;
+  }  
+  #body_text h1{
+    font-size: 55px !important;
+  }
   #body_text p{
     font-size: 22px !important;
   }
