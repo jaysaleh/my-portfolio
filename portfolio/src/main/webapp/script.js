@@ -12,15 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** @param slideIndex slide currently being displayed */
+/** @var slideIndex slide currently being displayed */
 var slideIndex = 1;
+
+/** @const ADD_ATTRIBUTE used to add a space in class attributes */
+const ADD_ATTRIBUTE = " ";
 
 /**
  * Supported class states for dots and slides.
  * @enum {string}
  */
 const states = {
-  SHOW_DOT: ' active',
+  SHOW_DOT: ADD_ATTRIBUTE + 'active',
   HIDE_DOT: '',
   SHOW_SLIDE: 'block',
   HIDE_SLIDE: 'none',
