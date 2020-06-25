@@ -15,7 +15,7 @@
 /** @var slideIndex slide currently being displayed */
 var slideIndex = 1;
 
-/** @const ADD_ATTRIBUTE !string used to add a space in class attributes */
+/** @const ADD_ATTRIBUTE !string used for adding an attribute */
 const ADD_ATTRIBUTE = " ";
 
 /**
