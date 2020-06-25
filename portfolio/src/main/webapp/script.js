@@ -29,8 +29,7 @@ const states = {
 showSlides(slideIndex);
 
 /**
- * Function computes which slide should be shown and class showSlides on that
- * specific slide. Function is called when either arrows are pressed.
+ * Computes which slide to show then shows that slide. Invoked when either arrows are pressed.
  * @param {integer} n where n = 1 to go forward or n = -1 to go back
  */
 function plusSlides(n) {
@@ -38,7 +37,7 @@ function plusSlides(n) {
 }
 
 /**
- * Function calls showSlides on the slide that corresponds to the dot pressed.
+ * Allows changing of slide according to which dot is pressed.
  * @param {integer} n where n is the number of the dot that is pressed
  */
 function currentSlide(n) {
@@ -46,14 +45,16 @@ function currentSlide(n) {
 }
 
 /**
- * Function computes where the slide index is out of bounds and adjusts accordingly.
- * Function then sets all slides and dots to be not active and sets respective slide
- * and dot as active.
+ * When the slide index is out of bounds, adjust to wrap around. Then
+ * set all slides and dots to be not active and sets slide and dot
+ * with respect to slideIndex to be active.
  * @param {integer} n where n is the slide to be displayed
  */
-function showSlides(n) {
-  var slides = document.getElementsByClassName("mySlides"); /** Array<div> containing all slides in slideshow-container */
-  var dots = document.getElementsByClassName("dot"); /** Array<span> containing all dots in dot-container */
+function showSlides(n) {  
+  /** Array<div> containing all slides in slideshow-container */
+  var slides = document.getElementsByClassName("mySlides");
+  /** Array<span> containing all dots in dot-container */
+  var dots = document.getElementsByClassName("dot");
 
   // Wrap around if slideIndex is out of bounds
   if (n < 1) {

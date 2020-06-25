@@ -47,8 +47,12 @@
   text-align: center;
 }
 
-.mySlides h1, 
-h3 {
+.mySlides h1 {
+  color: #f6543c;
+  text-align: center;
+}
+
+.mySlides h3 {
   text-align: center;
 }
 
@@ -95,9 +99,13 @@ h3 {
 }
 
 /* Link styling */
-a:hover,
-#selected {
+a:hover {
   color: #f6543c !important;
+}
+
+#selected {
+  color: #0cca4a !important;
+  font-weight: bold !important;
 }
 
 a:visited {
