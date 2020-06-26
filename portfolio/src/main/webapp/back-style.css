@@ -12,9 +12,8 @@ a:visited {
   color: #000;
 }
 
-.active, 
-.dot:hover {
-  background-color: #717171;
+.active {
+  background-color: #0cca4a !important;
 }
 
 /* Container styling */
@@ -46,6 +45,10 @@ a:visited {
 
 .dot-container {
   text-align: center;
+}
+
+.dot:hover {
+  background-color: #f6543c !important;
 }
 
 /* Button styling */
