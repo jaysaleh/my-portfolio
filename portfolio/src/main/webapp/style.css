@@ -35,51 +35,64 @@
   font-weight: bold !important;
 }
 
-#blog_body {
+/* Post styling */
+#blog-body {
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Body styling */
-#body {
+.post {
   align-items: center;
   display: flex;
   flex-direction: row;
-  /* height: 600px; */
   justify-content: space-around;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-
-  padding-top: 100px;
-  padding-bottom: 100px;
 }
 
-#body_img {
+#post-img {
   width: 40%;
 }
 
-#body_img img {
+#post-img-app {
+  width: 20%;
+}
+
+#post-img img,
+#post-img-app img {
   height: 100%;
   width: 100%;
 }
 
-#body_text {
+#post-text {
   width: 50%;
   text-align: center;
 }
 
-#body_text h1{
+#post-text a:hover {
+  color: #0cca4a !important;
+}
+
+#post-text a {
+  color: #000 !important;
+}
+
+#post-text h1 {
   color: #f6543c;
 }
 
-/* a tag styling */
-a:visited{
-  color: #000000;
+/* <a> styling */
+a:visited {
+  color: #000;
 }
 
-a:hover{
+a:hover {
   color: #f6543c !important;
+}
+
+#links {
+  text-decoration: none;
 }
 
 /* Footer styling */
@@ -104,26 +117,27 @@ a:hover{
 }
 
 .fa:hover {
+  color: #0cca4a !important;
   opacity: 0.7;
 }
 
-/* Font Sizing */
+/* Window resizing contstraints */
 @media (min-width:800px) {
   #header {
     width: 95% !important;
   }
-  #blog_body {
+  #blog-body {
     width: 85% !important;
   }  
-  #body_text h1{
+  #body-text h1{
     font-size: 30px !important;
   }
-  #body_text p{
+  #body-text p{
     font-size: 18px !important;
   }
   #body {
-    padding-top: 25px !important;
     padding-bottom: 25px !important;
+    padding-top: 25px !important;
   }
 }
 
@@ -131,18 +145,18 @@ a:hover{
   #header {
     width: 85% !important;
   }
-  #blog_body {
+  #blog-body {
     width: 75% !important;
   }  
-  #body_text h1{
+  #body-text h1{
     font-size: 40px !important;
   }
-  #body_text p{
+  #body-text p{
     font-size: 20px !important;
   }
   #body {
-    padding-top: 50px !important;
     padding-bottom: 50px !important;
+    padding-top: 50px !important;
   }
 }
 
@@ -150,17 +164,17 @@ a:hover{
   #header {
     width: 75% !important;
   }
-  #blog_body {
+  #blog-body {
     width: 65% !important;
   }  
-  #body_text h1{
+  #body-text h1{
     font-size: 50px !important;
   }
-  #body_text p{
+  #body-text p{
     font-size: 22px !important;
   }
   #body {
-    padding-top: 75px !important;
     padding-bottom: 75px !important;
+    padding-top: 75px !important;
   }
 }
