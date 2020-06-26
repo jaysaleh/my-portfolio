@@ -199,19 +199,19 @@ a:visited {
 }
 
 /* Resizing constraints */
-@media (min-width:800px){
+@media (min-width:800px) {
   #slideshow-container {
     padding-top: 50px !important;
   }
 }
 
-@media (min-width:1200px){
+@media (min-width:1200px) {
   #slideshow-container {
     padding-top: 125px !important;
   }
 }
 
-@media (min-width:1600px){
+@media (min-width:1600px) {
   #slideshow-container {
     padding-top: 200px !important;
   }
