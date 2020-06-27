@@ -204,7 +204,7 @@ a:visited {
 /* Resizing constraints */
 @media (min-width:800px) {
   #slideshow-container {
-    padding-top: 50px !important;
+    padding-top: 75px !important;
   }
 }
 
@@ -216,6 +216,6 @@ a:visited {
 
 @media (min-width:1600px) {
   #slideshow-container {
-    padding-top: 200px !important;
+    padding-top: 150px !important;
   }
 }
