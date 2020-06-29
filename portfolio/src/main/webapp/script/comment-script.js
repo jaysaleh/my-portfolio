@@ -18,6 +18,18 @@
  */
 async function getData() {
   const response = await fetch('/data');
-  const quote = await response.text();
-  document.getElementById('data-container').innerText = quote;
+  const json = await response.json();
+  
+  const commentsListElement = document.getElementById('comments-container');
+  commentsListElement.innerHTML = '';
+  commentsListElement.appendChild(createListElement('Comment: ' + json[0])); 
+  commentsListElement.appendChild(createListElement('Comment: ' + json[1]));
+  commentsListElement.appendChild(createListElement('Comment: ' + json[2]));
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
