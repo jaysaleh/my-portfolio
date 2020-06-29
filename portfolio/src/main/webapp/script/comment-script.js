@@ -13,8 +13,8 @@
 // limitations under the License.
 
 /**
- * Fetches data from servlet and sets data in comments.html. Called when
- * <body> is loaded in comments.html.
+ * Fetches data from servlet and sets it in the comments section of portfolio.
+ * Called whenever comments section is loaded.
  */
 async function getData() {
   const response = await fetch('/data');
