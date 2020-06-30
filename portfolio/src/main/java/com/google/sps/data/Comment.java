@@ -16,10 +16,16 @@ package com.google.sps.data;
 
 import com.google.auto.value.AutoValue;
 
+/** Class used to create and store comment data */
 @AutoValue public abstract class Comment {
   public abstract String name();
   public abstract String commentText();
 
+  /** 
+   * Creates comment object
+   * @param name Name of author
+   * @param commentText Text author wrote
+   */
   public static Comment create(String name, String commentText) {
     return new AutoValue_Comment(name, commentText);
   }
