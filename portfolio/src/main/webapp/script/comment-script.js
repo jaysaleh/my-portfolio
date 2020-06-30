@@ -25,9 +25,9 @@ async function getData() {
   
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
-  commentsListElement.appendChild(createListElement(jsonData[0])); 
-  commentsListElement.appendChild(createListElement(jsonData[1]));
-  commentsListElement.appendChild(createListElement(jsonData[2]));
+  for(comment of jsonData){
+    commentsListElement.appendChild(createListElement(comment));
+  }
 }
 
 /** Creates an <li> element containing text from comment. 
