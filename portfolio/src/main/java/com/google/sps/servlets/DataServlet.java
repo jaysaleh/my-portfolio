@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// TODO: Modify servlet to access multiple messages from servlet.
+
 package com.google.sps.servlets;
 
 import java.util.*; 
@@ -22,13 +24,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns "Hello Jay Saleh!". TODO: modify this file to handle comments data */
+/** Servlet that writes an list of messages as a response. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
+  /** Hard coded messages used for tesing JSON */
   private List<String> messages;
 
   @Override
+  /** Initializes list of messages */
   public void init(){
     messages = new ArrayList<>();
     messages.add("one");
@@ -37,6 +41,10 @@ public class DataServlet extends HttpServlet {
   }
 
   @Override
+  /** Writes list of messages as JSON to the client.
+   * @param request Information requested from servlet.
+   * @param response Servlet writes information requested in response.
+   */
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Gson gson = new Gson();
     String json = gson.toJson(messages);

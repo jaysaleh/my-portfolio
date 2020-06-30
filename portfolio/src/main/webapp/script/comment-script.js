@@ -12,22 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// TODO: Modify script to append n number of comments from servlet.
+
 /**
  * Fetches data from servlet and sets it in the comments section of portfolio.
  * Called whenever comments section is loaded.
+ * TODO: Modify to handle dynamic data.
  */
 async function getData() {
   const response = await fetch('/data');
-  const json = await response.json();
+  const jsonData = await response.json();
   
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
-  commentsListElement.appendChild(createListElement('Comment: ' + json[0])); 
-  commentsListElement.appendChild(createListElement('Comment: ' + json[1]));
-  commentsListElement.appendChild(createListElement('Comment: ' + json[2]));
+  commentsListElement.appendChild(createListElement(jsonData[0])); 
+  commentsListElement.appendChild(createListElement(jsonData[1]));
+  commentsListElement.appendChild(createListElement(jsonData[2]));
 }
 
-/** Creates an <li> element containing text. */
+/** Creates an <li> element containing text from comment. 
+ * @param {String} text Text to be placed in new element.
+ * @return {<li>} liElement Element to be appended in comments section of portfolio.
+ */
 function createListElement(text) {
   const liElement = document.createElement('li');
   liElement.innerText = text;
