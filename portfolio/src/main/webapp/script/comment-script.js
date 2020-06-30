@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// TODO: Modify script to append n number of comments from servlet.
-
 /** @const commentHyphen used to space out comment text from author name */
 const commentHyphen = " -";
 /**

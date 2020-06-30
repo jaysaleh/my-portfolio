@@ -17,6 +17,7 @@ package com.google.sps.data;
 import com.google.auto.value.AutoValue;
 
 /** Class used to create object to store comment data */
+// TODO: Add database id feild for each comment.
 @AutoValue public abstract class Comment {
   public abstract String name();
   public abstract String commentText();
