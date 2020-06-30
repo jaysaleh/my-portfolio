@@ -14,10 +14,11 @@
 
 // TODO: Modify script to append n number of comments from servlet.
 
+/** @const commentHyphen used to space out cooment text from author name */
+const commentHyphen = " -";
 /**
  * Fetches data from servlet and sets it in the comments section of portfolio.
  * Called whenever comments section is loaded.
- * TODO: Modify to handle dynamic data.
  */
 async function getData() {
   const response = await fetch('/data');
@@ -26,7 +27,7 @@ async function getData() {
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
   for (comment of jsonData) {
-    commentsListElement.appendChild(createListElement(comment));
+    commentsListElement.appendChild(createListElement(comment.commentText + commentHyphen + comment.name));
   }
 }
 
