@@ -14,7 +14,7 @@
 
 // TODO: Modify script to append n number of comments from servlet.
 
-/** @const commentHyphen used to space out cooment text from author name */
+/** @const commentHyphen used to space out comment text from author name */
 const commentHyphen = " -";
 /**
  * Fetches data from servlet and sets it in the comments section of portfolio.
