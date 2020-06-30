@@ -25,7 +25,7 @@ async function getData() {
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
   for (comment of jsonData) {
-    commentsListElement.appendChild(createListElement(comment.commentText + " -" + comment.name));
+    commentsListElement.appendChild(createListElement(comment));
   }
 }
 
