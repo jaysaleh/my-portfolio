@@ -54,16 +54,18 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String name = getParameter(request, "name-input", "");
-    String commentText = getParameter(request, "comment-input", "");
+    String name = getParameter(request, /* name= */ "name-input", /* defaultValue= */ "");
+    String commentText = getParameter(request, /* name= */ "comment-input", /* defaultValue= */ "");
 
     messages.add(new Comment(name, commentText));
     response.sendRedirect("/html/comments.html");
   }
 
   /**
-   * @return the request parameter, or the default value if the parameter
-   *         was not specified by the client
+   * Gets value from form in comments section of portfolio and returns it. If form is empty,
+   * function will return defaultValue passed in.
+   * @param request Form sent by client
+   * @param name textArea to retrive information from
    */
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
