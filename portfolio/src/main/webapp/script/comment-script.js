@@ -17,7 +17,6 @@
 /**
  * Fetches data from servlet and sets it in the comments section of portfolio.
  * Called whenever comments section is loaded.
- * TODO: Modify to handle dynamic data.
  */
 async function getData() {
   const response = await fetch('/data');
@@ -25,12 +24,13 @@ async function getData() {
   
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
-  for(comment of jsonData){
-    commentsListElement.appendChild(createListElement(comment));
+  for (comment of jsonData) {
+    commentsListElement.appendChild(createListElement(comment.commentText + " -" + comment.name));
   }
 }
 
-/** Creates an <li> element containing text from comment. 
+/** 
+ * Creates an <li> element containing text from comment. 
  * @param {String} text Text to be placed in new element.
  * @return {<li>} liElement Element to be appended in comments section of portfolio.
  */
