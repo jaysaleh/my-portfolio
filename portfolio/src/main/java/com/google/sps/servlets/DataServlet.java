@@ -23,22 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-/** Class used to store comment data */
-class Comment {
-  String name;
-  String commentText;
-
-  /**
-   * Constructor
-   * @param name Author of comment
-   * @param commentText Comment written by author
-   */
-  public Comment(String name, String commentText) {
-    this.name = name;
-    this.commentText = commentText;
-  }
-}
+import com.google.sps.data.Comment;
 
 /** Servlet that writes an list of messages as a response. */
 @WebServlet("/data")
@@ -57,7 +42,7 @@ public class DataServlet extends HttpServlet {
     String name = getParameter(request, /* name= */ "name-input", /* defaultValue= */ "");
     String commentText = getParameter(request, /* name= */ "comment-input", /* defaultValue= */ "");
 
-    messages.add(new Comment(name, commentText));
+    messages.add(Comment.create(name, commentText));
     response.sendRedirect("/html/comments.html");
   }
 
