@@ -19,11 +19,11 @@ package com.google.sps.servlets;
 import java.util.*; 
 import com.google.gson.Gson;
 import java.io.IOException;
+import com.google.sps.data.Comment;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.sps.data.Comment;
 
 /** Servlet that writes an list of messages as a response. */
 @WebServlet("/data")

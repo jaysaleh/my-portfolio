@@ -16,7 +16,7 @@ package com.google.sps.data;
 
 import com.google.auto.value.AutoValue;
 
-/** Class used to create and store comment data */
+/** Class used to create object to store comment data */
 @AutoValue public abstract class Comment {
   public abstract String name();
   public abstract String commentText();
