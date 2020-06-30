@@ -37,10 +37,6 @@ public class DataServlet extends HttpServlet {
   }
 
   @Override
-  /** Writes list of messages as JSON to the client.
-   * @param request Information requested from servlet.
-   * @param response Servlet writes information requested in response.
-   */
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Gson gson = new Gson();
     String json = gson.toJson(messages);
