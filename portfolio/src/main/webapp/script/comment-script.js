@@ -25,12 +25,13 @@ async function getData() {
   
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
-  for(comment of jsonData){
+  for (comment of jsonData) {
     commentsListElement.appendChild(createListElement(comment));
   }
 }
 
-/** Creates an <li> element containing text from comment. 
+/** 
+ * Creates an <li> element containing text from comment. 
  * @param {String} text Text to be placed in new element.
  * @return {<li>} liElement Element to be appended in comments section of portfolio.
  */
