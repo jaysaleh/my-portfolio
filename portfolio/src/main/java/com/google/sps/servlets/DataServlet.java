@@ -36,9 +36,15 @@ public class DataServlet extends HttpServlet {
   private static final String TIME_STAMP = "timeStamp";
   private static final String NAME = "name";
   private static final String COMMENT_TEXT = "commentText";
+  
+  /** Name of input field used for author name in comments section */
   private static final String NAME_INPUT = "name-input";
+  /** Name of input field used for comment text in comments section */
   private static final String COMMENT_INPUT = "comment-input";
+  /** Default value if comment section inputs are empty */
   private static final String DEFAULT_VALUE = "";
+  public static final String REDIRECT_URL = "/html/comments.html";
+
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
