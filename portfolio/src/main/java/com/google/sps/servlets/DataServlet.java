@@ -72,7 +72,6 @@ public class DataServlet extends HttpServlet {
   /** Queries database for commenting in most recent time stamp order and writes comments as JSON to client */
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Comment").addSort("timeStamp", SortDirection.ASCENDING);
-
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
@@ -82,7 +81,8 @@ public class DataServlet extends HttpServlet {
       String name = (String) entity.getProperty("name");
       String commentText = (String) entity.getProperty("commentText");
       long timeStamp = (long) entity.getProperty("timeStamp");
-
+      
+      // Creates new comment object for JSON accessibility
       Comment newComment = Comment.create(id, name, commentText, timeStamp);
       comments.add(newComment);
     }
