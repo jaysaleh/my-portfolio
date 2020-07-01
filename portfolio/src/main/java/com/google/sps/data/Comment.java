@@ -16,7 +16,7 @@ package com.google.sps.data;
 
 import com.google.auto.value.AutoValue;
 
-/** Stores data for each comment written in portfoilio */
+/** Stores data for each comment written in portfolio. */
 // TODO: Add database id and timestamp fields for each comment.
 @AutoValue 
 public abstract class Comment {
@@ -24,7 +24,7 @@ public abstract class Comment {
   public abstract String commentText();
 
   /** 
-   * Creates a Comment
+   * Creates a Comment.
    * @param name Name of author
    * @param commentText Text written
    */

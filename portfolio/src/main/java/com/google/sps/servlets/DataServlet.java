@@ -32,6 +32,7 @@ public class DataServlet extends HttpServlet {
   public static final String NAME_INPUT = "name-input";
   /** Name of input field used for comment text in comments section */
   public static final String COMMENT_INPUT = "comment-input";
+  /** Default value if comment section inputs are empty */
   public static final String DEFAULT_VALUE = "";
   public static final String REDIRECT_URL = "/html/comments.html";
 
@@ -56,7 +57,7 @@ public class DataServlet extends HttpServlet {
    * Returns value with {@code name} from the {@code request} form. 
    * If the {@code name} cannot be found, return {@code defaultValue}.
    * @param request Form sent by client
-   * @param name {@code textArea} to read content of
+   * @param name {@code <input>} or {@code <textarea>} to read content of
    */
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
