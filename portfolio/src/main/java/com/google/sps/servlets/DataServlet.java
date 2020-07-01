@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that writes an list of messages as a response. */
+/** Servlet that writes messages as a response. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
