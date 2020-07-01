@@ -12,8 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** @const commentHyphen used to space out comment text from author name */
+/** Spaces out comment text from author name. */
 const commentHyphen = " -";
+
 /**
  * Fetches data from servlet and sets it in the comments section of portfolio.
  * Called whenever comments section is loaded.

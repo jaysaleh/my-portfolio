@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// TODO: Modify servlet to access multiple messages from servlet.
-
 package com.google.sps.servlets;
 
 import java.util.*; 
@@ -29,13 +27,15 @@ import javax.servlet.http.HttpServletResponse;
 // TODO: Modify servlet to store values in database.
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-
-  public static final String NAME_INPUT = "name-input"; // Name input field name in comments section
-  public static final String COMMENT_INPUT = "comment-input"; // Text area field name in comments section
+  
+  /** Name of input field used for author name in comments section */
+  public static final String NAME_INPUT = "name-input";
+  /** Name of input field used for comment text in comments section */
+  public static final String COMMENT_INPUT = "comment-input";
   public static final String DEFAULT_VALUE = "";
   public static final String REDIRECT_URL = "/html/comments.html";
 
-  /** Hard coded messages used for tesing JSON */
+  /** Used to store Comments for JSON parsing */
   private List<Comment> messages;
 
   @Override
@@ -53,10 +53,10 @@ public class DataServlet extends HttpServlet {
   }
 
   /**
-   * Gets value from form in comments section of portfolio and returns it. If form is empty,
-   * function will return defaultValue passed in.
+   * Returns value with {@code name} from the {@code request} form. 
+   * If the {@code name} cannot be found, return {@code defaultValue}.
    * @param request Form sent by client
-   * @param name textArea to retrive information from
+   * @param name {@code textArea} to read content of
    */
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);

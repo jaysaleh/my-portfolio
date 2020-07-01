@@ -16,17 +16,17 @@ package com.google.sps.data;
 
 import com.google.auto.value.AutoValue;
 
-/** Class used to create object to store comment data */
-// TODO: Add database id feild for each comment.
+/** Stores data for each comment written in portfoilio */
+// TODO: Add database id and timestamp fields for each comment.
 @AutoValue 
 public abstract class Comment {
   public abstract String name();
   public abstract String commentText();
 
   /** 
-   * Creates comment object
+   * Creates a Comment
    * @param name Name of author
-   * @param commentText Text author wrote
+   * @param commentText Text written
    */
   public static Comment create(String name, String commentText) {
     return new AutoValue_Comment(name, commentText);
