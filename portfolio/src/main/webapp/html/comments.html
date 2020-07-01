@@ -1,6 +1,4 @@
-<!-- TODO: Modify file to accomodate multiple comments
-     TODO: Add styling.
- -->
+<!-- TODO: Add styling. -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,8 +8,19 @@
   </head>
   <body onLoad="getData()">
     <div id="content">
-      <h1>Fetch Test</h1>
-      <div id="data-container"></div>
+      <h1>Enter Comment</h1>
+      <form action="/data" method="POST">
+        <p>Enter your name:</p>
+        <input type="text" name="name-input">
+        <br/>
+        <br/>
+        <p>Enter your comment:</p>
+        <textarea name="comment-input"></textarea>
+        <br/>
+        <br/>
+       <input type="submit" />
+      </form>
+      <ul id="comments-container"></ul>
     </div>
   </body>
 </html>

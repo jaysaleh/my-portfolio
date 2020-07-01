@@ -12,12 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/** Spaces out comment text from author name. */
+const commentHyphen = " -";
+
 /**
  * Fetches data from servlet and sets it in the comments section of portfolio.
  * Called whenever comments section is loaded.
  */
 async function getData() {
   const response = await fetch('/data');
-  const quote = await response.text();
-  document.getElementById('data-container').innerText = quote;
+  const jsonData = await response.json();
+  
+  const commentsListElement = document.getElementById('comments-container');
+  commentsListElement.innerHTML = '';
+  for (comment of jsonData) {
+    commentsListElement.appendChild(createListElement(comment.commentText + commentHyphen + comment.name));
+  }
+}
+
+/** 
+ * Creates and returns list element (<li>) containing {@code text} from comment.
+ */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
