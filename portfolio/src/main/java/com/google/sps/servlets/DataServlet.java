@@ -29,7 +29,12 @@ import javax.servlet.http.HttpServletResponse;
 // TODO: Modify servlet to store values in database.
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  
+
+  public static final String NAME_INPUT = "name-input"; // Name input field name in comments section
+  public static final String COMMENT_INPUT = "comment-input"; // Text area field name in comments section
+  public static final String DEFAULT_VALUE = "";
+  public static final String REDIRECT_URL = "/html/comments.html";
+
   /** Hard coded messages used for tesing JSON */
   private List<Comment> messages;
 
@@ -40,11 +45,11 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String name = getParameter(request, /* name= */ "name-input", /* defaultValue= */ "");
-    String commentText = getParameter(request, /* name= */ "comment-input", /* defaultValue= */ "");
+    String name = getParameter(request, NAME_INPUT, DEFAULT_VALUE);
+    String commentText = getParameter(request, COMMENT_INPUT, DEFAULT_VALUE);
 
     messages.add(Comment.create(name, commentText));
-    response.sendRedirect("/html/comments.html");
+    response.sendRedirect(REDIRECT_URL);
   }
 
   /**

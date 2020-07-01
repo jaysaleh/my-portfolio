@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,7 +18,8 @@ import com.google.auto.value.AutoValue;
 
 /** Class used to create object to store comment data */
 // TODO: Add database id feild for each comment.
-@AutoValue public abstract class Comment {
+@AutoValue 
+public abstract class Comment {
   public abstract String name();
   public abstract String commentText();
 
