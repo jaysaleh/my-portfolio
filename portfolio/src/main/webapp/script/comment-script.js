@@ -31,7 +31,7 @@ async function getData() {
 }
 
 /** 
- * Creates and returns <li> containing {@code text} from comment.
+ * Creates and returns list element (<li>) containing {@code text} from comment.
  */
 function createListElement(text) {
   const liElement = document.createElement('li');
