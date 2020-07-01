@@ -19,15 +19,17 @@ import com.google.auto.value.AutoValue;
 /** Class used to create object to store comment data */
 // TODO: Add database id feild for each comment.
 @AutoValue public abstract class Comment {
+  public abstract Long id();
   public abstract String name();
   public abstract String commentText();
+  public abstract Long timeStamp();
 
   /** 
    * Creates comment object
    * @param name Name of author
    * @param commentText Text author wrote
    */
-  public static Comment create(String name, String commentText) {
-    return new AutoValue_Comment(name, commentText);
+  public static Comment create(Long id, String name, String commentText, Long timeStamp) {
+    return new AutoValue_Comment(id, name, commentText, timeStamp);
   }
 }
