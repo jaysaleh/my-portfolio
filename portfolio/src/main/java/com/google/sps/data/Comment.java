@@ -16,7 +16,7 @@ package com.google.sps.data;
 
 import com.google.auto.value.AutoValue;
 
-/** Creates a Comment for each comment written in portfoilio */
+/** Creates a Comment for each comment written in portfolio. */
 @AutoValue 
 public abstract class Comment {
   public abstract Long id();

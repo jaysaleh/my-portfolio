@@ -32,7 +32,8 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that writes an list of messages as a response. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  /** Used to set Entity and its fields */
+  
+  /** Used to create Entity and its fields */
   private static final String COMMENT = "Comment";
   private static final String TIME_STAMP = "timeStamp";
   private static final String NAME = "name";
@@ -46,13 +47,13 @@ public class DataServlet extends HttpServlet {
   private static final String DEFAULT_VALUE = "";
   public static final String REDIRECT_URL = "/html/comments.html";
 
-
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String name = getParameter(request, NAME_INPUT, DEFAULT_VALUE);
     String commentText = getParameter(request, COMMENT_INPUT, DEFAULT_VALUE);
     long timeStamp = System.currentTimeMillis();
 
+    // Creates Entity and stores in database
     Entity commentEntity = new Entity(COMMENT);
     commentEntity.setProperty(NAME, name);
     commentEntity.setProperty(COMMENT_TEXT, commentText);
@@ -61,7 +62,7 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
-    response.sendRedirect("/html/comments.html");
+    response.sendRedirect(REDIRECT_URL);
   }
 
   /**
