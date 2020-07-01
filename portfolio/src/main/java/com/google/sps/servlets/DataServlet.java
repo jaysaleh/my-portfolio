@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// TODO: Modify servlet to access multiple messages from servlet.
-
 package com.google.sps.servlets;
 
 import java.util.*; 
@@ -35,11 +33,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that writes an list of messages as a response. */
-// TODO: Modify servlet to store values in database.
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
   @Override
+  /** Creates a "comment" entity and stores in database */
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String name = getParameter(request, /* name= */ "name-input", /* defaultValue= */ "");
     String commentText = getParameter(request, /* name= */ "comment-input", /* defaultValue= */ "");
@@ -71,8 +69,9 @@ public class DataServlet extends HttpServlet {
   }
 
   @Override
+  /** Queries database for commenting in most recent time stamp order and writes comments as JSON to client */
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment").addSort("timeStamp", SortDirection.DESCENDING);
+    Query query = new Query("Comment").addSort("timeStamp", SortDirection.ASCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
