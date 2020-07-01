@@ -29,12 +29,12 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
   
   /** Name of input field used for author name in comments section */
-  public static final String NAME_INPUT = "name-input";
+  private static final String NAME_INPUT = "name-input";
   /** Name of input field used for comment text in comments section */
-  public static final String COMMENT_INPUT = "comment-input";
+  private static final String COMMENT_INPUT = "comment-input";
   /** Default value if comment section inputs are empty */
-  public static final String DEFAULT_VALUE = "";
-  public static final String REDIRECT_URL = "/html/comments.html";
+  private static final String DEFAULT_VALUE = "";
+  private static final String REDIRECT_URL = "/html/comments.html";
 
   /** Used to store Comments for JSON parsing */
   private List<Comment> messages;
