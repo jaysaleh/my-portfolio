@@ -32,16 +32,18 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that writes an list of messages as a response. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  public static final String COMMENT = "Comment";
-  public static final String TIME_STAMP = "timeStamp";
-  public static final String NAME = "name";
-  public static final String COMMENT_TEXT = "commentText";
+  private static final String COMMENT = "Comment";
+  private static final String TIME_STAMP = "timeStamp";
+  private static final String NAME = "name";
+  private static final String COMMENT_TEXT = "commentText";
+  private static final String NAME_INPUT = "name-input";
+  private static final String COMMENT_INPUT = "comment-input";
+  private static final String DEFAULT_VALUE = "";
 
-  /** Creates a "comment" entity and stores in database */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String name = getParameter(request, /* textArea name= */ "name-input", /* defaultValue= */ "");
-    String commentText = getParameter(request, /* textArea name= */ "comment-input", /* defaultValue= */ "");
+    String name = getParameter(request, NAME_INPUT, DEFAULT_VALUE);
+    String commentText = getParameter(request, COMMENT_INPUT, DEFAULT_VALUE);
     long timeStamp = System.currentTimeMillis();
 
     Entity commentEntity = new Entity(COMMENT);
@@ -69,10 +71,6 @@ public class DataServlet extends HttpServlet {
     return value;
   }
 
-  /**
-   * Queries database for comments and writes them to {@code response} as JSON. 
-   * Comments are written in order of most recent time stamp.
-   */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query(COMMENT).addSort(TIME_STAMP, SortDirection.ASCENDING);
