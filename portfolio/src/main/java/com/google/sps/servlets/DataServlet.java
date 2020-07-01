@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that writes an list of messages as a response. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
+  /** Used to set Entity and its fields */
   private static final String COMMENT = "Comment";
   private static final String TIME_STAMP = "timeStamp";
   private static final String NAME = "name";
@@ -64,10 +65,10 @@ public class DataServlet extends HttpServlet {
   }
 
   /**
-   * Gets value from form in comments section of portfolio and returns it. If form is empty,
-   * function will return defaultValue passed in.
+   * Returns value with {@code name} from the {@code request} form. 
+   * If the {@code name} cannot be found, return {@code defaultValue}.
    * @param request Form sent by client
-   * @param name textArea to retrive information from
+   * @param name {@code <input>} or {@code <textarea>} to read content of
    */
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
@@ -90,7 +91,7 @@ public class DataServlet extends HttpServlet {
       String commentText = (String) entity.getProperty(COMMENT_TEXT);
       long timeStamp = (long) entity.getProperty(TIME_STAMP);
       
-      // Creates new comment object for JSON accessibility
+      // Creates new Comment for JSON accessibility
       Comment newComment = Comment.create(id, name, commentText, timeStamp);
       comments.add(newComment);
     }
