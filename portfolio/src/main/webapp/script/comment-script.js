@@ -26,7 +26,10 @@ async function getData() {
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
   for (comment of jsonData) {
-    commentsListElement.appendChild(createListElement(comment.commentText + commentHyphen + comment.name));
+    if(comment.commentText != "" && comment.name != ""){
+      commentsListElement.appendChild(createListElement(comment.commentText, comment.name, comment.timeStamp));
+      commentsListElement.appendChild(document.createElement('br'));
+    }
   }
 }
 
@@ -35,8 +38,24 @@ async function getData() {
  * @param {String} text Text to be placed in new element.
  * @return {<li>} liElement Element to be appended in comments section of portfolio.
  */
-function createListElement(text) {
-  const liElement = document.createElement('li');
-  liElement.innerText = text;
+function createListElement(text, name, timeStamp) {
+  const liElement = document.createElement('div');
+  const pElement = document.createElement('p');
+  const h4Element = document.createElement('h4');
+  const h5Element = document.createElement('h5');
+
+  liElement.id = 'list-element';
+  
+  var date = new Date(timeStamp);
+  var formattedDate = date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear();
+
+  pElement.innerText = text;
+  h4Element.innerText = name;
+  h5Element.innerText = formattedDate;
+
+  liElement.appendChild(pElement);
+  liElement.appendChild(h4Element);
+  liElement.appendChild(h5Element);
+
   return liElement;
 }
