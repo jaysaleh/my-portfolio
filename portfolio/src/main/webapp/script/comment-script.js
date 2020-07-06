@@ -34,28 +34,27 @@ async function getData() {
 }
 
 /** 
- * Creates an <li> element containing text from comment. 
- * @param {String} text Text to be placed in new element.
- * @return {<li>} liElement Element to be appended in comments section of portfolio.
+ * Creates and returns a div element containing {@code text}, {@code name},
+ * and {@code timeStamp} from comment.
  */
 function createListElement(text, name, timeStamp) {
-  const liElement = document.createElement('div');
-  const pElement = document.createElement('p');
-  const h4Element = document.createElement('h4');
-  const h5Element = document.createElement('h5');
+  const commentDiv = document.createElement('div');
+  const textElement = document.createElement('p');
+  const nameElement = document.createElement('h4');
+  const dateElement = document.createElement('h5');
 
-  liElement.id = 'list-element';
+  commentDiv.id = 'list-element';
   
   var date = new Date(timeStamp);
   var formattedDate = date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear();
 
-  pElement.innerText = text;
-  h4Element.innerText = name;
-  h5Element.innerText = formattedDate;
+  textElement.innerText = text;
+  nameElement.innerText = name;
+  dateElement.innerText = formattedDate;
 
-  liElement.appendChild(pElement);
-  liElement.appendChild(h4Element);
-  liElement.appendChild(h5Element);
+  commentDiv.appendChild(textElement);
+  commentDiv.appendChild(nameElement);
+  commentDiv.appendChild(dateElement);
 
-  return liElement;
+  return commentDiv;
 }
