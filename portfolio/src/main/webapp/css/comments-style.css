@@ -68,8 +68,7 @@ h3 {
   flex-direction: row;
   height: 100px;
   justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   position: absolute;
   width: 100%;
 }
@@ -83,6 +82,7 @@ form {
   width: 100%;
 }
 
+/* Social media icons styling */
 .fa {
   font-size: 50px;
   padding: 10px;
@@ -116,13 +116,13 @@ form {
 }
 
 #header a {
-  color: #000000;
-  font-size: 18px;
-  font-weight: 200;
+  color: #000;
+  font: 200 18px Helvetica;
   padding-right: 35px;
   text-decoration: none;
 }
 
+/* Line break styling */
 hr {
   background-color: #ccc;
   border: 0;
@@ -154,9 +154,7 @@ input[type=submit]:hover {
   border-radius: 25px;
   cursor: pointer;
   float: c;
-  font-family: monospace;
-  font-size: 16px;
-  font-weight: 400;
+  font: 400 16px Monospace;
   padding: 12px 100px;
 }
 
@@ -174,11 +172,9 @@ input[type=submit]:hover {
   border-radius: 5px;
   display: inline-block;
   flex-direction: column;
-  font-family: Monospace;
-  font-size: 20px;
+  font: 20px Monospace;
   justify-content: center;
-  margin: auto;
-  margin-bottom:  20px;
+  margin: auto auto 20px auto;
   padding: 7.5px;
 }
 
@@ -198,11 +194,11 @@ input[type=submit]:hover {
   font-size: 12px;
 }
 
-#list-element h4, h5 {
+#list-element h4,
+h5 {
   font-family: Monospace;
   font-style: italic;
-  margin-bottom: 0px;
-  margin-top: 5px;
+  margin: 5px 0px 0px 0px;
   text-align: right;
 }
 
@@ -218,8 +214,7 @@ input[type=text] {
   background-color: #f8f8f8;
   border: 2px solid #ccc;
   border-radius: 4px;
-  font-family: Monospace;
-  font-size: 16px;
+  font: 16px Monospace;
   margin: 8px 0;
   outline: none;
   padding: 12px 20px;
@@ -228,6 +223,7 @@ input[type=text] {
   width: 100%;
 }
 
+/* Comment input styling */
 textarea {
   height: 75px;
 }
