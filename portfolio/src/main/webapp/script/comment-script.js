@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** Spaces out comment text from author name */
+/** Spaces out comment text from author name. */
 const commentHyphen = " -";
 
 /**
@@ -31,9 +31,7 @@ async function getData() {
 }
 
 /** 
- * Creates an <li> element containing text from comment. 
- * @param {String} text Text to be placed in new element.
- * @return {<li>} liElement Element to be appended in comments section of portfolio.
+ * Creates and returns list element (<li>) containing {@code text} from comment.
  */
 function createListElement(text) {
   const liElement = document.createElement('li');
