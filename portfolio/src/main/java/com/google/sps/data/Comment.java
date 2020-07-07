@@ -19,10 +19,10 @@ import com.google.auto.value.AutoValue;
 /** Stores data for comments written in portfolio. */
 @AutoValue 
 public abstract class Comment {
-  public abstract Long id();
+  public abstract long id();
   public abstract String name();
   public abstract String commentText();
-  public abstract Long timeStamp();
+  public abstract long timeStamp();
 
   /** 
    * Creates a Comment.
@@ -31,7 +31,7 @@ public abstract class Comment {
    * @param commentText Text author wrote
    * @param timeStamp Time when author submitted comment
    */
-  public static Comment create(Long id, String name, String commentText, Long timeStamp) {
+  public static Comment create(long id, String name, String commentText, long timeStamp) {
     return new AutoValue_Comment(id, name, commentText, timeStamp);
   }
 }
