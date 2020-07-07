@@ -15,8 +15,8 @@ a:hover {
 /* Delete Button Styling */
 button {
   background-color: #fff;
-  border: 2px solid #ff0000;
-  color: #ff0000;
+  border: 2px solid #f00;
+  color: #f00;
   height: 35px;
   outline: none;
 }
@@ -33,8 +33,8 @@ button:hover {
 }
 
 button:hover {
-  border: 2px solid #ff0000;
-  background-color: #ff0000;
+  border: 2px solid #f00;
+  background-color: #f00;
   color: #fff;
   transition: 0.5s;
   -webkit-transition: 0.5s;
