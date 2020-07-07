@@ -26,7 +26,7 @@ async function getData() {
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
   for (comment of jsonData) {
-    if(comment.commentText != "" && comment.name != ""){
+    if(comment.commentText != "" && comment.name != "") {
       commentsListElement.appendChild(createListElement(comment.commentText, comment.name, comment.timeStamp));
       commentsListElement.appendChild(document.createElement('br'));
     }
