@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /** Spaces out comment text from author name. */
-const commentHyphen = " -";
+const commentHyphen = ' -';
 
 /**
  * Fetches data from servlet and sets it in the comments section of portfolio.
