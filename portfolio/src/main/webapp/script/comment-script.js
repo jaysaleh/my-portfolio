@@ -34,7 +34,7 @@ async function getData() {
 }
 
 /** 
- * Creates and returns a div element containing {@code text}, {@code name},
+ * Creates and returns a <div> element containing {@code text}, {@code name},
  * and {@code timeStamp} from comment.
  */
 function createListElement(text, name, timeStamp) {
