@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /** Spaces out comment text from author name */
-const commentHyphen = " -";
+const commentHyphen = ' -';
 
 /**
  * Fetches data from servlet and sets it in the comments section of portfolio.
@@ -26,7 +26,7 @@ async function getData() {
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
   for (comment of jsonData) {
-    if(comment.commentText != "" && comment.name != "") {
+    if(comment.commentText != '' && comment.name != '') {
       commentsListElement.appendChild(createDivElement(comment.commentText, comment.name, comment.timeStamp));
       commentsListElement.appendChild(document.createElement('br'));
     }
