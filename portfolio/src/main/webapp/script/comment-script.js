@@ -27,7 +27,7 @@ async function getData() {
   commentsListElement.innerHTML = '';
   for (comment of jsonData) {
     if(comment.commentText != "" && comment.name != "") {
-      commentsListElement.appendChild(createListElement(comment.commentText, comment.name, comment.timeStamp));
+      commentsListElement.appendChild(createDivElement(comment.commentText, comment.name, comment.timeStamp));
       commentsListElement.appendChild(document.createElement('br'));
     }
   }
@@ -37,7 +37,7 @@ async function getData() {
  * Creates and returns a <div> element containing {@code text}, {@code name},
  * and {@code timeStamp} from comment.
  */
-function createListElement(text, name, timeStamp) {
+function createDivElement(text, name, timeStamp) {
   const commentDiv = document.createElement('div');
   const textElement = document.createElement('p');
   const nameElement = document.createElement('h4');
