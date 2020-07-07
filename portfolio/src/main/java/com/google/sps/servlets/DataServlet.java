@@ -45,7 +45,7 @@ public class DataServlet extends HttpServlet {
   private static final String COMMENT_INPUT = "comment-input";
   /** Default value if comment section inputs are empty */
   private static final String DEFAULT_VALUE = "";
-  public static final String REDIRECT_URL = "/html/comments.html";
+  private static final String REDIRECT_URL = "/html/comments.html";
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
