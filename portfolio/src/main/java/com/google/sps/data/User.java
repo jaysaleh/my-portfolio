@@ -25,7 +25,7 @@ public abstract class User {
 
   /** 
    * Creates a User
-   * @param loggedIn boolean of user login status
+   * @param loggedIn boolean reflecting user login status
    * @param loginURL string where user can login
    * @param logoutURL string where user can logout
    */
