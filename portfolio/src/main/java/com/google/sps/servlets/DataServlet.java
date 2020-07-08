@@ -16,18 +16,29 @@ package com.google.sps.servlets;
 
 import java.util.*; 
 import com.google.gson.Gson;
-import java.io.IOException;
 import com.google.sps.data.Comment;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that writes messages as a response. */
-// TODO: Modify servlet to store values in database.
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
+  /** Used to create Entity and its fields */
+  private static final String COMMENT = "Comment";
+  private static final String TIME_STAMP = "timeStamp";
+  private static final String NAME = "name";
+  private static final String COMMENT_TEXT = "commentText";
+
   /** Name of input field used for author name in comments section */
   private static final String NAME_INPUT = "name-input";
   /** Name of input field used for comment text in comments section */
@@ -36,20 +47,21 @@ public class DataServlet extends HttpServlet {
   private static final String DEFAULT_VALUE = "";
   private static final String REDIRECT_URL = "/html/comments.html";
 
-  /** Used to store Comments for JSON parsing */
-  private List<Comment> messages;
-
-  @Override
-  public void init() {
-    messages = new ArrayList<>();
-  }
-
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String name = getParameter(request, NAME_INPUT, DEFAULT_VALUE);
     String commentText = getParameter(request, COMMENT_INPUT, DEFAULT_VALUE);
+    long timeStamp = System.currentTimeMillis();
 
-    messages.add(Comment.create(name, commentText));
+    // Creates Entity and stores in database
+    Entity commentEntity = new Entity(COMMENT);
+    commentEntity.setProperty(NAME, name);
+    commentEntity.setProperty(COMMENT_TEXT, commentText);
+    commentEntity.setProperty(TIME_STAMP, timeStamp);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(commentEntity);
+
     response.sendRedirect(REDIRECT_URL);
   }
 
@@ -69,10 +81,24 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Gson gson = new Gson();
-    String json = gson.toJson(messages);
+    Query query = new Query(COMMENT).addSort(TIME_STAMP, SortDirection.ASCENDING);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
 
-    response.setContentType("text/html;");
-    response.getWriter().println(json);
+    List<Comment> comments = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+      long id = entity.getKey().getId();
+      String name = (String) entity.getProperty(NAME);
+      String commentText = (String) entity.getProperty(COMMENT_TEXT);
+      long timeStamp = (long) entity.getProperty(TIME_STAMP);
+      
+      // Creates new Comment for JSON accessibility
+      Comment newComment = Comment.create(id, name, commentText, timeStamp);
+      comments.add(newComment);
+    }
+
+    Gson gson = new Gson();
+    response.setContentType("text/html");
+    response.getWriter().println(gson.toJson(comments));
   }
 }

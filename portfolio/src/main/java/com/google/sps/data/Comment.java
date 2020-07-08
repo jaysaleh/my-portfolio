@@ -17,18 +17,21 @@ package com.google.sps.data;
 import com.google.auto.value.AutoValue;
 
 /** Stores data for comments written in portfolio. */
-// TODO: Add database id and timestamp fields for each comment.
 @AutoValue 
 public abstract class Comment {
+  public abstract long id();
   public abstract String name();
   public abstract String commentText();
+  public abstract long timeStamp();
 
   /** 
    * Creates a Comment.
+   * @param id Id of object stored in database
    * @param name Name of author
-   * @param commentText Text written
+   * @param commentText Text author wrote
+   * @param timeStamp Time when author submitted comment
    */
-  public static Comment create(String name, String commentText) {
-    return new AutoValue_Comment(name, commentText);
+  public static Comment create(long id, String name, String commentText, long timeStamp) {
+    return new AutoValue_Comment(id, name, commentText, timeStamp);
   }
 }
