@@ -36,15 +36,20 @@ async function getUserLoginData() {
 
   var button = document.getElementById('login-button');
   var form = document.getElementById('hide-form');
-  var buttonForm = document.getElementById('button-form');
-  
+  var loginButtonForm = document.getElementById('login-button-form');
+  var logoutButtonForm = document.getElementById('logout-button-form');
+  var deleteButton = document.getElementById('delete-button');
+
   if(jsonData.loggedIn) {
     button.style.display = states.HIDE_CONTAINER;
     form.style.display = states.SHOW_CONTAINER;
+    deleteButton.style.display = states.SHOW_CONTAINER;
+    logoutButtonForm.action = jsonData.logoutURL;
   } else {
     button.style.display = states.SHOW_CONTAINER;
     form.style.display = states.HIDE_CONTAINER;
-    buttonForm.action = jsonData.link;
+    deleteButton.style.display = states.HIDE_CONTAINER;
+    loginButtonForm.action = jsonData.loginURL;
   }
 }
 

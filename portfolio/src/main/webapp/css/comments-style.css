@@ -21,6 +21,10 @@ a:hover {
   display: none;
 }
 
+#delete-button {
+  display: none;
+}
+
 /* Delete Button Styling */
 #login-button button {
   background-color: #fff;
@@ -36,6 +40,35 @@ a:hover {
   color: #fff;
   transition: 0.5s;
   -webkit-transition: 0.5s;
+}
+
+
+#logout-button-form {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Delete Button Styling */
+#logout-button-form button {
+  background-color: #fff;
+  border: 2px solid #4c8bf5;
+  color: #4c8bf5;
+  height: 35px;
+  outline: none;
+  text-align: center;
+  margin: 0;
+}
+
+#logout-button-form button:hover {
+  border: 2px solid #4c8bf5;
+  background-color: #4c8bf5;
+  color: #fff;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  text-align: center;
+  margin: 0;
 }
 
 /* Delete Button Styling */

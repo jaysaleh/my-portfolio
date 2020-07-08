@@ -20,13 +20,14 @@ import com.google.auto.value.AutoValue;
 @AutoValue 
 public abstract class User {
   public abstract boolean loggedIn();
-  public abstract String link();
+  public abstract String loginURL();
+  public abstract String logoutURL();
 
   /** 
    * Creates a User
    * @param loggedIn boolean if user is logged in or not
    */
-  public static User create(boolean loggedIn, String link) {
-    return new AutoValue_User(loggedIn, link);
+  public static User create(boolean loggedIn, String loginURL, String logoutURL) {
+    return new AutoValue_User(loggedIn, loginURL, logoutURL);
   }
 }

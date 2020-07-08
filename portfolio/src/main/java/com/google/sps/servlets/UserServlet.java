@@ -35,13 +35,16 @@ public class UserServlet extends HttpServlet {
     
     Gson gson = new Gson();
     if(userService.isUserLoggedIn()) {
-      User newUser = User.create(true, "");
+      String urlToRedirectToAfterUserLogsOut = "/html/comments.html";
+      String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
+
+      User newUser = User.create(true, "", logoutUrl);
       response.getWriter().println(gson.toJson(newUser));
     } else {
       String urlToRedirectToAfterUserLogsIn = "/html/comments.html";
       String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
 
-      User newUser = User.create(false, loginUrl);
+      User newUser = User.create(false, loginUrl, "");
       response.getWriter().println(gson.toJson(newUser));
     }
   }

@@ -21,7 +21,7 @@
       </header>
       <div id="content">
         <div id="login-button">
-          <form id="button-form" action="" method="get">
+          <form id="login-button-form" action="" method="get">
             <input type="hidden" name="continue" value="..%2Fhtml%2Fcomments.html"/>
             <button>Login to Leave a Comment</button>
           </form>
@@ -42,13 +42,16 @@
                 <input type="submit"/>
               </div>
             </form>
+            <form id="logout-button-form" action="" method="get">
+              <input type="hidden" name="continue" value="..%2Fhtml%2Fcomments.html"/>
+              <button>Logout</button>
+            </form>
           </div>
         </div>
-        <br>
         <hr>
         <div id="comments">
           <h1>Comments</h1>
-          <button type="button" onclick="deleteData()">Delete All Comments</button>
+          <button id="delete-button" type="button" onclick="deleteData()">Delete All Comments</button>
           <div id="comments-container"></div>
         </div>
       </div>
