@@ -21,6 +21,7 @@ import com.google.auto.value.AutoValue;
 public abstract class Comment {
   public abstract long id();
   public abstract String name();
+  public abstract String email();
   public abstract String commentText();
   public abstract long timeStamp();
 
@@ -28,10 +29,11 @@ public abstract class Comment {
    * Creates a Comment.
    * @param id Id of object stored in database
    * @param name Name of author
+   * @param email Email comment written under
    * @param commentText Text author wrote
    * @param timeStamp Time when author submitted comment
    */
-  public static Comment create(long id, String name, String commentText, long timeStamp) {
-    return new AutoValue_Comment(id, name, commentText, timeStamp);
+  public static Comment create(long id, String name, String email, String commentText, long timeStamp) {
+    return new AutoValue_Comment(id, name, email, commentText, timeStamp);
   }
 }

@@ -73,7 +73,7 @@ async function getData() {
   commentsListElement.innerHTML = '';
   for (comment of jsonData) {
     if(comment.commentText != '' && comment.name != '') {
-      commentsListElement.appendChild(createDivElement(comment.commentText, comment.name, comment.timeStamp));
+      commentsListElement.appendChild(createDivElement(comment.commentText, comment.email, comment.timeStamp));
       commentsListElement.appendChild(document.createElement('br'));
     }
   }
@@ -90,13 +90,13 @@ async function deleteData() {
 }
 
 /** 
- * Creates and returns a <div> element containing {@code text}, {@code name},
+ * Creates and returns a <div> element containing {@code text}, {@code email},
  * and {@code timeStamp} from comment.
  */
-function createDivElement(text, name, timeStamp) {
+function createDivElement(text, email, timeStamp) {
   const commentDiv = document.createElement('div');
   const textElement = document.createElement('p');
-  const nameElement = document.createElement('h4');
+  const emailElement = document.createElement('h4');
   const dateElement = document.createElement('h5');
 
   commentDiv.id = 'list-element';
@@ -105,11 +105,11 @@ function createDivElement(text, name, timeStamp) {
   var formattedDate = date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear();
 
   textElement.innerText = text;
-  nameElement.innerText = name;
+  emailElement.innerText = email;
   dateElement.innerText = formattedDate;
 
   commentDiv.appendChild(textElement);
-  commentDiv.appendChild(nameElement);
+  commentDiv.appendChild(emailElement);
   commentDiv.appendChild(dateElement);
 
   return commentDiv;
