@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that displays login status of user. */
+/** Servlet that retrieves user login status. */
 @WebServlet("/user-login")
 public class UserServlet extends HttpServlet {
 
