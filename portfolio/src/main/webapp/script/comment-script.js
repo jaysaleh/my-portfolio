@@ -49,7 +49,7 @@ async function getUserLoginData() {
     lineBreak.style.display = states.SHOW;
     
     /** Sets the logout link */
-    logoutButtonForm.action = jsonData.logoutURL;
+    logoutButtonForm.action = userData.logoutURL;
   } else {
     loginButtonContainer.style.display = states.SHOW;
     commentForm.style.display = states.HIDE;
@@ -57,7 +57,7 @@ async function getUserLoginData() {
     lineBreak.style.display = states.HIDE;
 
     /** Sets the login link */
-    loginButtonForm.action = jsonData.loginURL;
+    loginButtonForm.action = userData.loginURL;
   }
 }
 
