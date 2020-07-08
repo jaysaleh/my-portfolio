@@ -29,7 +29,7 @@ public abstract class Comment {
    * Creates a Comment.
    * @param id Id of object stored in database
    * @param name Name of author
-   * @param email Email comment written under
+   * @param email Email of user comment was written by
    * @param commentText Text author wrote
    * @param timeStamp Time when author submitted comment
    */
