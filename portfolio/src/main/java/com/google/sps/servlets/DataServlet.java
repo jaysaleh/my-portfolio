@@ -38,7 +38,7 @@ public class DataServlet extends HttpServlet {
   private static final String TIME_STAMP = "timeStamp";
   private static final String NAME = "name";
   private static final String COMMENT_TEXT = "commentText";
-  
+
   /** Name of input field used for author name in comments section */
   private static final String NAME_INPUT = "name-input";
   /** Name of input field used for comment text in comments section */
@@ -98,7 +98,7 @@ public class DataServlet extends HttpServlet {
     }
 
     Gson gson = new Gson();
-    response.setContentType("text/html;");
+    response.setContentType("text/html");
     response.getWriter().println(gson.toJson(comments));
   }
 }
