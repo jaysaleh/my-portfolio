@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that displays login status of user. */
+/** Servlet that communicates login status of user. */
 @WebServlet("/user-login")
 public class UserServlet extends HttpServlet {
 
