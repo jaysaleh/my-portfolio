@@ -12,8 +12,34 @@ a:hover {
   color: #f6543c !important;
 }
 
+#login-button {
+  display: block;
+}
+
+#hide-form {
+  width: 60%;
+  display: none;
+}
+
 /* Delete Button Styling */
-button {
+#login-button button {
+  background-color: #fff;
+  border: 2px solid #4c8bf5;
+  color: #4c8bf5;
+  height: 35px;
+  outline: none;
+}
+
+#login-button button:hover {
+  border: 2px solid #4c8bf5;
+  background-color: #4c8bf5;
+  color: #fff;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+
+/* Delete Button Styling */
+#comments button {
   background-color: #fff;
   border: 2px solid #f00;
   color: #f00;
@@ -32,7 +58,7 @@ button:hover {
   text-align: center;
 }
 
-button:hover {
+#comments button:hover {
   border: 2px solid #f00;
   background-color: #f00;
   color: #fff;
@@ -56,6 +82,10 @@ button:hover {
   flex-direction: column;
   margin: 0 auto;
   padding-top: 0px;
+}
+
+#content h1 {
+  text-align: center;
 }
 
 #content h1,
@@ -98,7 +128,8 @@ h3 {
 
 #form-container {
   padding-bottom: 25px;
-  width: 60%;
+  width: 100%;
+  /* display: none; */
 }
 
 form {

@@ -16,6 +16,37 @@
 const commentHyphen = ' -';
 
 /**
+ * Supported class states for showing and hiding contianers
+ * @enum {string}
+ */
+const states = {
+  SHOW_CONTAINER: 'block',
+  HIDE_CONTAINER: 'none',
+}
+
+getUserLoginData();
+
+/**
+ * Fetches data from servlet and sets it in the comments section of portfolio.
+ * Called whenever comments section is loaded.
+ */
+async function getUserLoginData() {
+  const response = await fetch('/user-login');
+  const jsonData = await response.json();
+
+  var button = document.getElementById("login-button");
+  var form = document.getElementById("hide-form");
+  
+  if(jsonData.loggedIn) {
+    button.style.display = states.HIDE_CONTAINER;
+    form.style.display = states.SHOW_CONTAINER;
+  } else {
+    button.style.display = states.SHOW_CONTAINER;
+    form.style.display = states.HIDE_CONTAINER;
+  }
+}
+
+/**
  * Fetches data from servlet and sets it in the comments section of portfolio.
  * Called whenever comments section is loaded.
  */

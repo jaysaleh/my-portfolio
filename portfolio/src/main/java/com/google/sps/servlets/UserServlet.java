@@ -14,6 +14,8 @@
 
 package com.google.sps.servlets;
 
+import com.google.sps.data.User;
+import com.google.gson.Gson;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
@@ -30,10 +32,9 @@ public class UserServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html");
     UserService userService = UserServiceFactory.getUserService();
-    if (userService.isUserLoggedIn()) {
-      response.getWriter().println("<p>User logged in</p>");
-    } else {
-      response.getWriter().println("<p>User not logged in</p>");
-    }
+
+    User newUser = User.create(userService.isUserLoggedIn());
+    Gson gson = new Gson();
+    response.getWriter().println(gson.toJson(newUser));
   }
 }
