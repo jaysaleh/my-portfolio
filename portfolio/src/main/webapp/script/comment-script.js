@@ -16,7 +16,7 @@
 const commentHyphen = ' -';
 
 /**
- * Supported class states for showing and hiding contianers
+ * Supported class states for showing and hiding containers.
  * @enum {string}
  */
 const states = {
@@ -34,8 +34,9 @@ async function getUserLoginData() {
   const response = await fetch('/user-login');
   const jsonData = await response.json();
 
-  var button = document.getElementById("login-button");
-  var form = document.getElementById("hide-form");
+  var button = document.getElementById('login-button');
+  var form = document.getElementById('hide-form');
+  var buttonForm = document.getElementById('button-form');
   
   if(jsonData.loggedIn) {
     button.style.display = states.HIDE_CONTAINER;
@@ -43,6 +44,7 @@ async function getUserLoginData() {
   } else {
     button.style.display = states.SHOW_CONTAINER;
     form.style.display = states.HIDE_CONTAINER;
+    buttonForm.action = jsonData.link;
   }
 }
 

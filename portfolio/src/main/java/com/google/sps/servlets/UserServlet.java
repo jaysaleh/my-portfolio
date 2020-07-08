@@ -32,9 +32,17 @@ public class UserServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html");
     UserService userService = UserServiceFactory.getUserService();
-
-    User newUser = User.create(userService.isUserLoggedIn());
+    
     Gson gson = new Gson();
-    response.getWriter().println(gson.toJson(newUser));
+    if(userService.isUserLoggedIn()) {
+      User newUser = User.create(true, "");
+      response.getWriter().println(gson.toJson(newUser));
+    } else {
+      String urlToRedirectToAfterUserLogsIn = "/html/comments.html";
+      String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
+
+      User newUser = User.create(false, loginUrl);
+      response.getWriter().println(gson.toJson(newUser));
+    }
   }
 }

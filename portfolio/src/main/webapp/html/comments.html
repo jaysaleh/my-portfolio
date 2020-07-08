@@ -21,25 +21,28 @@
       </header>
       <div id="content">
         <div id="login-button">
-          <button type="button" onclick="deleteData()">Login to Leave a Comment</button>
-        </div>
-        <div id="hide-form">
-        <h1>Leave a Comment!</h1>
-        <div id="form-container">
-          <form action="/data" method="POST">
-            <h3>Enter your name:</h3>
-            <input type="text" placeholder="Name" name="name-input">
-            <br/>
-            <br/>
-            <h3>Enter your comment:</h3>
-            <textarea placeholder="Comment" name="comment-input"></textarea>
-            <br/>
-            <br/>
-            <div id="submit-button">
-              <input type="submit"/>
-            </div>
+          <form id="button-form" action="" method="get">
+            <input type="hidden" name="continue" value="..%2Fhtml%2Fcomments.html"/>
+            <button>Login to Leave a Comment</button>
           </form>
         </div>
+        <div id="hide-form">
+          <h1>Leave a Comment!</h1>
+          <div id="form-container">
+            <form action="/data" method="POST">
+              <h3>Enter your name:</h3>
+              <input type="text" placeholder="Name" name="name-input">
+              <br/>
+              <br/>
+              <h3>Enter your comment:</h3>
+              <textarea placeholder="Comment" name="comment-input"></textarea>
+              <br/>
+              <br/>
+              <div id="submit-button">
+                <input type="submit"/>
+              </div>
+            </form>
+          </div>
         </div>
         <br>
         <hr>
