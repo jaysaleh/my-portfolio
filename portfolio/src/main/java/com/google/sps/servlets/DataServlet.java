@@ -68,7 +68,10 @@ public class DataServlet extends HttpServlet {
 
     response.sendRedirect(REDIRECT_URL);
   }
-
+  
+  /**
+   * Returns email of currently logged in user.
+   */
   private String getEmail() {
     UserService userService = UserServiceFactory.getUserService();
     return userService.getCurrentUser().getEmail();
