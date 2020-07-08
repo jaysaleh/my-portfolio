@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 /** Spaces out comment text from author name. */
 const commentHyphen = ' -';
 
@@ -26,15 +27,35 @@ async function getData() {
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
   for (comment of jsonData) {
-    commentsListElement.appendChild(createListElement(comment.commentText + commentHyphen + comment.name));
+    if(comment.commentText != '' && comment.name != '') {
+      commentsListElement.appendChild(createDivElement(comment.commentText, comment.name, comment.timeStamp));
+      commentsListElement.appendChild(document.createElement('br'));
+    }
   }
 }
 
 /** 
- * Creates and returns list element (<li>) containing {@code text} from comment.
+ * Creates and returns a <div> element containing {@code text}, {@code name},
+ * and {@code timeStamp} from comment.
  */
-function createListElement(text) {
-  const liElement = document.createElement('li');
-  liElement.innerText = text;
-  return liElement;
+function createDivElement(text, name, timeStamp) {
+  const commentDiv = document.createElement('div');
+  const textElement = document.createElement('p');
+  const nameElement = document.createElement('h4');
+  const dateElement = document.createElement('h5');
+
+  commentDiv.id = 'list-element';
+  
+  var date = new Date(timeStamp);
+  var formattedDate = date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear();
+
+  textElement.innerText = text;
+  nameElement.innerText = name;
+  dateElement.innerText = formattedDate;
+
+  commentDiv.appendChild(textElement);
+  commentDiv.appendChild(nameElement);
+  commentDiv.appendChild(dateElement);
+
+  return commentDiv;
 }

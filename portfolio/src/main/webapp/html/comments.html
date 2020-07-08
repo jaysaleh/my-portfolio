@@ -1,26 +1,55 @@
-<!-- TODO: Add styling. -->
+<!-- TODO: remove optional tags -->
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Jay Saleh - Comment</title>
+    <title>Jay Saleh - Comments</title>
+    <link rel="stylesheet" href="../css/comments-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="../script/comment-script.js"></script>
   </head>
-  <body onLoad="getData()">
-    <div id="content">
-      <h1>Enter Comment</h1>
-      <form action="/data" method="POST">
-        <p>Enter your name:</p>
-        <input type="text" name="name-input">
-        <br/>
-        <br/>
-        <p>Enter your comment:</p>
-        <textarea name="comment-input"></textarea>
-        <br/>
-        <br/>
-       <input type="submit" />
-      </form>
-      <ul id="comments-container"></ul>
+  <body id="container" onLoad="getData()">
+    <div id="content-wrap">
+      <header id="header">
+        <h1>Jay Saleh</h1>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="./back.html">Background</a></li>
+          <li><a href="./blog.html">Projects & Blog</a></li>
+          <li><a href="./comments.html" id="selected">Comments</a></li>
+        </ul>
+      </header>
+      <div id="content">
+        <h1>Leave a Comment!</h1>
+        <div id="form-container">
+          <form action="/data" method="POST">
+            <h3>Enter your name:</h3>
+            <input type="text" placeholder="Name" name="name-input">
+            <br/>
+            <br/>
+            <h3>Enter your comment:</h3>
+            <textarea placeholder="Comment" name="comment-input"></textarea>
+            <br/>
+            <br/>
+            <div id="button">
+              <input type="submit"/>
+            </div>
+          </form>
+        </div>
+        <br>
+        <hr>
+        <div id="comments">
+          <h1>Comments</h1>
+          <div id="comments-container"></div>
+        </div>
+      </div>
     </div>
+    <footer id="footer">
+      <a href="https://instagram.com/jaysaleh_" target="_blank" class="fa fa-instagram fa-2x"</a>
+      <a href="https://twitter.com/j_saleh6" target="_blank" class="fa fa-twitter fa-2x"</a>
+      <a href="https://facebook.com/jay.saleh.777/" target="_blank" class="fa fa-facebook fa-2x"</a>
+      <a href="https://linkedin.com/in/jay-saleh" target="_blank" class="fa fa-linkedin fa-2x"</a>
+      <a href="https://github.com/jaysaleh" target="_blank" class="fa fa-github fa-2x"></a>
+    </footer>
   </body>
 </html>
