@@ -20,13 +20,13 @@
         </ul>
       </header>
       <div id="content">
-        <div id="login-button">
+        <div id="login-button-container">
           <form id="login-button-form" action="" method="get">
             <input type="hidden" name="continue" value="..%2Fhtml%2Fcomments.html"/>
             <button>Login to Leave a Comment</button>
           </form>
         </div>
-        <div id="hide-form">
+        <div id="comment-form">
           <h1>Leave a Comment!</h1>
           <div id="form-container">
             <form action="/data" method="POST">
@@ -48,7 +48,7 @@
             </form>
           </div>
         </div>
-        <hr>
+        <hr id="line">
         <div id="comments">
           <h1>Comments</h1>
           <button id="delete-button" type="button" onclick="deleteData()">Delete All Comments</button>

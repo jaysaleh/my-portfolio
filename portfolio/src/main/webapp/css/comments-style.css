@@ -12,11 +12,11 @@ a:hover {
   color: #f6543c !important;
 }
 
-#login-button {
+#login-button-container {
   display: block;
 }
 
-#hide-form {
+#comment-form {
   width: 60%;
   display: none;
 }
@@ -26,7 +26,7 @@ a:hover {
 }
 
 /* Delete Button Styling */
-#login-button button {
+#login-button-container button {
   background-color: #fff;
   border: 2px solid #4c8bf5;
   color: #4c8bf5;
@@ -34,7 +34,7 @@ a:hover {
   outline: none;
 }
 
-#login-button button:hover {
+#login-button-container button:hover {
   border: 2px solid #4c8bf5;
   background-color: #4c8bf5;
   color: #fff;
@@ -210,7 +210,7 @@ form {
 }
 
 /* Line break styling */
-hr {
+#line {
   background-color: #ccc;
   border: 0;
   clear: both;

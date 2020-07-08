@@ -34,21 +34,25 @@ async function getUserLoginData() {
   const response = await fetch('/user-login');
   const jsonData = await response.json();
 
-  var button = document.getElementById('login-button');
-  var form = document.getElementById('hide-form');
+  var loginButtonContainer = document.getElementById('login-button-container');
+  var commentForm = document.getElementById('comment-form');
   var loginButtonForm = document.getElementById('login-button-form');
   var logoutButtonForm = document.getElementById('logout-button-form');
+  
+  var lineBreak = document.getElementById('line');
   var deleteButton = document.getElementById('delete-button');
 
   if(jsonData.loggedIn) {
-    button.style.display = states.HIDE_CONTAINER;
-    form.style.display = states.SHOW_CONTAINER;
+    loginButtonContainer.style.display = states.HIDE_CONTAINER;
+    commentForm.style.display = states.SHOW_CONTAINER;
     deleteButton.style.display = states.SHOW_CONTAINER;
+    lineBreak.style.display = states.SHOW_CONTAINER;
     logoutButtonForm.action = jsonData.logoutURL;
   } else {
-    button.style.display = states.SHOW_CONTAINER;
-    form.style.display = states.HIDE_CONTAINER;
+    loginButtonContainer.style.display = states.SHOW_CONTAINER;
+    commentForm.style.display = states.HIDE_CONTAINER;
     deleteButton.style.display = states.HIDE_CONTAINER;
+    lineBreak.style.display = states.HIDE_CONTAINER;
     loginButtonForm.action = jsonData.loginURL;
   }
 }
