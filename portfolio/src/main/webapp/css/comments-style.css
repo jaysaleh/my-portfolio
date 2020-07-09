@@ -85,8 +85,7 @@ h3 {
 }
 
 #content h3 {
-  margin-bottom: 5px;
-  margin-top: 5px;
+  margin: 5px 0px 5px 0px;
 }
 
 #content-wrap {
@@ -165,9 +164,8 @@ input[type=text] {
 }
 
 input[type=file] {
-  margin-bottom: 15px;
-  margin-top: 10px;
   font-family: monospace;
+  margin: 10px 0px 15px 0px;
 }
 
 input[type=text]:focus, 
