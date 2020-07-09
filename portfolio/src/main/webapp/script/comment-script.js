@@ -91,7 +91,8 @@ async function deleteData() {
 }
 
 /**
- * Fetches image upload URL from blobstore-upload-url servlet and.
+ * Fetches image upload URL from blobstore-upload-url servlet and sets
+ * URL as action in {@code comment-image-form}.
  */
 async function getSetBlobURL() {
   const response = await fetch('/blobstore-upload-url');
