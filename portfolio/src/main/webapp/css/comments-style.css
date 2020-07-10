@@ -51,6 +51,7 @@ button:hover {
   flex-direction: column;
   margin: 0 auto;
   padding-top: 25px;
+  width: 80%;
 }
 
 #comments-container {
@@ -58,7 +59,8 @@ button:hover {
   margin: 0;
   padding: 0;
   text-align: center;
-  width: 60%;
+  width: 95%;
+  padding-top: 50px;
 }
 
 /* Content styling */
@@ -350,4 +352,27 @@ textarea {
   #header {
     width: 75% !important;
   }
+}
+
+#img-comment-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 25px;
+}
+
+#img-div {
+  margin-right: 20px;
+  height: 40%;
+  width: 40%;
+}
+
+#img {
+  height: 100%;
+  width: 100%;
+}
+
+#comment-div {
+  margin-left: 20px;
+  width: 40%;
 }
