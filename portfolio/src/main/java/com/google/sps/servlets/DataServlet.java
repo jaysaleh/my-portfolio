@@ -44,7 +44,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that writes messages as a response. */
-// TODO: Remove print statement and store image URL in database
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
@@ -54,6 +53,7 @@ public class DataServlet extends HttpServlet {
   private static final String NAME = "name";
   private static final String COMMENT_TEXT = "commentText";
   private static final String EMAIL = "email";
+  private static final String IMAGE_URL = "imageURL";
 
   /** Supported image files */
   private static final String JPEG = "image/jpg";
@@ -78,11 +78,9 @@ public class DataServlet extends HttpServlet {
     Entity commentEntity = new Entity(COMMENT);
     commentEntity.setProperty(NAME, name);
     commentEntity.setProperty(EMAIL, getEmail());
+    commentEntity.setProperty(IMAGE_URL, getUploadedFileUrl(request, "image"));
     commentEntity.setProperty(COMMENT_TEXT, commentText);
     commentEntity.setProperty(TIME_STAMP, timeStamp);
-
-    // Used for testing, see TODO
-    System.out.println(getUploadedFileUrl(request, "image"));
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
@@ -94,7 +92,7 @@ public class DataServlet extends HttpServlet {
   private String getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
-    List<BlobKey> blobKeys = blobs.get("image");
+    List<BlobKey> blobKeys = blobs.get(formInputElementName);
 
     // User submitted form without selecting a file, so we can't get a URL. (dev server)
     if (blobKeys == null || blobKeys.isEmpty()) {
@@ -164,11 +162,12 @@ public class DataServlet extends HttpServlet {
       long id = entity.getKey().getId();
       String name = (String) entity.getProperty(NAME);
       String email = (String) entity.getProperty(EMAIL);
+      String imageURL = (String) entity.getProperty(IMAGE_URL);
       String commentText = (String) entity.getProperty(COMMENT_TEXT);
       long timeStamp = (long) entity.getProperty(TIME_STAMP);
       
       // Creates new Comment for JSON accessibility
-      Comment newComment = Comment.create(id, name, email, commentText, timeStamp);
+      Comment newComment = Comment.create(id, name, email, imageURL, commentText, timeStamp);
       comments.add(newComment);
     }
 
