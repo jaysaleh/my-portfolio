@@ -44,6 +44,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that writes messages as a response. */
+// TODO: Store URL in database
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
@@ -53,7 +54,12 @@ public class DataServlet extends HttpServlet {
   private static final String NAME = "name";
   private static final String COMMENT_TEXT = "commentText";
   private static final String EMAIL = "email";
-  
+
+  /** Supported image files */
+  private static final String JPEG = "image/jpg";
+  private static final String PNG = "image/png";
+  private static final String TIFF = "image/tiff";
+
   /** Name of input field used for author name in comments section */
   private static final String NAME_INPUT = "name-input";
   /** Name of input field used for comment text in comments section */
@@ -67,11 +73,7 @@ public class DataServlet extends HttpServlet {
     String name = getParameter(request, NAME_INPUT, DEFAULT_VALUE);
     String commentText = getParameter(request, COMMENT_INPUT, DEFAULT_VALUE);
     long timeStamp = System.currentTimeMillis();
-    String imageUrl = getUploadedFileUrl(request, "image");
-    System.out.println("-----------------------");
-    System.out.println(imageUrl);
-    System.out.println("-----------------------");
-    
+
     // Creates Entity and stores in database
     Entity commentEntity = new Entity(COMMENT);
     commentEntity.setProperty(NAME, name);
@@ -79,13 +81,16 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty(COMMENT_TEXT, commentText);
     commentEntity.setProperty(TIME_STAMP, timeStamp);
 
+    // Testing purposes,see TODO
+    System.out.println(getUploadedFileUrl(request, "image"));
+
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
     response.sendRedirect(REDIRECT_URL);
   }
 
-  /** Returns a URL that points to the uploaded file, or null if the user didn't upload a file. */
+  /** Returns a URL that points to the uploaded file, or null if the user didn't upload an image file. */
   private String getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
@@ -96,7 +101,7 @@ public class DataServlet extends HttpServlet {
       return null;
     }
 
-    // Our form only contains a single file input, so get the first index.
+    // Gets first and only file in form submission
     BlobKey blobKey = blobKeys.get(0);
 
     // User submitted form without selecting a file, so we can't get a URL. (live server)
@@ -106,15 +111,18 @@ public class DataServlet extends HttpServlet {
       return null;
     }
 
-    // We could check the validity of the file here, e.g. to make sure it's an image file
-    // https://stackoverflow.com/q/10779564/873165
+    String fileInfo = blobInfo.getContentType();
 
-    // Use ImagesService to get a URL that points to the uploaded file.
+    // Return null if file is not a jpg, png or tiff image
+    if (!fileInfo.equals(JPEG) && !fileInfo.equals(PNG) && !fileInfo.equals(TIFF)) {
+      return null;
+    }
+
+    // Gets URL that points to the uploaded file
     ImagesService imagesService = ImagesServiceFactory.getImagesService();
     ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
 
-    // To support running in Google Cloud Shell with AppEngine's devserver, we must use the relative
-    // path to the image, rather than the path returned by imagesService which contains a host.
+    // Return relative path
     try {
       URL url = new URL(imagesService.getServingUrl(options));
       return url.getPath();
