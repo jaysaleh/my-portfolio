@@ -40,12 +40,13 @@ public class UserServlet extends HttpServlet {
 
       User newUser = User.create(/* loggedIn= */ true, /* loginURL= */ "", logoutUrl);
       response.getWriter().println(gson.toJson(newUser));
-    } else {
-      String urlToRedirectToAfterUserLogsIn = "/html/comments.html";
-      String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
-
-      User newUser = User.create(/* loggedIn= */ false, loginUrl, /* logoutURL= */ "");
-      response.getWriter().println(gson.toJson(newUser));
+      return;
     }
+    
+    String urlToRedirectToAfterUserLogsIn = "/html/comments.html";
+    String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
+
+    User newUser = User.create(/* loggedIn= */ false, loginUrl, /* logoutURL= */ "");
+    response.getWriter().println(gson.toJson(newUser));
   }
 }
