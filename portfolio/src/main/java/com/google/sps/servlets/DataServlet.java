@@ -44,7 +44,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that writes messages as a response. */
-// TODO: Store URL in database
+// TODO: Remove print statement and store image URL in database
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
@@ -81,7 +81,7 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty(COMMENT_TEXT, commentText);
     commentEntity.setProperty(TIME_STAMP, timeStamp);
 
-    // Testing purposes,see TODO
+    // Used for testing, see TODO
     System.out.println(getUploadedFileUrl(request, "image"));
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
