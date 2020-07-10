@@ -82,7 +82,7 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty(TIME_STAMP, timeStamp);
 
     // Used for testing, see TODO
-    System.out.println(getUploadedFileUrl(request, "image"));
+    System.out.println(getUploadedFileUrl(request, /* formInputElementName= */ "image"));
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
