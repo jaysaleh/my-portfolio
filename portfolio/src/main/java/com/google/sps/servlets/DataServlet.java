@@ -33,6 +33,10 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+import java.util.Map;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -64,8 +68,10 @@ public class DataServlet extends HttpServlet {
     String commentText = getParameter(request, COMMENT_INPUT, DEFAULT_VALUE);
     long timeStamp = System.currentTimeMillis();
     String imageUrl = getUploadedFileUrl(request, "image");
-    System.out.println("++++++++++++" + imageUrl);
-
+    System.out.println("-----------------------");
+    System.out.println(imageUrl);
+    System.out.println("-----------------------");
+    
     // Creates Entity and stores in database
     Entity commentEntity = new Entity(COMMENT);
     commentEntity.setProperty(NAME, name);
