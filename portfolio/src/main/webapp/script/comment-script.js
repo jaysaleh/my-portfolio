@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** Spaces out comment text from author name */
+/** Spaces out comment text from author name. */
 const commentHyphen = ' -';
 
 /**
@@ -25,7 +25,7 @@ const states = {
 }
 
 getUserLoginData();
-getSetBlobURL();
+getSetBlobUrl();
 
 /**
  * Fetches user login data from servlet and adjusts comments section of portfolio
@@ -42,24 +42,25 @@ async function getUserLoginData() {
   var lineBreak = document.getElementById('line');
   var deleteButton = document.getElementById('delete-button');
 
-  /** Hide/show containers depending on user login state */
+  /* Hide/show containers depending on user login state. */
   if(userData.loggedIn) {
     loginButtonContainer.style.display = states.HIDE;
     commentForm.style.display = states.SHOW;
     deleteButton.style.display = states.SHOW;
     lineBreak.style.display = states.SHOW;
     
-    /** Sets the logout link */
+    /* Sets the logout link. */
     logoutButtonForm.action = userData.logoutURL;
-  } else {
-    loginButtonContainer.style.display = states.SHOW;
-    commentForm.style.display = states.HIDE;
-    deleteButton.style.display = states.HIDE;
-    lineBreak.style.display = states.HIDE;
-
-    /** Sets the login link */
-    loginButtonForm.action = userData.loginURL;
+    return;
   }
+
+  loginButtonContainer.style.display = states.SHOW;
+  commentForm.style.display = states.HIDE;
+  deleteButton.style.display = states.HIDE;
+  lineBreak.style.display = states.HIDE;
+
+  /* Sets the login link. */
+  loginButtonForm.action = userData.loginURL;
 }
 
 /**
@@ -94,11 +95,11 @@ async function deleteData() {
  * Fetches image upload URL from blobstore-upload-url servlet and sets
  * URL as action in {@code comment-image-form}.
  */
-async function getSetBlobURL() {
+async function getSetBlobUrl() {
   const response = await fetch('/blobstore-upload-url');
-  const blobUploadURL = await response.text();
+  const blobUploadUrl = await response.text();
   var commentImageForm = document.getElementById("comment-image-form");
-  commentImageForm.action = blobUploadURL;
+  commentImageForm.action = blobUploadUrl;
 }
 
 function createDivElement(text, email, timeStamp, imageURL) {
