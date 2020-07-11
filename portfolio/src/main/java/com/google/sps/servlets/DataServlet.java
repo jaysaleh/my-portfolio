@@ -55,6 +55,7 @@ public class DataServlet extends HttpServlet {
   private static final String EMAIL = "email";
   private static final String IMAGE_URL = "imageURL";
 
+
   // Supported image files.
   private static final String JPEG = "image/jpg";
   private static final String PNG = "image/png";
@@ -100,7 +101,7 @@ public class DataServlet extends HttpServlet {
       return null;
     }
 
-    // Gets first and only file in form submission
+    // Gets first and only file in form submission.
     BlobKey blobKey = blobKeys.get(0);
 
     // User submitted form without selecting a file, so we can't get a URL. (live server)
@@ -112,16 +113,16 @@ public class DataServlet extends HttpServlet {
 
     String fileInfo = blobInfo.getContentType();
 
-    // Return null if file is not a jpg, png or tiff image
+    // Return null if file is not a jpg, png or tiff image.
     if (!fileInfo.equals(JPEG) && !fileInfo.equals(PNG) && !fileInfo.equals(TIFF)) {
       return null;
     }
 
-    // Gets URL that points to the uploaded file
+    // Gets URL that points to the uploaded file.
     ImagesService imagesService = ImagesServiceFactory.getImagesService();
     ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
 
-    // Returns relative path to image
+    // Returns relative path to image.
     try {
       URL url = new URL(imagesService.getServingUrl(options));
       return url.getPath();
