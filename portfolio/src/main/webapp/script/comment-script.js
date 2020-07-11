@@ -50,16 +50,17 @@ async function getUserLoginData() {
     lineBreak.style.display = states.SHOW;
     
     /* Sets the logout link. */
-    logoutButtonForm.action = userData.logoutUrl;
-  } else {
-    loginButtonContainer.style.display = states.SHOW;
-    commentForm.style.display = states.HIDE;
-    deleteButton.style.display = states.HIDE;
-    lineBreak.style.display = states.HIDE;
-
-    /* Sets the login link. */
-    loginButtonForm.action = userData.loginUrl;
+    logoutButtonForm.action = userData.logoutURL;
+    return;
   }
+
+  loginButtonContainer.style.display = states.SHOW;
+  commentForm.style.display = states.HIDE;
+  deleteButton.style.display = states.HIDE;
+  lineBreak.style.display = states.HIDE;
+
+  /* Sets the login link. */
+  loginButtonForm.action = userData.loginURL;
 }
 
 /**

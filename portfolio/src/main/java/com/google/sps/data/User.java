@@ -16,7 +16,7 @@ package com.google.sps.data;
 
 import com.google.auto.value.AutoValue;
 
-/** Stores user data. */
+/** Stores user login data. */
 @AutoValue 
 public abstract class User {
   public abstract boolean loggedIn();
