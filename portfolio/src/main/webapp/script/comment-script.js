@@ -50,7 +50,7 @@ async function getUserLoginData() {
     lineBreak.style.display = states.SHOW;
     
     /** Sets the logout link */
-    logoutButtonForm.action = userData.logoutURL;
+    logoutButtonForm.action = userData.logoutUrl;
   } else {
     loginButtonContainer.style.display = states.SHOW;
     commentForm.style.display = states.HIDE;
@@ -58,7 +58,7 @@ async function getUserLoginData() {
     lineBreak.style.display = states.HIDE;
 
     /** Sets the login link */
-    loginButtonForm.action = userData.loginURL;
+    loginButtonForm.action = userData.loginUrl;
   }
 }
 
@@ -96,9 +96,9 @@ async function deleteData() {
  */
 async function getSetBlobUrl() {
   const response = await fetch('/blobstore-upload-url');
-  const blobUploadURL = await response.text();
+  const blobUploadUrl = await response.text();
   var commentImageForm = document.getElementById("comment-image-form");
-  commentImageForm.action = blobUploadURL;
+  commentImageForm.action = blobUploadUrl;
 }
 
 /** 
