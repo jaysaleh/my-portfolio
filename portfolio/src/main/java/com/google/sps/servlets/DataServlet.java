@@ -80,8 +80,8 @@ public class DataServlet extends HttpServlet {
   /**
    * Returns value with {@code name} from the {@code request} form. 
    * If the {@code name} cannot be found, return {@code defaultValue}.
-   * @param request Form sent by client.
-   * @param name {@code <input>} or {@code <textarea>} to read content of.
+   * @param request Form sent by client
+   * @param name {@code <input>} or {@code <textarea>} to read content of
    */
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);

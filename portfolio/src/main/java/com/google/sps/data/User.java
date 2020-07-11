@@ -25,9 +25,9 @@ public abstract class User {
 
   /** 
    * Creates a User.
-   * @param loggedIn boolean reflecting user login status.
-   * @param loginURL string where user can login.
-   * @param logoutURL string where user can logout.
+   * @param loggedIn Indicates if user is logged in.
+   * @param loginURL URL where user can login.
+   * @param logoutURL URL where user can logout.
    */
   public static User create(boolean loggedIn, String loginUrl, String logoutUrl) {
     return new AutoValue_User(loggedIn, loginUrl, logoutUrl);
