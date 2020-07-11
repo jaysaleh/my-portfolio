@@ -28,11 +28,11 @@ public abstract class Comment {
 
   /** 
    * Creates a Comment.
-   * @param id Id of object stored in database
-   * @param name Name of author
-   * @param email Email of user comment was written by
-   * @param commentText Text author wrote
-   * @param timeStamp Time when author submitted comment
+   * @param id Id of object stored in database.
+   * @param name Name of author.
+   * @param email Email of user comment was written by.
+   * @param commentText Text author wrote.
+   * @param timeStamp Time when author submitted comment.
    */
   public static Comment create(long id, String name, String email, String imageURL, String commentText, long timeStamp) {
     return new AutoValue_Comment(id, name, email, imageURL, commentText, timeStamp);
