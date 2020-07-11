@@ -48,23 +48,24 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
-  /** Used to create Entity and its fields */
+  // Used to create Entity and its fields.
   private static final String COMMENT = "Comment";
   private static final String TIME_STAMP = "timeStamp";
   private static final String NAME = "name";
   private static final String COMMENT_TEXT = "commentText";
   private static final String EMAIL = "email";
 
-  /** Supported image files */
+  // Supported image files.
   private static final String JPEG = "image/jpg";
   private static final String PNG = "image/png";
   private static final String TIFF = "image/tiff";
 
-  /** Name of input field used for author name in comments section */
+  // Name of input field used for author name in comments section.
   private static final String NAME_INPUT = "name-input";
-  /** Name of input field used for comment text in comments section */
+  // Name of input field used for comment text in comments section.
   private static final String COMMENT_INPUT = "comment-input";
-  /** Default value if comment section inputs are empty */
+  // Default value if comment section inputs are empty.
+
   private static final String DEFAULT_VALUE = "";
   private static final String REDIRECT_URL = "/html/comments.html";
 
@@ -74,7 +75,7 @@ public class DataServlet extends HttpServlet {
     String commentText = getParameter(request, COMMENT_INPUT, DEFAULT_VALUE);
     long timeStamp = System.currentTimeMillis();
 
-    // Creates Entity and stores in database
+    // Creates Entity and stores in database.
     Entity commentEntity = new Entity(COMMENT);
     commentEntity.setProperty(NAME, name);
     commentEntity.setProperty(EMAIL, getEmail());
@@ -142,8 +143,8 @@ public class DataServlet extends HttpServlet {
   /**
    * Returns value with {@code name} from the {@code request} form. 
    * If the {@code name} cannot be found, return {@code defaultValue}.
-   * @param request Form sent by client
-   * @param name {@code <input>} or {@code <textarea>} to read content of
+   * @param request Form sent by client.
+   * @param name {@code <input>} or {@code <textarea>} to read content of.
    */
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
@@ -167,7 +168,7 @@ public class DataServlet extends HttpServlet {
       String commentText = (String) entity.getProperty(COMMENT_TEXT);
       long timeStamp = (long) entity.getProperty(TIME_STAMP);
       
-      // Creates new Comment for JSON accessibility
+      // Creates new Comment for JSON accessibility.
       Comment newComment = Comment.create(id, name, email, commentText, timeStamp);
       comments.add(newComment);
     }
