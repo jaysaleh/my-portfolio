@@ -16,6 +16,7 @@ package com.google.sps.servlets;
 
 import com.google.sps.data.User;
 import com.google.gson.Gson;
+import java.util.Optional;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class UserServlet extends HttpServlet {
       String urlToRedirectToAfterUserLogsOut = "/html/comments.html";
       String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-      User newUser = User.create(/* loggedIn= */ true, /* loginURL= */ "", logoutUrl);
+      User newUser = User.builder().setLoggedIn(true).setLogoutUrl(Optional.of(logoutUrl)).build();
       response.getWriter().println(gson.toJson(newUser));
       return;
     }
@@ -46,7 +47,7 @@ public class UserServlet extends HttpServlet {
     String urlToRedirectToAfterUserLogsIn = "/html/comments.html";
     String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
 
-    User newUser = User.create(/* loggedIn= */ false, loginUrl, /* logoutURL= */ "");
+    User newUser = User.builder().setLoggedIn(false).setLoginUrl(Optional.of(loginUrl)).build();
     response.getWriter().println(gson.toJson(newUser));
   }
 }
