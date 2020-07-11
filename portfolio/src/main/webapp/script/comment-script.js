@@ -25,7 +25,7 @@ const states = {
 }
 
 getUserLoginData();
-getSetBlobURL();
+getSetBlobUrl();
 
 /**
  * Fetches user login data from servlet and adjusts comments section of portfolio
@@ -94,7 +94,7 @@ async function deleteData() {
  * Fetches image upload URL from blobstore-upload-url servlet and sets
  * URL as action in {@code comment-image-form}.
  */
-async function getSetBlobURL() {
+async function getSetBlobUrl() {
   const response = await fetch('/blobstore-upload-url');
   const blobUploadURL = await response.text();
   var commentImageForm = document.getElementById("comment-image-form");

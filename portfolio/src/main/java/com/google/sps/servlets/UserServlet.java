@@ -38,7 +38,7 @@ public class UserServlet extends HttpServlet {
       String urlToRedirectToAfterUserLogsOut = "/html/comments.html";
       String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-      User newUser = User.create(/** loggedIn= */ true, /** loginURL= */ "", logoutUrl);
+      User newUser = User.create(/** loggedIn= */ true, /** loginUrl= */ "", logoutUrl);
       response.getWriter().println(gson.toJson(newUser));
     } else {
       String urlToRedirectToAfterUserLogsIn = "/html/comments.html";
