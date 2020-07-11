@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** Spaces out comment text from author name */
+/** Spaces out comment text from author name. */
 const commentHyphen = ' -';
 
 /**
@@ -41,24 +41,24 @@ async function getUserLoginData() {
   var lineBreak = document.getElementById('line');
   var deleteButton = document.getElementById('delete-button');
 
-  /* Hide/show containers depending on user login state */
+  /* Hide/show containers depending on user login state. */
   if(userData.loggedIn) {
     loginButtonContainer.style.display = states.HIDE;
     commentForm.style.display = states.SHOW;
     deleteButton.style.display = states.SHOW;
     lineBreak.style.display = states.SHOW;
     
-    /* Sets the logout link */
+    /* Sets the logout link. */
     logoutButtonForm.action = userData.logoutURL;
     return;
   }
-  
+
   loginButtonContainer.style.display = states.SHOW;
   commentForm.style.display = states.HIDE;
   deleteButton.style.display = states.HIDE;
   lineBreak.style.display = states.HIDE;
 
-    /* Sets the login link */
+  /* Sets the login link. */
   loginButtonForm.action = userData.loginURL;
 }
 
