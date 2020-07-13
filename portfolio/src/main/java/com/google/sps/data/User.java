@@ -24,7 +24,7 @@ public abstract class User {
   public abstract Optional<String> loginUrl();
   public abstract Optional<String> logoutUrl();
 
-/** Returns a Builder for a User. */
+  /** Returns a Builder for a User. */
   public static Builder builder() {
     return new AutoValue_User.Builder().setLoginUrl(Optional.empty()).setLogoutUrl(Optional.empty());
   }
