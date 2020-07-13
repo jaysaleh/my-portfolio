@@ -121,7 +121,7 @@ public class DataServlet extends HttpServlet {
     ImagesService imagesService = ImagesServiceFactory.getImagesService();
     ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
 
-    // Return relative path.
+    // Returns relative path to image.
     try {
       URL url = new URL(imagesService.getServingUrl(options));
       return url.getPath();
