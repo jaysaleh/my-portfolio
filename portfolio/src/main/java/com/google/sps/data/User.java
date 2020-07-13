@@ -24,16 +24,9 @@ public abstract class User {
   public abstract Optional<String> loginUrl();
   public abstract Optional<String> logoutUrl();
 
-//   /** 
-//    * Creates a User
-//    * @param loggedIn Indicates if user is logged in
-//    * @param loginUrl URL where user can login
-//    * @param logoutUrl URL where user can logout
-//    */
-//   public static User create(boolean loggedIn, String loginUrl, String logoutUrl) {
-//     return new AutoValue_User(loggedIn, loginUrl, logoutUrl);
-//   }
-
+/**
+ * Creates a builder for a User.
+ */
   public static Builder builder() {
     return new AutoValue_User.Builder().setLoginUrl(Optional.empty()).setLogoutUrl(Optional.empty());
   }
