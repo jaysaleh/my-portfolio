@@ -49,7 +49,7 @@ async function getUserLoginData() {
     lineBreak.style.display = states.SHOW;
     
     /* Sets the logout link. */
-    logoutButtonForm.action = userData.logoutURL;
+    logoutButtonForm.action = userData.logoutUrl;
     return;
   }
 
@@ -59,7 +59,7 @@ async function getUserLoginData() {
   lineBreak.style.display = states.HIDE;
 
   /* Sets the login link. */
-  loginButtonForm.action = userData.loginURL;
+  loginButtonForm.action = userData.loginUrl;
 }
 
 /**
