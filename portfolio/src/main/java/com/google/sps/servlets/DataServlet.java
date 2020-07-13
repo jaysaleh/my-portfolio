@@ -55,7 +55,6 @@ public class DataServlet extends HttpServlet {
   private static final String EMAIL = "email";
   private static final String IMAGE_URL = "imageURL";
 
-
   // Supported image files.
   private static final String JPEG = "image/jpg";
   private static final String PNG = "image/png";
@@ -163,12 +162,12 @@ public class DataServlet extends HttpServlet {
       long id = entity.getKey().getId();
       String name = (String) entity.getProperty(NAME);
       String email = (String) entity.getProperty(EMAIL);
-      String imageURL = (String) entity.getProperty(IMAGE_URL);
+      String imageUrl = (String) entity.getProperty(IMAGE_URL);
       String commentText = (String) entity.getProperty(COMMENT_TEXT);
       long timeStamp = (long) entity.getProperty(TIME_STAMP);
       
       // Creates new Comment for JSON accessibility.
-      Comment newComment = Comment.create(id, name, email, imageURL, commentText, timeStamp);
+      Comment newComment = Comment.create(id, name, email, imageUrl, commentText, timeStamp);
       comments.add(newComment);
     }
 
