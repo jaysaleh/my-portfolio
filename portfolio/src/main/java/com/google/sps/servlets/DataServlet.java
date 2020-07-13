@@ -47,7 +47,6 @@ public class DataServlet extends HttpServlet {
   // Name of input field used for comment text in comments section.
   private static final String COMMENT_INPUT = "comment-input";
   // Default value if comment section inputs are empty.
-
   private static final String DEFAULT_VALUE = "";
   private static final String REDIRECT_URL = "/html/comments.html";
 
