@@ -29,6 +29,7 @@ public abstract class User {
     return new AutoValue_User.Builder().setLoginUrl(Optional.empty()).setLogoutUrl(Optional.empty());
   }
 
+  /** Builder object for User. */
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder setLoggedIn(boolean val);
