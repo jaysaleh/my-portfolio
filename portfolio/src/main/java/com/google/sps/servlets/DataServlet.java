@@ -96,6 +96,7 @@ public class DataServlet extends HttpServlet {
 
     // User submitted form without selecting a file, so we can't get a URL. (local server)
     if (blobKeys == null || blobKeys.isEmpty()) {
+      System.out.println("NO FILE - LOCAL");
       return null;
     }
 
@@ -106,6 +107,7 @@ public class DataServlet extends HttpServlet {
     BlobInfo blobInfo = new BlobInfoFactory().loadBlobInfo(blobKey);
     if (blobInfo.getSize() == 0) {
       blobstoreService.delete(blobKey);
+      System.out.println("NO FILE - LIVE");
       return null;
     }
 
@@ -113,6 +115,7 @@ public class DataServlet extends HttpServlet {
 
     // Return null if file is not a jpg, png or tiff image.
     if (!fileInfo.equals(JPEG) && !fileInfo.equals(PNG) && !fileInfo.equals(TIFF)) {
+      System.out.println("ILLEGAL FILE TYPE: " + fileInfo);
       return null;
     }
 
