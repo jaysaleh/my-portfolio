@@ -32,9 +32,9 @@ public abstract class User {
   /** Builder object for User. */
   @AutoValue.Builder
   public abstract static class Builder {
-    public abstract Builder setLoggedIn(boolean val);
-    public abstract Builder setLoginUrl(Optional<String> val);
-    public abstract Builder setLogoutUrl(Optional<String> val);
+    public abstract Builder setLoggedIn(boolean loggedIn);
+    public abstract Builder setLoginUrl(Optional<String> loginUrl);
+    public abstract Builder setLogoutUrl(Optional<String> logoutUrl);
     public abstract User build();
   }
 }
