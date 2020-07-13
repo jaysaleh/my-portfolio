@@ -55,7 +55,7 @@ public class DataServlet extends HttpServlet {
   private static final String EMAIL = "email";
 
   // Supported image files.
-  private static final String JPEG = "image/jpg";
+  private static final String JPEG = "image/jpeg";
   private static final String PNG = "image/png";
   private static final String TIFF = "image/tiff";
 
