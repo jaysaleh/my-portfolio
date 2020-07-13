@@ -66,7 +66,6 @@ public class DataServlet extends HttpServlet {
   // Name of input field used for comment text in comments section.
   private static final String COMMENT_INPUT = "comment-input";
   // Default value if comment section inputs are empty.
-
   private static final String DEFAULT_VALUE = "";
   private static final String REDIRECT_URL = "/html/comments.html";
 
@@ -96,7 +95,7 @@ public class DataServlet extends HttpServlet {
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
     List<BlobKey> blobKeys = blobs.get(formInputElementName);
 
-    // User submitted form without selecting a file, so we can't get a URL. (dev server)
+    // User submitted form without selecting a file, so we can't get a URL. (local server)
     if (blobKeys == null || blobKeys.isEmpty()) {
       return null;
     }
