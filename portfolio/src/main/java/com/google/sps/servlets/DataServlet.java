@@ -44,7 +44,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that writes messages as a response. */
-// TODO: Remove print statement and store image URL in database
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
@@ -65,7 +64,6 @@ public class DataServlet extends HttpServlet {
   // Name of input field used for comment text in comments section.
   private static final String COMMENT_INPUT = "comment-input";
   // Default value if comment section inputs are empty.
-
   private static final String DEFAULT_VALUE = "";
   private static final String REDIRECT_URL = "/html/comments.html";
 
@@ -82,7 +80,7 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty(COMMENT_TEXT, commentText);
     commentEntity.setProperty(TIME_STAMP, timeStamp);
 
-    // Used for testing, see TODO
+    // TODO: Remove print statement and store image URL in database.
     System.out.println(getUploadedFileUrl(request, /* formInputElementName= */ "image"));
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -97,12 +95,12 @@ public class DataServlet extends HttpServlet {
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
     List<BlobKey> blobKeys = blobs.get(formInputElementName);
 
-    // User submitted form without selecting a file, so we can't get a URL. (dev server)
+    // User submitted form without selecting a file, so we can't get a URL. (local server)
     if (blobKeys == null || blobKeys.isEmpty()) {
       return null;
     }
 
-    // Gets first and only file in form submission
+    // Gets first and only file in form submission.
     BlobKey blobKey = blobKeys.get(0);
 
     // User submitted form without selecting a file, so we can't get a URL. (live server)
@@ -114,16 +112,16 @@ public class DataServlet extends HttpServlet {
 
     String fileInfo = blobInfo.getContentType();
 
-    // Return null if file is not a jpg, png or tiff image
+    // Return null if file is not a jpg, png or tiff image.
     if (!fileInfo.equals(JPEG) && !fileInfo.equals(PNG) && !fileInfo.equals(TIFF)) {
       return null;
     }
 
-    // Gets URL that points to the uploaded file
+    // Gets URL that points to the uploaded file.
     ImagesService imagesService = ImagesServiceFactory.getImagesService();
     ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
 
-    // Return relative path
+    // Return relative path.
     try {
       URL url = new URL(imagesService.getServingUrl(options));
       return url.getPath();
