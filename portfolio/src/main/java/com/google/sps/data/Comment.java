@@ -22,7 +22,7 @@ public abstract class Comment {
   public abstract long id();
   public abstract String name();
   public abstract String email();
-  public abstract String imageURL();
+  public abstract String imageUrl();
   public abstract String commentText();
   public abstract long timeStamp();
 
@@ -34,7 +34,7 @@ public abstract class Comment {
    * @param commentText Text author wrote.
    * @param timeStamp Time when author submitted comment.
    */
-  public static Comment create(long id, String name, String email, String imageURL, String commentText, long timeStamp) {
-    return new AutoValue_Comment(id, name, email, imageURL, commentText, timeStamp);
+  public static Comment create(long id, String name, String email, String imageUrl, String commentText, long timeStamp) {
+    return new AutoValue_Comment(id, name, email, imageUrl, commentText, timeStamp);
   }
 }

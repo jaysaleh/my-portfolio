@@ -75,7 +75,7 @@ async function getData() {
   commentsListElement.innerHTML = '';
   for (comment of jsonData) {
     if(comment.commentText != '' && comment.name != '') {
-      commentsListElement.appendChild(createDivElement(comment.commentText, comment.email, comment.timeStamp, comment.imageURL));
+      commentsListElement.appendChild(createDivElement(comment.commentText, comment.email, comment.timeStamp, comment.imageUrl));
       commentsListElement.appendChild(document.createElement('br'));
     }
   }
@@ -102,7 +102,7 @@ async function getSetBlobUrl() {
   commentImageForm.action = blobUploadUrl;
 }
 
-function createDivElement(text, email, timeStamp, imageURL) {
+function createDivElement(text, email, timeStamp, imageUrl) {
   const outerDiv = document.createElement('div');
   const imageCommentDiv = document.createElement('div');
   const hr = document.createElement('hr');
@@ -110,7 +110,7 @@ function createDivElement(text, email, timeStamp, imageURL) {
   imageCommentDiv.id = 'img-comment-div';
   hr.id = 'line';
 
-  imageCommentDiv.append(createImageDiv(imageURL));
+  imageCommentDiv.append(createImageDiv(imageUrl));
   imageCommentDiv.append(createCommentDiv(text, email, timeStamp));
   
   outerDiv.append(imageCommentDiv);
@@ -119,12 +119,12 @@ function createDivElement(text, email, timeStamp, imageURL) {
   return outerDiv;
 }
 
-function createImageDiv(imageURL) {
+function createImageDiv(imageUrl) {
   const imageDiv = document.createElement('div');
   const image = document.createElement('img');
   imageDiv.id = 'img-div';
   image.id = 'img';
-  image.src = imageURL;
+  image.src = imageUrl;
   imageDiv.append(image);
   return imageDiv;
 }
