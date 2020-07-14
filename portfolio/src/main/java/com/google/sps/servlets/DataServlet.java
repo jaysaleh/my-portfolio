@@ -81,7 +81,7 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty(TIME_STAMP, timeStamp);
 
     // TODO: Remove print statement and store image URL in database.
-    System.out.println(getUploadedFileUrl(request, /* formInputElementName= */ "image"));
+    System.out.println(getUploadedFileUrl(request, /* formInputElementName= */ "image").get());
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
@@ -90,15 +90,14 @@ public class DataServlet extends HttpServlet {
   }
 
   /** Returns a URL that points to the uploaded file, or null if the user didn't upload an image file. */
-  private String getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
+  private Optional<String> getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
     List<BlobKey> blobKeys = blobs.get(formInputElementName);
 
     // User submitted form without selecting a file, so we can't get a URL. (local server)
     if (blobKeys == null || blobKeys.isEmpty()) {
-      System.out.println("NO FILE - LOCAL");
-      return null;
+      return Optional.empty();
     }
 
     // Gets first and only file in form submission.
@@ -108,16 +107,15 @@ public class DataServlet extends HttpServlet {
     BlobInfo blobInfo = new BlobInfoFactory().loadBlobInfo(blobKey);
     if (blobInfo.getSize() == 0) {
       blobstoreService.delete(blobKey);
-      System.out.println("NO FILE - LIVE");
-      return null;
+      return Optional.empty();
     }
 
     String fileInfo = blobInfo.getContentType();
 
     // Return null if file is not a jpg, png or tiff image.
     if (!fileInfo.equals(JPEG) && !fileInfo.equals(PNG) && !fileInfo.equals(TIFF)) {
-      System.out.println("ILLEGAL FILE TYPE: " + fileInfo);
-      return null;
+      return Optional.empty();
+
     }
 
     // Gets URL that points to the uploaded file.
@@ -127,9 +125,9 @@ public class DataServlet extends HttpServlet {
     // Returns relative path to image.
     try {
       URL url = new URL(imagesService.getServingUrl(options));
-      return url.getPath();
+      return Optional.of(url.getPath());
     } catch (MalformedURLException e) {
-      return imagesService.getServingUrl(options);
+      return Optional.of(imagesService.getServingUrl(options));
     }
   }
   
