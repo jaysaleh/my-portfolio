@@ -103,7 +103,7 @@ async function populateBlobUrl() {
 }
 
 /**
- * Creates and returns a <div> element containing an the comment
+ * Creates and returns a <div> element containing the comment
  * a user left and an image if they uploaded on.
  */
 function createDivElement(text, email, timeStamp, imageUrl) {
@@ -127,7 +127,7 @@ function createDivElement(text, email, timeStamp, imageUrl) {
 
 /**
  * Creates and returns a <div> element containing an <img>
- * that shows the image stored at {@code imageUrl}.
+ * that displays the image stored at {@code imageUrl}.
  */
 function createImageDiv(imageUrl) {
   const imageDiv = document.createElement('div');
