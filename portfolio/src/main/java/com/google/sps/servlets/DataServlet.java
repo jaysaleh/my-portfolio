@@ -117,7 +117,6 @@ public class DataServlet extends HttpServlet {
     // Return empty optional if file is not a jpg, png or tiff image.
     if (!fileInfo.equals(JPEG) && !fileInfo.equals(PNG) && !fileInfo.equals(TIFF)) {
       return Optional.empty();
-
     }
 
     ImagesService imagesService = ImagesServiceFactory.getImagesService();
