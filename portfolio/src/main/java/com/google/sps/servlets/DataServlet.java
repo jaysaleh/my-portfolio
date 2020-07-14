@@ -53,7 +53,7 @@ public class DataServlet extends HttpServlet {
   private static final String NAME = "name";
   private static final String COMMENT_TEXT = "commentText";
   private static final String EMAIL = "email";
-  private static final String IMAGE_URL = "imageURL";
+  private static final String IMAGE_URL = "imageUrl";
 
   // Supported image files.
   private static final String JPEG = "image/jpeg";
