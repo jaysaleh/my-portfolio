@@ -63,6 +63,11 @@ button:hover {
   padding-top: 50px;
 }
 
+#comment-div {
+  margin-left: 20px;
+  width: 40%;
+}
+
 /* Content styling */
 #container {
   min-height: 100vh;
@@ -158,6 +163,25 @@ form {
   font: 200 18px Helvetica;
   padding-right: 35px;
   text-decoration: none;
+}
+
+/* Image styling */
+#img {
+  height: 100%;
+  width: 100%;
+}
+
+#img-comment-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 25px;
+}
+
+#img-div {
+  margin-right: 20px;
+  height: 40%;
+  width: 40%;
 }
 
 /* Form input styling */
@@ -354,25 +378,3 @@ textarea {
   }
 }
 
-#img-comment-div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 25px;
-}
-
-#img-div {
-  margin-right: 20px;
-  height: 40%;
-  width: 40%;
-}
-
-#img {
-  height: 100%;
-  width: 100%;
-}
-
-#comment-div {
-  margin-left: 20px;
-  width: 40%;
-}
