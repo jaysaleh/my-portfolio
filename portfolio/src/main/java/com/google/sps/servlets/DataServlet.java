@@ -90,22 +90,22 @@ public class DataServlet extends HttpServlet {
   }
 
   /** 
-   * Returns a URL that points to the uploaded file, or an empty optional
-   * if the user didn't upload an image file. 
+   * Returns the URL that points to a file uploaded by {@code formInputElementName}, 
+   * or an empty optional if the user didn't upload an image file. 
    */
   private Optional<String> getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
     List<BlobKey> blobKeys = blobs.get(formInputElementName);
 
-    // User submitted form without selecting a file, so we can't get a URL. (local server)
+    // User submitted form in the local server without a file, so we can't get a URL.
     if (blobKeys == null || blobKeys.isEmpty()) {
       return Optional.empty();
     }
 
     BlobKey blobKey = blobKeys.get(0);
 
-    // User submitted form without selecting a file, so we can't get a URL. (live server)
+    // User submitted form in the live server without a file, so we can't get a URL.
     BlobInfo blobInfo = new BlobInfoFactory().loadBlobInfo(blobKey);
     if (blobInfo.getSize() == 0) {
       blobstoreService.delete(blobKey);
