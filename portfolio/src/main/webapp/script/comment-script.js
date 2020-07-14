@@ -34,8 +34,7 @@ async function getData() {
 }
 
 /**
- * Forwards POST request to delete-data servlet and refreshes portfolio with
- * updated comments.
+ * Deletes comments and refreshes portfolio with updated comments.
  */
 async function deleteData() {
   const request = new Request('/delete-data', {method: 'POST'});
