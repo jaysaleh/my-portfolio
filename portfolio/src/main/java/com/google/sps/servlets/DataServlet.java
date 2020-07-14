@@ -168,16 +168,10 @@ public class DataServlet extends HttpServlet {
       long timeStamp = (long) entity.getProperty(TIME_STAMP);
       
       // Creates new Comment for JSON accessibility.
-    //   if (!imageUrl.equals("")) {
-    //     comments.add(Comment.builder(id, name, email, commentText, timeStamp).setImageUrl(Optional.of(imageUrl)).build());
-    //   } else {
-    //     comments.add(Comment.builder(id, name, email, commentText, timeStamp).build());
-    //   }
-
       Builder commentBuilder = Comment.builder(id, name, email, commentText, timeStamp);
       if (imageUrl.isEmpty()) {
         comments.add(commentBuilder.build());
-        return;
+        continue;
       }
       comments.add(commentBuilder.setImageUrl(Optional.of(imageUrl)).build());
     }
