@@ -28,9 +28,8 @@ public abstract class Comment {
   public abstract long timeStamp();
 
   /** Returns a Builder for a Comment. */
-  public static Builder builder(long id, String name, String email, String commentText, long timeStamp) {
-    return new AutoValue_Comment.Builder().setId(id).setName(name).setEmail(email)
-      .setImageUrl(Optional.empty()).setCommentText(commentText).setTimeStamp(timeStamp);
+  public static Builder builder() {
+    return new AutoValue_Comment.Builder().setImageUrl(Optional.empty());
   }
   
   /** Builder object for Comment. */
