@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.sps.data.User;
+import com.google.gson.Gson;
+import java.util.Optional;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
@@ -22,7 +25,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that communicates login status of user. */
+/** Servlet that retrieves user login status. */
 @WebServlet("/user-login")
 public class UserServlet extends HttpServlet {
 
@@ -30,10 +33,21 @@ public class UserServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html");
     UserService userService = UserServiceFactory.getUserService();
+    
+    Gson gson = new Gson();
     if (userService.isUserLoggedIn()) {
-      response.getWriter().println("<p>User logged in</p>");
-    } else {
-      response.getWriter().println("<p>User not logged in</p>");
+      String urlToRedirectToAfterUserLogsOut = "/html/comments.html";
+      String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
+
+      User newUser = User.builder().setLoggedIn(true).setLogoutUrl(Optional.of(logoutUrl)).build();
+      response.getWriter().println(gson.toJson(newUser));
+      return;
     }
+    
+    String urlToRedirectToAfterUserLogsIn = "/html/comments.html";
+    String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
+
+    User newUser = User.builder().setLoggedIn(false).setLoginUrl(Optional.of(loginUrl)).build();
+    response.getWriter().println(gson.toJson(newUser));
   }
 }

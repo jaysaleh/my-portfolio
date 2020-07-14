@@ -12,15 +12,6 @@ a:hover {
   color: #f6543c !important;
 }
 
-/* Delete Button Styling */
-button {
-  background-color: #fff;
-  border: 2px solid #f00;
-  color: #f00;
-  height: 35px;
-  outline: none;
-}
-
 button,
 button:hover {
   border-radius: 25px;
@@ -32,12 +23,42 @@ button:hover {
   text-align: center;
 }
 
-button:hover {
+/* Comment form styling */
+#comment-form {
+  display: none;
+  width: 60%;
+}
+
+#comments button {
+  background-color: #fff;
   border: 2px solid #f00;
+  color: #f00;
+  height: 35px;
+  outline: none;
+}
+
+#comments button:hover {
   background-color: #f00;
+  border: 2px solid #f00;
   color: #fff;
   transition: 0.5s;
   -webkit-transition: 0.5s;
+}
+
+#comments {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding-top: 25px;
+}
+
+#comments-container {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 60%;
 }
 
 /* Content styling */
@@ -46,16 +67,16 @@ button:hover {
   position: relative;
 }
 
-#content-wrap {
-  padding-bottom: 100px;
-}
-
 #content {
   align-items: center;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   padding-top: 0px;
+}
+
+#content h1 {
+  text-align: center;
 }
 
 #content h1,
@@ -67,20 +88,12 @@ h3 {
   margin-bottom: 5px;
 }
 
-#comments-container {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  width: 60%;
+#content-wrap {
+  padding-bottom: 100px;
 }
 
-#comments {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  padding-top: 25px;
+#delete-button {
+  display: none;
 }
 
 /* Footer styling */
@@ -98,7 +111,7 @@ h3 {
 
 #form-container {
   padding-bottom: 25px;
-  width: 60%;
+  width: 100%;
 }
 
 form {
@@ -145,16 +158,6 @@ form {
   text-decoration: none;
 }
 
-/* Line break styling */
-hr {
-  background-color: #ccc;
-  border: 0;
-  clear: both;
-  display: block;
-  height: 1px;
-  width: 100%;
-}
-
 /* Form input styling */
 input[type=text] {
   height: 40px;
@@ -188,7 +191,16 @@ input[type=submit]:hover {
   -webkit-transition: 0.5s;
 }
 
-/* Comments list styling */
+#line {
+  background-color: #ccc;
+  border: 0;
+  clear: both;
+  display: block;
+  height: 1px;
+  width: 100%;
+}
+
+/* List styling */
 #list-element {
   align-items: center;
   background-color: #f8f8f8;
@@ -223,6 +235,54 @@ h5 {
   font-style: italic;
   margin: 5px 0px 0px 0px;
   text-align: right;
+}
+
+/* Login/Logout containers */
+#login-button-container {
+  display: block;
+}
+
+#login-button-container button {
+  background-color: #fff;
+  border: 2px solid #4c8bf5;
+  color: #4c8bf5;
+  height: 35px;
+  outline: none;
+}
+
+#login-button-container button:hover {
+  background-color: #4c8bf5;
+  border: 2px solid #4c8bf5;
+  color: #fff;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+
+#logout-button-form {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+#logout-button-form button {
+  background-color: #fff;
+  border: 2px solid #4c8bf5;
+  color: #4c8bf5;
+  height: 35px;
+  margin: 0;
+  outline: none;
+  text-align: center;
+}
+
+#logout-button-form button:hover {
+  background-color: #4c8bf5;
+  border: 2px solid #4c8bf5;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
 }
 
 /* Page selected styling */
