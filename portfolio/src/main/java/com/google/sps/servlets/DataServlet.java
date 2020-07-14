@@ -23,6 +23,8 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,6 +40,7 @@ public class DataServlet extends HttpServlet {
   private static final String TIME_STAMP = "timeStamp";
   private static final String NAME = "name";
   private static final String COMMENT_TEXT = "commentText";
+  private static final String EMAIL = "email";
   
   // Name of input field used for author name in comments section.
   private static final String NAME_INPUT = "name-input";
@@ -56,6 +59,7 @@ public class DataServlet extends HttpServlet {
     // Creates Entity and stores in database
     Entity commentEntity = new Entity(COMMENT);
     commentEntity.setProperty(NAME, name);
+    commentEntity.setProperty(EMAIL, getEmail());
     commentEntity.setProperty(COMMENT_TEXT, commentText);
     commentEntity.setProperty(TIME_STAMP, timeStamp);
 
@@ -63,6 +67,14 @@ public class DataServlet extends HttpServlet {
     datastore.put(commentEntity);
 
     response.sendRedirect(REDIRECT_URL);
+  }
+  
+  /**
+   * Returns email of currently logged in user.
+   */
+  private String getEmail() {
+    UserService userService = UserServiceFactory.getUserService();
+    return userService.getCurrentUser().getEmail();
   }
 
   /**
@@ -89,11 +101,12 @@ public class DataServlet extends HttpServlet {
     for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
       String name = (String) entity.getProperty(NAME);
+      String email = (String) entity.getProperty(EMAIL);
       String commentText = (String) entity.getProperty(COMMENT_TEXT);
       long timeStamp = (long) entity.getProperty(TIME_STAMP);
       
       // Creates new Comment for JSON accessibility
-      Comment newComment = Comment.create(id, name, commentText, timeStamp);
+      Comment newComment = Comment.create(id, name, email, commentText, timeStamp);
       comments.add(newComment);
     }
 
