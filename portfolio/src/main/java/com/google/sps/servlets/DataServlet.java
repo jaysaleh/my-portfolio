@@ -80,7 +80,7 @@ public class DataServlet extends HttpServlet {
     Entity commentEntity = new Entity(COMMENT);
     commentEntity.setProperty(NAME, name);
     commentEntity.setProperty(EMAIL, getEmail());
-    commentEntity.setProperty(IMAGE_URL, uploadedUrl.isPresent() ? uploadedUrl.get() : "");
+    commentEntity.setProperty(IMAGE_URL, uploadedUrl);
     commentEntity.setProperty(COMMENT_TEXT, commentText);
     commentEntity.setProperty(TIME_STAMP, timeStamp);
 
