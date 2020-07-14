@@ -88,7 +88,10 @@ public class DataServlet extends HttpServlet {
     response.sendRedirect(REDIRECT_URL);
   }
 
-  /** Returns a URL that points to the uploaded file, or null if the user didn't upload an image file. */
+  /** 
+   * Returns a URL that points to the uploaded file, or an empty optional
+   * if the user didn't upload an image file. 
+   */
   private Optional<String> getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
@@ -99,7 +102,6 @@ public class DataServlet extends HttpServlet {
       return Optional.empty();
     }
 
-    // Gets first and only file in form submission.
     BlobKey blobKey = blobKeys.get(0);
 
     // User submitted form without selecting a file, so we can't get a URL. (live server)
@@ -111,17 +113,15 @@ public class DataServlet extends HttpServlet {
 
     String fileInfo = blobInfo.getContentType();
 
-    // Return null if file is not a jpg, png or tiff image.
+    // Return empty optional if file is not a jpg, png or tiff image.
     if (!fileInfo.equals(JPEG) && !fileInfo.equals(PNG) && !fileInfo.equals(TIFF)) {
       return Optional.empty();
 
     }
 
-    // Gets URL that points to the uploaded file.
     ImagesService imagesService = ImagesServiceFactory.getImagesService();
     ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
 
-    // Returns relative path to image.
     try {
       URL url = new URL(imagesService.getServingUrl(options));
       return Optional.of(url.getPath());
