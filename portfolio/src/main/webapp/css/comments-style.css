@@ -85,7 +85,7 @@ h3 {
 }
 
 #content h3 {
-  margin-bottom: 5px;
+  margin: 5px 0px 5px 0px;
 }
 
 #content-wrap {
@@ -161,6 +161,11 @@ form {
 /* Form input styling */
 input[type=text] {
   height: 40px;
+}
+
+input[type=file] {
+  font-family: monospace;
+  margin: 10px 0px 15px 0px;
 }
 
 input[type=text]:focus, 

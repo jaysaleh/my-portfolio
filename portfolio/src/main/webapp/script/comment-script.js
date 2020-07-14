@@ -25,6 +25,7 @@ const states = {
 }
 
 getUserLoginData();
+populateBlobUrl();
 
 /**
  * Fetches user login data from servlet and adjusts comments section of portfolio
@@ -88,6 +89,17 @@ async function deleteData() {
   const request = new Request('/delete-data', {method: 'POST'});
   const response = await fetch(request);
   getData();
+}
+
+/**
+ * Retrieves URL of where to upload the image to Blobstore and sets it as
+ * the action for the comments section form.
+ */
+async function populateBlobUrl() {
+  const response = await fetch('/blobstore-upload-url');
+  const blobUploadUrl = await response.text();
+  var commentImageForm = document.getElementById("comment-image-form");
+  commentImageForm.action = blobUploadUrl;
 }
 
 /** 
