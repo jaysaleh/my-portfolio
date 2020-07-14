@@ -23,35 +23,25 @@ public abstract class Comment {
   public abstract long id();
   public abstract String name();
   public abstract String email();
-  public abstract Optional<String> imageUrl();
   public abstract String commentText();
   public abstract long timeStamp();
+  public abstract Optional<String> imageUrl();
 
   /** Returns a Builder for a Comment. */
   public static Builder builder(long id, String name, String email, String commentText, long timeStamp) {
-    return new AutoValue_Comment.Builder().setId(id).setName(name).setEmail(email).setImageUrl(Optional.empty()).setCommentText(commentText).setTimeStamp(timeStamp);
+    return new AutoValue_Comment.Builder().setId(id).setName(name).setEmail(email)
+      .setImageUrl(Optional.empty()).setCommentText(commentText).setTimeStamp(timeStamp);
   }
-
-//   /** 
-//    * Creates a Comment.
-//    * @param id Id of object stored in database.
-//    * @param name Name of author.
-//    * @param email Email of user comment was written by.
-//    * @param commentText Text author wrote.
-//    * @param timeStamp Time when author submitted comment.
-//    */
-//   public static Comment create(long id, String name, String email, String imageUrl, String commentText, long timeStamp) {
-//     return new AutoValue_Comment(id, name, email, imageUrl, commentText, timeStamp);
-//   }
-
+  
+  /** Builder object for Comment. */
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder setId(long id);
     public abstract Builder setName(String name);
     public abstract Builder setEmail(String email);
-    public abstract Builder setImageUrl(Optional<String> imageUrl);
     public abstract Builder setCommentText(String commentText);
     public abstract Builder setTimeStamp(long timeStamp);
+    public abstract Builder setImageUrl(Optional<String> imageUrl);
     public abstract Comment build();
   }
 }
