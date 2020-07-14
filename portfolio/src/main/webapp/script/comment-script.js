@@ -92,8 +92,8 @@ async function deleteData() {
 }
 
 /**
- * Retrieves URL of where to upload image to Blobstore and sets it as the action for the
- * comments section form.
+ * Retrieves URL of where to upload the image to Blobstore and sets it as
+ * the action for the comments section form.
  */
 async function populateBlobUrl() {
   const response = await fetch('/blobstore-upload-url');
