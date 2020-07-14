@@ -34,6 +34,15 @@ async function getData() {
   }
 }
 
+/**
+ * Deletes comments and refreshes portfolio with updated comments.
+ */
+async function deleteData() {
+  const request = new Request('/delete-data', {method: 'POST'});
+  const response = await fetch(request);
+  getData();
+}
+
 /** 
  * Creates and returns a <div> element containing {@code text}, {@code name},
  * and {@code timeStamp} from comment.

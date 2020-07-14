@@ -12,9 +12,32 @@ a:hover {
   color: #f6543c !important;
 }
 
-/* Button styling */
-#button {
+/* Delete Button Styling */
+button {
+  background-color: #fff;
+  border: 2px solid #f00;
+  color: #f00;
+  height: 35px;
+  outline: none;
+}
+
+button,
+button:hover {
+  border-radius: 25px;
+  cursor: pointer;
+  float: c;
+  font: 400 16px Monospace;
+  margin-bottom: 25px;
+  padding: 0px 12px;
   text-align: center;
+}
+
+button:hover {
+  border: 2px solid #f00;
+  background-color: #f00;
+  color: #fff;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
 }
 
 /* Content styling */
@@ -206,6 +229,11 @@ h5 {
 #selected {
   color: #0cca4a !important;
   font-weight: bold !important;
+}
+
+/* Submit Button styling */
+#submit-button {
+  text-align: center;
 }
 
 /* Text field styling */
