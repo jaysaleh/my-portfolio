@@ -102,8 +102,12 @@ async function getSetBlobUrl() {
   commentImageForm.action = blobUploadUrl;
 }
 
+/**
+ * Creates and returns a <div> element containing and an image, comment, and
+ * a horizontal line.
+ */
 function createDivElement(text, email, timeStamp, imageUrl) {
-  const outerDiv = document.createElement('div');
+  const imageCommentOuterDiv = document.createElement('div');
   const imageCommentDiv = document.createElement('div');
   const hr = document.createElement('hr');
 
@@ -113,32 +117,43 @@ function createDivElement(text, email, timeStamp, imageUrl) {
   imageCommentDiv.append(createImageDiv(imageUrl));
   imageCommentDiv.append(createCommentDiv(text, email, timeStamp));
   
-  outerDiv.append(imageCommentDiv);
-  outerDiv.append(hr);
+  imageCommentOuterDiv.append(imageCommentDiv);
+  imageCommentOuterDiv.append(hr);
 
-  return outerDiv;
+  return imageCommentOuterDiv;
 }
 
+/**
+ * Creates and returns a <div> element containing and <img> with
+ * that shows image uploaded with comment at {@code imageUrl}.
+ */
 function createImageDiv(imageUrl) {
   const imageDiv = document.createElement('div');
   const image = document.createElement('img');
+
   imageDiv.id = 'img-div';
   image.id = 'img';
   image.src = imageUrl;
+  
   imageDiv.append(image);
+
   return imageDiv;
 }
 
+/**
+ * Creates and returns a <div> element containing {@code text}, {@code email},
+ * and {@code timeStamp} from comment.
+ */
 function createCommentDiv(text, email, timeStamp) {
+  const commentOuterDiv = document.createElement('div');
   const commentDiv = document.createElement('div');
-  const listElement = document.createElement('div');
 
   const textElement = document.createElement('p');
   const emailElement = document.createElement('h4');
   const dateElement = document.createElement('h5');
 
-  commentDiv.id = 'comment-div'
-  listElement.id = 'list-element';
+  commentOuterDiv.id = 'comment-div'
+  commentDiv.id = 'list-element';
   
   var date = new Date(timeStamp);
   var formattedDate = date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear();
@@ -147,10 +162,10 @@ function createCommentDiv(text, email, timeStamp) {
   emailElement.innerText = email;
   dateElement.innerText = formattedDate;
 
-  listElement.appendChild(textElement);
-  listElement.appendChild(emailElement);
-  listElement.appendChild(dateElement);
+  commentDiv.appendChild(textElement);
+  commentDiv.appendChild(emailElement);
+  commentDiv.appendChild(dateElement);
 
-  commentDiv.appendChild(listElement);
-  return commentDiv;
+  commentOuterDiv.appendChild(commentDiv);
+  return commentOuterDiv;
 }
