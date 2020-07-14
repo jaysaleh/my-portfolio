@@ -17,6 +17,7 @@ package com.google.sps.servlets;
 import java.util.*; 
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
+import com.google.sps.data.Comment.Builder;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
@@ -88,21 +89,23 @@ public class DataServlet extends HttpServlet {
     response.sendRedirect(REDIRECT_URL);
   }
 
-  /** Returns a URL that points to the uploaded file, or null if the user didn't upload an image file. */
+  /** 
+   * Returns the URL that points to a file uploaded by {@code formInputElementName}, 
+   * or an empty optional if the user didn't upload an image file. 
+   */
   private Optional<String> getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
     List<BlobKey> blobKeys = blobs.get(formInputElementName);
 
-    // User submitted form without selecting a file, so we can't get a URL. (local server)
+    // User submitted form in the local server without a file, so we can't get a URL.
     if (blobKeys == null || blobKeys.isEmpty()) {
       return Optional.empty();
     }
 
-    // Gets first and only file in form submission.
     BlobKey blobKey = blobKeys.get(0);
 
-    // User submitted form without selecting a file, so we can't get a URL. (live server)
+    // User submitted form in the live server without a file, so we can't get a URL.
     BlobInfo blobInfo = new BlobInfoFactory().loadBlobInfo(blobKey);
     if (blobInfo.getSize() == 0) {
       blobstoreService.delete(blobKey);
@@ -111,17 +114,14 @@ public class DataServlet extends HttpServlet {
 
     String fileInfo = blobInfo.getContentType();
 
-    // Return null if file is not a jpg, png or tiff image.
+    // Return empty optional if file is not a jpg, png or tiff image.
     if (!fileInfo.equals(JPEG) && !fileInfo.equals(PNG) && !fileInfo.equals(TIFF)) {
       return Optional.empty();
-
     }
 
-    // Gets URL that points to the uploaded file.
     ImagesService imagesService = ImagesServiceFactory.getImagesService();
     ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
 
-    // Returns relative path to image.
     try {
       URL url = new URL(imagesService.getServingUrl(options));
       return Optional.of(url.getPath());
@@ -168,8 +168,12 @@ public class DataServlet extends HttpServlet {
       long timeStamp = (long) entity.getProperty(TIME_STAMP);
       
       // Creates new Comment for JSON accessibility.
-      Comment newComment = Comment.create(id, name, email, imageUrl, commentText, timeStamp);
-      comments.add(newComment);
+      Builder commentBuilder = Comment.builder().setId(id).setName(name)
+        .setEmail(email).setCommentText(commentText).setTimeStamp(timeStamp);
+      if (!imageUrl.isEmpty()) {
+        commentBuilder.setImageUrl(Optional.of(imageUrl));
+      }
+      comments.add(commentBuilder.build());
     }
 
     Gson gson = new Gson();

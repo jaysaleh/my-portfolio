@@ -38,7 +38,7 @@ public class UserServlet extends HttpServlet {
       String urlToRedirectToAfterUserLogsOut = "/html/comments.html";
       String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-      User newUser = User.create(/* loggedIn= */ true, /* loginURL= */ "", logoutUrl);
+      User newUser = User.create(/* loggedIn= */ true, /* loginUrl= */ "", logoutUrl);
       response.getWriter().println(gson.toJson(newUser));
       return;
     }
@@ -46,7 +46,7 @@ public class UserServlet extends HttpServlet {
     String urlToRedirectToAfterUserLogsIn = "/html/comments.html";
     String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
 
-    User newUser = User.create(/* loggedIn= */ false, loginUrl, /* logoutURL= */ "");
+    User newUser = User.create(/* loggedIn= */ false, loginUrl, /* logoutUrl= */ "");
     response.getWriter().println(gson.toJson(newUser));
   }
 }
