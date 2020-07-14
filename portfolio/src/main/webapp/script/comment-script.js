@@ -103,8 +103,8 @@ async function populateBlobUrl() {
 }
 
 /**
- * Creates and returns a <div> element containing and an image, comment, and
- * a horizontal line.
+ * Creates and returns a <div> element containing an the comment
+ * a user left and an image if they uploaded on.
  */
 function createDivElement(text, email, timeStamp, imageUrl) {
   const imageCommentOuterDiv = document.createElement('div');
@@ -113,8 +113,10 @@ function createDivElement(text, email, timeStamp, imageUrl) {
 
   imageCommentDiv.id = 'img-comment-div';
   hr.id = 'line';
-
-  imageCommentDiv.append(createImageDiv(imageUrl));
+  
+  if (imageUrl.hasOwnProperty('value') && imageUrl.value != '') {
+    imageCommentDiv.append(createImageDiv(imageUrl.value));
+  }
   imageCommentDiv.append(createCommentDiv(text, email, timeStamp));
   
   imageCommentOuterDiv.append(imageCommentDiv);
@@ -124,8 +126,8 @@ function createDivElement(text, email, timeStamp, imageUrl) {
 }
 
 /**
- * Creates and returns a <div> element containing and <img> with
- * that shows image uploaded with comment at {@code imageUrl}.
+ * Creates and returns a <div> element containing an <img>
+ * that shows the image stored at {@code imageUrl}.
  */
 function createImageDiv(imageUrl) {
   const imageDiv = document.createElement('div');
