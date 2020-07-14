@@ -17,6 +17,7 @@ package com.google.sps.servlets;
 import java.util.*; 
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
+import com.google.sps.data.Comment.Builder;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
@@ -168,11 +169,18 @@ public class DataServlet extends HttpServlet {
       long timeStamp = (long) entity.getProperty(TIME_STAMP);
       
       // Creates new Comment for JSON accessibility.
-      if (!imageUrl.equals("")) {
-        comments.add(Comment.builder(id, name, email, commentText, timeStamp).setImageUrl(Optional.of(imageUrl)).build());
-      } else {
-        comments.add(Comment.builder(id, name, email, commentText, timeStamp).build());
+    //   if (!imageUrl.equals("")) {
+    //     comments.add(Comment.builder(id, name, email, commentText, timeStamp).setImageUrl(Optional.of(imageUrl)).build());
+    //   } else {
+    //     comments.add(Comment.builder(id, name, email, commentText, timeStamp).build());
+    //   }
+
+      Builder commentBuilder = Comment.builder(id, name, email, commentText, timeStamp);
+      if (imageUrl.isEmpty()) {
+        comments.add(commentBuilder.build());
+        return;
       }
+      comments.add(commentBuilder.setImageUrl(Optional.of(imageUrl)).build());
     }
 
     Gson gson = new Gson();
