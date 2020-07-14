@@ -53,7 +53,7 @@ public class DataServlet extends HttpServlet {
   private static final String NAME = "name";
   private static final String COMMENT_TEXT = "commentText";
   private static final String EMAIL = "email";
-  private static final String IMAGE_URL = "imageURL";
+  private static final String IMAGE_URL = "imageUrl";
 
   // Supported image files.
   private static final String JPEG = "image/jpeg";
@@ -94,33 +94,36 @@ public class DataServlet extends HttpServlet {
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
     List<BlobKey> blobKeys = blobs.get(formInputElementName);
 
-    // User submitted form without selecting a file, so we can't get a URL. (dev server)
+    // User submitted form without selecting a file, so we can't get a URL. (local server)
     if (blobKeys == null || blobKeys.isEmpty()) {
+      System.out.println("NO FILE - LOCAL");
       return null;
     }
 
-    // Gets first and only file in form submission
+    // Gets first and only file in form submission.
     BlobKey blobKey = blobKeys.get(0);
 
     // User submitted form without selecting a file, so we can't get a URL. (live server)
     BlobInfo blobInfo = new BlobInfoFactory().loadBlobInfo(blobKey);
     if (blobInfo.getSize() == 0) {
       blobstoreService.delete(blobKey);
+      System.out.println("NO FILE - LIVE");
       return null;
     }
 
     String fileInfo = blobInfo.getContentType();
 
-    // Return null if file is not a jpg, png or tiff image
+    // Return null if file is not a jpg, png or tiff image.
     if (!fileInfo.equals(JPEG) && !fileInfo.equals(PNG) && !fileInfo.equals(TIFF)) {
+      System.out.println("ILLEGAL FILE TYPE: " + fileInfo);
       return null;
     }
 
-    // Gets URL that points to the uploaded file
+    // Gets URL that points to the uploaded file.
     ImagesService imagesService = ImagesServiceFactory.getImagesService();
     ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
 
-    // Returns relative path to image
+    // Returns relative path to image.
     try {
       URL url = new URL(imagesService.getServingUrl(options));
       return url.getPath();
@@ -162,12 +165,12 @@ public class DataServlet extends HttpServlet {
       long id = entity.getKey().getId();
       String name = (String) entity.getProperty(NAME);
       String email = (String) entity.getProperty(EMAIL);
-      String imageURL = (String) entity.getProperty(IMAGE_URL);
+      String imageUrl = (String) entity.getProperty(IMAGE_URL);
       String commentText = (String) entity.getProperty(COMMENT_TEXT);
       long timeStamp = (long) entity.getProperty(TIME_STAMP);
       
       // Creates new Comment for JSON accessibility.
-      Comment newComment = Comment.create(id, name, email, imageURL, commentText, timeStamp);
+      Comment newComment = Comment.create(id, name, email, imageUrl, commentText, timeStamp);
       comments.add(newComment);
     }
 
