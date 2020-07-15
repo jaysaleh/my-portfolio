@@ -109,10 +109,10 @@ async function populateBlobUrl() {
 function createCommentImageDiv(text, email, timeStamp, imageUrl) {
   const imageCommentOuterDiv = document.createElement('div');
   const imageCommentDiv = document.createElement('div');
-  const hr = document.createElement('hr');
+  const lineBreak = document.createElement('hr');
 
   imageCommentDiv.id = 'img-comment-div';
-  hr.id = 'line';
+  lineBreak.id = 'line';
   
   if (imageUrl.hasOwnProperty('value') && imageUrl.value != '') {
     imageCommentDiv.append(createImageDiv(imageUrl.value));
@@ -121,7 +121,7 @@ function createCommentImageDiv(text, email, timeStamp, imageUrl) {
   imageCommentDiv.append(createCommentDiv(text, email, timeStamp, sentimentScore));
   
   imageCommentOuterDiv.append(imageCommentDiv);
-  imageCommentOuterDiv.append(hr);
+  imageCommentOuterDiv.append(lineBreak);
 
   return imageCommentOuterDiv;
 }
