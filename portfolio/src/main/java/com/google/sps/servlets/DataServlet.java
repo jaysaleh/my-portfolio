@@ -17,6 +17,7 @@ package com.google.sps.servlets;
 import java.util.*; 
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
+import com.google.sps.data.Comment.Builder;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
@@ -53,6 +54,7 @@ public class DataServlet extends HttpServlet {
   private static final String NAME = "name";
   private static final String COMMENT_TEXT = "commentText";
   private static final String EMAIL = "email";
+  private static final String IMAGE_URL = "imageUrl";
 
   // Supported image files.
   private static final String JPEG = "image/jpeg";
@@ -77,11 +79,9 @@ public class DataServlet extends HttpServlet {
     Entity commentEntity = new Entity(COMMENT);
     commentEntity.setProperty(NAME, name);
     commentEntity.setProperty(EMAIL, getEmail());
+    commentEntity.setProperty(IMAGE_URL, getUploadedFileUrl(request, /* forInputElement= */ "image").get());
     commentEntity.setProperty(COMMENT_TEXT, commentText);
     commentEntity.setProperty(TIME_STAMP, timeStamp);
-
-    // TODO: Remove print statement and store image URL in database.
-    System.out.println(getUploadedFileUrl(request, /* formInputElementName= */ "image").get());
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
@@ -163,12 +163,17 @@ public class DataServlet extends HttpServlet {
       long id = entity.getKey().getId();
       String name = (String) entity.getProperty(NAME);
       String email = (String) entity.getProperty(EMAIL);
+      String imageUrl = (String) entity.getProperty(IMAGE_URL);
       String commentText = (String) entity.getProperty(COMMENT_TEXT);
       long timeStamp = (long) entity.getProperty(TIME_STAMP);
       
       // Creates new Comment for JSON accessibility.
-      Comment newComment = Comment.create(id, name, email, commentText, timeStamp);
-      comments.add(newComment);
+      Builder commentBuilder = Comment.builder().setId(id).setName(name)
+        .setEmail(email).setCommentText(commentText).setTimeStamp(timeStamp);
+      if (!imageUrl.isEmpty()) {
+        commentBuilder.setImageUrl(Optional.of(imageUrl));
+      }
+      comments.add(commentBuilder.build());
     }
 
     Gson gson = new Gson();
