@@ -117,6 +117,7 @@ function createDivElement(text, email, timeStamp, imageUrl, sentimentScore) {
   if (imageUrl.hasOwnProperty('value') && imageUrl.value != '') {
     imageCommentDiv.append(createImageDiv(imageUrl.value));
   }
+  console.log(sentimentScore);
   imageCommentDiv.append(createCommentDiv(text, email, timeStamp, sentimentScore));
   
   imageCommentOuterDiv.append(imageCommentDiv);
@@ -146,27 +147,31 @@ function createImageDiv(imageUrl) {
  * Creates and returns a <div> element containing {@code text}, {@code email},
  * and {@code timeStamp} from comment.
  */
-function createCommentDiv(text, email, timeStamp) {
+function createCommentDiv(text, email, timeStamp, sentimentScore) {
   const commentOuterDiv = document.createElement('div');
   const commentDiv = document.createElement('div');
 
   const textElement = document.createElement('p');
   const emailElement = document.createElement('h4');
+  const scoreElement = document.createElement('h4');
   const dateElement = document.createElement('h5');
 
   commentOuterDiv.id = 'comment-div'
   commentDiv.id = 'list-element';
+  scoreElement.id = sentimentScore >= 0 ? 'good' : 'bad';
   
   var date = new Date(timeStamp);
   var formattedDate = date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear();
 
   textElement.innerText = text;
   emailElement.innerText = email;
+  scoreElement.innerText = Math.abs(sentimentScore) + '%';
   dateElement.innerText = formattedDate;
 
   commentDiv.appendChild(textElement);
   commentDiv.appendChild(emailElement);
   commentDiv.appendChild(dateElement);
+  commentDiv.appendChild(scoreElement);
 
   commentOuterDiv.appendChild(commentDiv);
   return commentOuterDiv;
