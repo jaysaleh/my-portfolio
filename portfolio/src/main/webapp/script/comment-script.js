@@ -75,7 +75,7 @@ async function getData() {
   commentsListElement.innerHTML = '';
   for (comment of jsonData) {
     if(comment.commentText != '' && comment.name != '') {
-      commentsListElement.appendChild(createDivElement(comment.commentText, comment.email, comment.timeStamp, comment.imageUrl, comment.sentimentScore));
+      commentsListElement.appendChild(createCommentImageDiv(comment.commentText, comment.email, comment.timeStamp, comment.imageUrl));
       commentsListElement.appendChild(document.createElement('br'));
     }
   }
@@ -103,10 +103,10 @@ async function populateBlobUrl() {
 }
 
 /**
- * Creates and returns a <div> element containing the comment
- * a user left and an image if they uploaded on.
+ * Creates and returns a <div> containing the comment
+ * a user left and an image if they uploaded one.
  */
-function createDivElement(text, email, timeStamp, imageUrl, sentimentScore) {
+function createCommentImageDiv(text, email, timeStamp, imageUrl) {
   const imageCommentOuterDiv = document.createElement('div');
   const imageCommentDiv = document.createElement('div');
   const hr = document.createElement('hr');
