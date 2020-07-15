@@ -156,6 +156,8 @@ function createCommentDiv(text, email, timeStamp, sentimentScore) {
   const scoreElement = document.createElement('h5');
   const dateElement = document.createElement('h5');
 
+  // If the sentimentScore is positive, the comment is most likely good.
+  // If the sentimentScore is negative, the comment is most likely bad.
   var scoreWord = sentimentScore >= 0 ? 'good' : 'bad';
 
   commentOuterDiv.id = 'comment-div'
