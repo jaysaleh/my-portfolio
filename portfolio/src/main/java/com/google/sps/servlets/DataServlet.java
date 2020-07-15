@@ -95,8 +95,11 @@ public class DataServlet extends HttpServlet {
     response.sendRedirect(REDIRECT_URL);
   }
 
-  private long getSentiment(String message) throws IOException {
-    Document doc = Document.newBuilder().setContent(message).setType(Document.Type.PLAIN_TEXT).build();
+  /**
+   * Returns sentiment analysis score of {@code commentText}.
+   */
+  private long getSentiment(String commentText) throws IOException {
+    Document doc = Document.newBuilder().setContent(commentText).setType(Document.Type.PLAIN_TEXT).build();
     LanguageServiceClient languageService = LanguageServiceClient.create();
     Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
     long score = (long)(sentiment.getScore() * 100);
