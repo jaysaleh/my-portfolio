@@ -74,12 +74,13 @@ public class DataServlet extends HttpServlet {
     String name = getParameter(request, NAME_INPUT, DEFAULT_VALUE);
     String commentText = getParameter(request, COMMENT_INPUT, DEFAULT_VALUE);
     long timeStamp = System.currentTimeMillis();
+    Optional<String> uploadedUrl = getUploadedFileUrl(request, /* forInputElement= */ "image");
 
     // Creates Entity and stores in database.
     Entity commentEntity = new Entity(COMMENT);
     commentEntity.setProperty(NAME, name);
     commentEntity.setProperty(EMAIL, getEmail());
-    commentEntity.setProperty(IMAGE_URL, getUploadedFileUrl(request, /* forInputElement= */ "image").get());
+    commentEntity.setProperty(IMAGE_URL, uploadedUrl.isPresent() ? uploadedUrl.get() : "");
     commentEntity.setProperty(COMMENT_TEXT, commentText);
     commentEntity.setProperty(TIME_STAMP, timeStamp);
 
