@@ -153,19 +153,21 @@ function createCommentDiv(text, email, timeStamp, sentimentScore) {
 
   const textElement = document.createElement('p');
   const emailElement = document.createElement('h4');
-  const scoreElement = document.createElement('h4');
+  const scoreElement = document.createElement('h5');
   const dateElement = document.createElement('h5');
+
+  var scoreWord = sentimentScore >= 0 ? 'good' : 'bad';
 
   commentOuterDiv.id = 'comment-div'
   commentDiv.id = 'list-element';
-  scoreElement.id = sentimentScore >= 0 ? 'good' : 'bad';
+  scoreElement.id = scoreWord;
   
   var date = new Date(timeStamp);
   var formattedDate = date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear();
 
   textElement.innerText = text;
   emailElement.innerText = email;
-  scoreElement.innerText = Math.abs(sentimentScore) + '%';
+  scoreElement.innerText = Math.abs(sentimentScore) + '% ' + scoreWord;
   dateElement.innerText = formattedDate;
 
   commentDiv.appendChild(textElement);
