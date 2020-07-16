@@ -9,6 +9,8 @@ a:visited {
 }
 
 a:hover {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
   color: #f6543c !important;
 }
 
@@ -238,51 +240,22 @@ h5 {
 }
 
 /* Login/Logout containers */
-#login-button-container {
+#login-container {
   display: block;
 }
 
-#login-button-container button {
-  background-color: #fff;
-  border: 2px solid #4c8bf5;
+#login-link,
+#logout-link {
   color: #4c8bf5;
-  height: 35px;
-  outline: none;
+  font-family: Monospace !important;
+  font-size: 20px !important;
 }
 
-#login-button-container button:hover {
-  background-color: #4c8bf5;
-  border: 2px solid #4c8bf5;
-  color: #fff;
-  transition: 0.5s;
-  -webkit-transition: 0.5s;
-}
-
-#logout-button-form {
+#logout-link {
   align-items: center;
   display: flex;
   justify-content: center;
   margin-top: 15px;
-}
-
-#logout-button-form button {
-  background-color: #fff;
-  border: 2px solid #4c8bf5;
-  color: #4c8bf5;
-  height: 35px;
-  margin: 0;
-  outline: none;
-  text-align: center;
-}
-
-#logout-button-form button:hover {
-  background-color: #4c8bf5;
-  border: 2px solid #4c8bf5;
-  color: #fff;
-  margin: 0;
-  text-align: center;
-  transition: 0.5s;
-  -webkit-transition: 0.5s;
 }
 
 /* Page selected styling */

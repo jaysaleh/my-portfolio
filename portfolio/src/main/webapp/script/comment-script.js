@@ -34,32 +34,33 @@ async function getUserLoginData() {
   const response = await fetch('/user-login');
   const userData = await response.json();
 
-  var loginButtonContainer = document.getElementById('login-button-container');
+  var loginButtonContainer = document.getElementById('login-container');
   var commentForm = document.getElementById('comment-form');
-  var loginButtonForm = document.getElementById('login-button-form');
-  var logoutButtonForm = document.getElementById('logout-button-form');
+  var loginButtonForm = document.getElementById('login-link');
+  var logoutButtonForm = document.getElementById('logout-link');
   var lineBreak = document.getElementById('line');
   var deleteButton = document.getElementById('delete-button');
 
   /* Hide/show containers depending on user login state. */
   if (userData.loggedIn) {
+    console.log('USER LOGGED IN');
     loginButtonContainer.style.display = states.HIDE;
     commentForm.style.display = states.SHOW;
     deleteButton.style.display = states.SHOW;
     lineBreak.style.display = states.SHOW;
     
     /* Sets the logout link. */
-    logoutButtonForm.action = userData.logoutUrl.value;
+    logoutButtonForm.href = userData.logoutUrl.value;
     return;
   }
-  
+
   loginButtonContainer.style.display = states.SHOW;
   commentForm.style.display = states.HIDE;
   deleteButton.style.display = states.HIDE;
   lineBreak.style.display = states.HIDE;
 
   /* Sets the login link. */
-  loginButtonForm.action = userData.loginUrl.value;
+  loginButtonForm.href = userData.loginUrl.value;
 }
 
 /**
