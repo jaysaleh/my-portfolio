@@ -96,7 +96,9 @@ public class DataServlet extends HttpServlet {
   }
 
   /**
-   * Returns sentiment analysis score of {@code commentText}.
+   * Returns sentiment analysis score of {@code commentText} ranging from -1 to 1.
+   * The closer to -1, the most likely the comment is bad. The closer to 1, the comment
+   * is most likely good.
    */
   private long getSentiment(String commentText) throws IOException {
     Document doc = Document.newBuilder().setContent(commentText).setType(Document.Type.PLAIN_TEXT).build();
