@@ -16,17 +16,61 @@ package com.google.sps;
 
 import java.util.*; 
 import java.util.Collection;
+import com.google.sps.TimeRange;
 import com.google.common.collect.Iterables;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     System.out.println("--------------------NEW TEST--------------------");
     Collection<String> required = request.getAttendees();
-    Collection<TimeRange> availableTime = assembleTime(events, required, request.getDuration);
-    return null;
+    Collection<TimeRange> availableTime = assembleTime(events, required, request.getDuration());
+    // System.out.println(availableTime);
+    return availableTime;
   }
 
   public Collection<TimeRange> assembleTime(Collection<Event> events, Collection<String> required, long duration) {
     Collection<TimeRange> availableTime = new ArrayList<>();
+    availableTime.add(TimeRange.WHOLE_DAY);
+    for(Event currEvent : events) {
+      if (!Collections.disjoint(currEvent.getAttendees(), required)) {
+        availableTime = adjustAvailableTime(availableTime, currEvent.getWhen());
+      }
+    }
+
+    Iterator<TimeRange> i = availableTime.iterator();
+ 
+    while(i.hasNext()) {
+      TimeRange e = i.next();
+      if (e.duration() < duration) {
+        System.out.println("OPENING DURATION: " + e.duration());
+        System.out.println("MEETING DURATION: " + duration);
+        System.out.println("TOO SHORT");
+        i.remove();
+      }
+    }
+
+    return availableTime;
+  }
+
+  public Collection<TimeRange> adjustAvailableTime(Collection<TimeRange> availableTime, TimeRange eventWindow) {
+    Collection<TimeRange> newTimes = new ArrayList<>();
+    for(TimeRange thisTime : availableTime) {
+      if(!thisTime.overlaps(eventWindow)) {
+        newTimes.add(thisTime);
+      } else if (thisTime.contains(eventWindow)) {
+        newTimes.add(TimeRange.fromStartEnd(thisTime.start(), eventWindow.start(), false));
+        newTimes.add(TimeRange.fromStartEnd(eventWindow.end(), thisTime.end(), false));
+      } else if (eventWindow.start() > thisTime.start() && thisTime.start() < eventWindow.end()) {
+        // Modify such that thisTime start later (@eventWindow.end())
+        System.out.println("3");
+        newTimes.add(TimeRange.fromStartEnd(eventWindow.end(), thisTime.end(), false));
+      } else if (thisTime.start() > eventWindow.start() && eventWindow.start() > thisTime.end()) {
+        // Modify thisTime to end sonner (@eventWindow.start())
+        newTimes.add(TimeRange.fromStartEnd(thisTime.start(), eventWindow.start(), false));
+      } else if (thisTime.start() > eventWindow.start() && thisTime.end() > eventWindow.end()) {
+        newTimes.add(TimeRange.fromStartEnd(eventWindow.end(), thisTime.end(), false));
+      } 
+    }
+    return newTimes;
   }
 }
