@@ -23,7 +23,6 @@ import org.junit.runners.JUnit4;
 /** */
 @RunWith(JUnit4.class)
 public final class TimeRangeTest {
-
   @Test
   public void equality() {
     Assert.assertEquals(TimeRange.fromStartDuration(100, 50), TimeRange.fromStartDuration(100, 50));
