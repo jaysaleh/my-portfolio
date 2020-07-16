@@ -35,10 +35,10 @@ async function getUserLoginData() {
   const response = await fetch('/user-login');
   const userData = await response.json();
 
-  var loginButtonContainer = document.getElementById('login-button-container');
+  var loginButtonContainer = document.getElementById('login-container');
   var commentForm = document.getElementById('comment-form');
-  var loginButtonForm = document.getElementById('login-button-form');
-  var logoutButtonForm = document.getElementById('logout-button-form');
+  var loginButtonForm = document.getElementById('login-link');
+  var logoutButtonForm = document.getElementById('logout-link');
   var lineBreak = document.getElementById('line');
   var deleteButton = document.getElementById('delete-button');
 
@@ -50,7 +50,7 @@ async function getUserLoginData() {
     lineBreak.style.display = states.SHOW;
     
     /* Sets the logout link. */
-    logoutButtonForm.action = userData.logoutUrl;
+    logoutButtonForm.href = userData.logoutUrl.value;
     return;
   }
 
@@ -60,7 +60,7 @@ async function getUserLoginData() {
   lineBreak.style.display = states.HIDE;
 
   /* Sets the login link. */
-  loginButtonForm.action = userData.loginUrl;
+  loginButtonForm.href = userData.loginUrl.value;
 }
 
 /**
