@@ -12,8 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** Spaces out comment text from author name. */
-const commentHyphen = ' -';
+const POSITIVE_SENTIMENT_THRESHOLD = 0;
 
 /**
  * Supported class states for showing and hiding containers.
@@ -103,8 +102,9 @@ async function populateBlobUrl() {
 }
 
 /**
- * Creates and returns a <div> containing the comment
- * a user left and an image if they uploaded one.
+ * Creates and returns a <div> containing the comment a user
+ * left, an image if they uploaded one, and a horizonal line
+ * to divide comments.
  */
 function createDivElement(text, email, timeStamp, imageUrl, sentimentScore) {
   const imageCommentOuterDiv = document.createElement('div');
@@ -117,7 +117,6 @@ function createDivElement(text, email, timeStamp, imageUrl, sentimentScore) {
   if (imageUrl.hasOwnProperty('value') && imageUrl.value != '') {
     imageCommentDiv.append(createImageDiv(imageUrl.value));
   }
-  console.log(sentimentScore);
   imageCommentDiv.append(createCommentDiv(text, email, timeStamp, sentimentScore));
   
   imageCommentOuterDiv.append(imageCommentDiv);
@@ -156,8 +155,8 @@ function createCommentDiv(text, email, timeStamp, sentimentScore) {
   const scoreElement = document.createElement('h5');
   const dateElement = document.createElement('h5');
 
-  // The comment is most likely good if score is postivie. Otherwise it is most likely bad.
-  var scoreWord = sentimentScore >= 0 ? 'good' : 'bad';
+  // The comment is most likely good if score is positive. Otherwise it is most likely bad.
+  var scoreWord = sentimentScore >= POSITIVE_SENTIMENT_THRESHOLD ? 'good' : 'bad';
 
   commentOuterDiv.id = 'comment-div'
   commentDiv.id = 'list-element';
