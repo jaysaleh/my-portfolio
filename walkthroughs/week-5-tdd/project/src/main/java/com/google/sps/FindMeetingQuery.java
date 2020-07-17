@@ -30,16 +30,15 @@ public final class FindMeetingQuery {
    */
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     Collection<String> requiredAttendees = new ArrayList<>(request.getAttendees());
-    Collection<String> allAttendees = new ArrayList<>(requiredAttendees);
     Collection<String> optionalAttendees = request.getOptionalAttendees();
-    
-    // Treat optional attendees as required and see if there are available times.
+    Collection<String> allAttendees = new ArrayList<>(requiredAttendees);
     allAttendees.addAll(optionalAttendees);
+
+    // Treat optional attendees as required and see if there are available times.
     Collection<TimeRange> availableTimes = assembleTime(events, allAttendees, request.getDuration());
     if (requiredAttendees.isEmpty() || !availableTimes.isEmpty()){
       return availableTimes;
     }
-
     // Return times for required attendees only.
     return assembleTime(events, requiredAttendees, request.getDuration());
   }
@@ -60,10 +59,8 @@ public final class FindMeetingQuery {
         availableTimes = adjustAvailableTimes(availableTimes, currEvent.getWhen());
       }
     }
-
     // Remove TimeRanges that are too short.
     availableTimes.removeIf(item -> item.duration() < duration);
-
     return availableTimes;
   }
 
