@@ -25,10 +25,17 @@ public final class FindMeetingQuery {
    * Returns the open windows for which {@code request} can be scheduled in.
    */
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Collection<String> requiredAttendees = request.getAttendees();
-    Collection<TimeRange> availableTime = assembleTime(events, requiredAttendees, request.getDuration());
-    System.out.println(availableTime);
-    return availableTime;
+    Collection<String> requiredAttendees = new ArrayList<>(request.getAttendees());
+    Collection<String> allAttendees = new ArrayList<>(requiredAttendees);
+    Collection<String> optionalAttendees = request.getOptionalAttendees();
+    
+    allAttendees.addAll(optionalAttendees);
+    
+    Collection<TimeRange> availableTimes = assembleTime(events, allAttendees, request.getDuration());
+    if (requiredAttendees.isEmpty() || !availableTimes.isEmpty()){
+      return availableTimes;
+    }
+    return assembleTime(events, requiredAttendees, request.getDuration());
   }
 
   /**
