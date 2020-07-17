@@ -276,8 +276,7 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void query_optional_allDayEvent_requiredOnly_returnThreeTimes() {
-    // Have each person have different events. We should see two options because each person has
-    // split the restricted times.
+    // Have each person have different events. Should return three TimeRanges.
     //
     // Events  :       |--A--|     |--B--|
     //           |--------------C--------------|
@@ -307,8 +306,7 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void query_optional_inBetweenRequired_returnEarlyAndLateDay() {
-    // Have each person have different events. We should see two options because each person has
-    // split the restricted times.
+    // Have each person have different events. Should return two TimeRanges.
     //
     // Events  :       |--A--|--C--|--B--|
     // Day     : |-----------------------------|
@@ -337,7 +335,8 @@ public final class FindMeetingQueryTest {
   @Test
   public void query_optional_notEnoughTime_returnOneTime() {
     // Have one required person with just enough time for the meeting and one optional person
-    // who can attend only a portion of the available time.
+    // who can attend only a portion of the available time. Should return one TimeRange for which
+    // only required attendees can attend.
     //
     // Events  : |--A--|-------|--A--|
     //                     |-B-|
@@ -365,6 +364,7 @@ public final class FindMeetingQueryTest {
   @Test
   public void query_twoOptional_multiGaps_returnThreeTimes() {
     // Have no required people but instead two optional people how have several gaps in schedule.
+    // Should return three TimeRanges.
     //
     // Events  :       |--A--|     |--B--|
     // Day     : |-----------------------------|
@@ -392,6 +392,7 @@ public final class FindMeetingQueryTest {
   @Test
   public void query_twoOptional_noGaps_returnNoTimes() {
     // Have no required people but two optional people who have no time in their schedule to meet.
+    // Should return no TimeRanges.
     //
     // Events  : |----A----||----B----|
     // Day     : |--------------------|
