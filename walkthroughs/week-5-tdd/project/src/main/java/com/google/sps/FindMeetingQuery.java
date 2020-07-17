@@ -19,6 +19,10 @@ import java.util.Collection;
 import com.google.sps.TimeRange;
 import com.google.common.collect.Iterables;
 
+/** 
+ * Determines a list of available TimeRanges to schedule a meeting
+ * given a MeetingRequest and list of events taking place that day. 
+ */
 public final class FindMeetingQuery {
   
   /** 
@@ -26,13 +30,13 @@ public final class FindMeetingQuery {
    */
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     Collection<String> requiredAttendees = request.getAttendees();
-    Collection<TimeRange> availableTime = assembleTime(events, required, request.getDuration());
-    return availableTime;
+    Collection<TimeRange> availableTimes = assembleTime(events, requiredAttendees, request.getDuration());
+    return adjustAvailableTimes;
   }
 
   /**
    * Returns the open windows for which {@code request} can be scheduled in,
-   * after removing all conflicting time from {@code events}.
+   * after making {@code events} TimeRanges unavailable in {@code availableTimes}.
    */
   public Collection<TimeRange> assembleTime(Collection<Event> events, Collection<String> requiredAttendees, long duration) {
     Collection<TimeRange> availableTimes = new ArrayList<>();
@@ -40,7 +44,7 @@ public final class FindMeetingQuery {
     // Initally, entire day is open to schedule a meeting in.
     availableTimes.add(TimeRange.WHOLE_DAY);
 
-    // For every event that a requiredAttendee must attended, remove that time from avaibleTimes.
+    // For every event that a requiredAttendee must attended, remove that TimeRange from availableTimes.
     for(Event currEvent : events) {
       if (!Collections.disjoint(currEvent.getAttendees(), requiredAttendees)) {
         availableTimes = adjustAvailableTimes(availableTimes, currEvent.getWhen());
@@ -59,26 +63,26 @@ public final class FindMeetingQuery {
    */
   public Collection<TimeRange> adjustAvailableTimes(Collection<TimeRange> availableTimes, TimeRange eventWindow) {
     Collection<TimeRange> newTimes = new ArrayList<>();
-    for(TimeRange thisTime : availableTimes) {
-      // If timeTime doesn't overlap with eventWindow then thisTime is available.
-      if(!thisTime.overlaps(eventWindow)) {
-        newTimes.add(thisTime);
+    for(TimeRange availableTime : availableTimes) {
+      // If timeTime doesn't overlap with eventWindow then availableTime is available.
+      if (!availableTime.overlaps(eventWindow)) {
+        newTimes.add(availableTime);
         continue;
       } 
-      // If eventWindow fits entirely into thisTime then split thisTime into two windows.
-      if (thisTime.contains(eventWindow)) {
-        newTimes.add(TimeRange.fromStartEnd(thisTime.start(), eventWindow.start(), false));
-        newTimes.add(TimeRange.fromStartEnd(eventWindow.end(), thisTime.end(), false));
+      // If eventWindow fits entirely into availableTime then split availableTime into two windows.
+      if (availableTime.contains(eventWindow)) {
+        newTimes.add(TimeRange.fromStartEnd(availableTime.start(), eventWindow.start(), false));
+        newTimes.add(TimeRange.fromStartEnd(eventWindow.end(), availableTime.end(), false));
         continue;
       } 
-      // If eventWindow ends after thisTime starts, push back thisTime's start until eventWindow ends.
-      if (thisTime.start() > eventWindow.start() && thisTime.end() > eventWindow.end()) {
-        newTimes.add(TimeRange.fromStartEnd(eventWindow.end(), thisTime.end(), false));
+      // If eventWindow ends after availableTime starts, push back availableTime's start until eventWindow ends.
+      if (availableTime.start() > eventWindow.start() && availableTime.end() > eventWindow.end()) {
+        newTimes.add(TimeRange.fromStartEnd(eventWindow.end(), availableTime.end(), false));
         continue;
       }
-      // If eventWindow starts before thisTime ends, move thisTime's end forward.
-      if (thisTime.start() > eventWindow.start() && eventWindow.start() > thisTime.end()) {
-        newTimes.add(TimeRange.fromStartEnd(thisTime.start(), eventWindow.start(), false));
+      // If eventWindow starts before availableTime ends, move availableTime's end forward.
+      if (availableTime.start() > eventWindow.start() && eventWindow.start() > availableTime.end()) {
+        newTimes.add(TimeRange.fromStartEnd(availableTime.start(), eventWindow.start(), false));
         continue;
       } 
     }
