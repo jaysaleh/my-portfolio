@@ -33,7 +33,7 @@ public final class FindMeetingQuery {
     Collection<String> allAttendees = new ArrayList<>(requiredAttendees);
     Collection<String> optionalAttendees = request.getOptionalAttendees();
     
-    // Treat optional attendees as required and see if there are available time spots.
+    // Treat optional attendees as required and see if there are available times.
     allAttendees.addAll(optionalAttendees);
     Collection<TimeRange> availableTimes = assembleTime(events, allAttendees, request.getDuration());
     if (requiredAttendees.isEmpty() || !availableTimes.isEmpty()){
