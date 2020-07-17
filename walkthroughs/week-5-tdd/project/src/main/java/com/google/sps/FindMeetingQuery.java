@@ -20,13 +20,14 @@ import com.google.sps.TimeRange;
 import com.google.common.collect.Iterables;
 
 /** 
- * Determines a list of available TimeRanges to schedule a meeting
- * given a MeetingRequest and list of events taking place that day. 
+ * Determines a list of available time slots to schedule a meeting given
+ * already scheduled meetings. 
  */
 public final class FindMeetingQuery {
   
   /** 
-   * Returns the open windows for which {@code request} can be scheduled in.
+   * Returns the open windows for which {@code request} can be scheduled in
+   * while taking account conflicting meetings in {@code events}.
    */
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     Collection<String> requiredAttendees = request.getAttendees();
