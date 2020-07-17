@@ -26,7 +26,8 @@ public final class FindMeetingQuery {
    */
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     Collection<String> requiredAttendees = request.getAttendees();
-    Collection<TimeRange> availableTime = assembleTime(events, required, request.getDuration());
+    Collection<TimeRange> availableTime = assembleTime(events, requiredAttendees, request.getDuration());
+    System.out.println(availableTime);
     return availableTime;
   }
 
