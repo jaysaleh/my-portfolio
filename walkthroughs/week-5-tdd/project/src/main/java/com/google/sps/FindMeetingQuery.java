@@ -29,12 +29,14 @@ public final class FindMeetingQuery {
     Collection<String> allAttendees = new ArrayList<>(requiredAttendees);
     Collection<String> optionalAttendees = request.getOptionalAttendees();
     
+    // Treat optional attendees as required and see if there are available time spots.
     allAttendees.addAll(optionalAttendees);
-    
     Collection<TimeRange> availableTimes = assembleTime(events, allAttendees, request.getDuration());
     if (requiredAttendees.isEmpty() || !availableTimes.isEmpty()){
       return availableTimes;
     }
+
+    // Return times for required attendees only.
     return assembleTime(events, requiredAttendees, request.getDuration());
   }
 
