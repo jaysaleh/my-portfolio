@@ -12,8 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** Spaces out comment text from author name. */
-const commentHyphen = ' -';
+const POSITIVE_SENTIMENT_THRESHOLD = 0;
 
 /**
  * Supported class states for showing and hiding containers.
@@ -103,8 +102,9 @@ async function populateBlobUrl() {
 }
 
 /**
- * Creates and returns a <div> containing the comment
- * a user left and an image if they uploaded one.
+ * Creates and returns a <div> containing the comment a user
+ * left, an image if they uploaded one, and a horizonal line
+ * to divide comments.
  */
 function createCommentImageDiv(text, email, timeStamp, imageUrl) {
   const imageCommentOuterDiv = document.createElement('div');
@@ -117,7 +117,7 @@ function createCommentImageDiv(text, email, timeStamp, imageUrl) {
   if (imageUrl.hasOwnProperty('value') && imageUrl.value != '') {
     imageCommentDiv.append(createImageDiv(imageUrl.value));
   }
-  imageCommentDiv.append(createCommentDiv(text, email, timeStamp));
+  imageCommentDiv.append(createCommentDiv(text, email, timeStamp, sentimentScore));
   
   imageCommentOuterDiv.append(imageCommentDiv);
   imageCommentOuterDiv.append(lineBreak);
@@ -146,27 +146,34 @@ function createImageDiv(imageUrl) {
  * Creates and returns a <div> element containing {@code text}, {@code email},
  * and {@code timeStamp} from comment.
  */
-function createCommentDiv(text, email, timeStamp) {
+function createCommentDiv(text, email, timeStamp, sentimentScore) {
   const commentOuterDiv = document.createElement('div');
   const commentDiv = document.createElement('div');
 
   const textElement = document.createElement('p');
   const emailElement = document.createElement('h4');
+  const scoreElement = document.createElement('h5');
   const dateElement = document.createElement('h5');
+
+  // The comment is most likely good if score is positive. Otherwise it is most likely bad.
+  var scoreWord = sentimentScore >= POSITIVE_SENTIMENT_THRESHOLD ? 'good' : 'bad';
 
   commentOuterDiv.id = 'comment-div'
   commentDiv.id = 'list-element';
+  scoreElement.id = scoreWord;
   
   var date = new Date(timeStamp);
   var formattedDate = date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear();
 
   textElement.innerText = text;
   emailElement.innerText = email;
+  scoreElement.innerText = Math.abs(sentimentScore) + '% ' + scoreWord;
   dateElement.innerText = formattedDate;
 
   commentDiv.appendChild(textElement);
   commentDiv.appendChild(emailElement);
   commentDiv.appendChild(dateElement);
+  commentDiv.appendChild(scoreElement);
 
   commentOuterDiv.appendChild(commentDiv);
   return commentOuterDiv;

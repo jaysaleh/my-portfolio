@@ -25,6 +25,7 @@ public abstract class Comment {
   public abstract String email();
   public abstract Optional<String> imageUrl();
   public abstract String commentText();
+  public abstract long sentimentScore();
   public abstract long timeStamp();
 
   /** Returns a Builder for a Comment. */
@@ -40,6 +41,7 @@ public abstract class Comment {
     public abstract Builder setEmail(String email);
     public abstract Builder setImageUrl(Optional<String> imageUrl);
     public abstract Builder setCommentText(String commentText);
+    public abstract Builder setSentimentScore(long sentimentScore);
     public abstract Builder setTimeStamp(long timeStamp);
     public abstract Comment build();
   }
