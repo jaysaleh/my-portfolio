@@ -91,6 +91,19 @@ async function deleteData() {
   getData();
 }
 
+async function getBlob(imageUrl) {
+  const myHeaders = new Headers();
+  myHeaders.append('blob-key', imageUrl);
+
+  const request = new Request('/blob', {method: 'GET', headers: myHeaders});
+
+  const response = await fetch(request);
+  const responseBlob = await response.blob();
+  const url = await URL.createObjectURL(responseBlob).toString();
+  console.log(url);
+  return url;
+}
+
 /**
  * Retrieves URL of where to upload the image to Blobstore and sets it as
  * the action for the comments section form.
@@ -115,7 +128,8 @@ function createCommentImageDiv(text, email, timeStamp, imageUrl) {
   lineBreak.id = 'line';
   
   if (imageUrl.hasOwnProperty('value') && imageUrl.value != '') {
-    imageCommentDiv.append(createImageDiv(imageUrl.value));
+    getBlob(imageUrl.value).then(result => imageCommentDiv.append(createImageDiv(result)));
+    // imageCommentDiv.append(createImageDiv(url));
   }
   imageCommentDiv.append(createCommentDiv(text, email, timeStamp));
   

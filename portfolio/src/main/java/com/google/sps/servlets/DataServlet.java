@@ -105,7 +105,7 @@ public class DataServlet extends HttpServlet {
     }
 
     BlobKey blobKey = blobKeys.get(0);
-
+    
     // User submitted form in the live server without a file, so we can't get a URL.
     BlobInfo blobInfo = new BlobInfoFactory().loadBlobInfo(blobKey);
     if (blobInfo.getSize() == 0) {
@@ -120,15 +120,7 @@ public class DataServlet extends HttpServlet {
       return Optional.empty();
     }
 
-    ImagesService imagesService = ImagesServiceFactory.getImagesService();
-    ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
-
-    try {
-      URL url = new URL(imagesService.getServingUrl(options));
-      return Optional.of(url.getPath());
-    } catch (MalformedURLException e) {
-      return Optional.of(imagesService.getServingUrl(options));
-    }
+    return Optional.of(blobKey.getKeyString());
   }
   
   /**
