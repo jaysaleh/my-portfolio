@@ -37,7 +37,7 @@ public final class FindMeetingQuery {
 
   /**
    * Returns the open windows for which {@code request} can be scheduled in,
-   * after making {@code events}' TimeRanges unavailable in {@code availableTimes}.
+   * after making {@code events}'' TimeRanges unavailable for scheduling.
    */
   public Collection<TimeRange> assembleTime(Collection<Event> events, Collection<String> requiredAttendees, long duration) {
     Collection<TimeRange> availableTimes = new ArrayList<>();
@@ -59,29 +59,25 @@ public final class FindMeetingQuery {
   }
 
   /**
-   * Returns {@code newTimes} which takes all TimeRanges in {@code availableTimes} and
-   * adjusts them to not include {@code eventWindow}.
+   * Returns a collection of TimeRanges with TimeRanges in {@code availableTimes} that have been
+   * adjusted to not include {@code eventWindow}.
    */
   public Collection<TimeRange> adjustAvailableTimes(Collection<TimeRange> availableTimes, TimeRange eventWindow) {
     Collection<TimeRange> newTimes = new ArrayList<>();
     for(TimeRange availableTime : availableTimes) {
-      // If timeTime doesn't overlap with eventWindow then availableTime is available.
       if (!availableTime.overlaps(eventWindow)) {
         newTimes.add(availableTime);
         continue;
       } 
-      // If eventWindow fits entirely into availableTime then split availableTime into two windows.
       if (availableTime.contains(eventWindow)) {
         newTimes.add(TimeRange.fromStartEnd(availableTime.start(), eventWindow.start(), false));
         newTimes.add(TimeRange.fromStartEnd(eventWindow.end(), availableTime.end(), false));
         continue;
       } 
-      // If eventWindow ends after availableTime starts, push back availableTime's start until eventWindow ends.
       if (availableTime.start() > eventWindow.start() && availableTime.end() > eventWindow.end()) {
         newTimes.add(TimeRange.fromStartEnd(eventWindow.end(), availableTime.end(), false));
         continue;
       }
-      // If eventWindow starts before availableTime ends, move availableTime's end forward.
       if (availableTime.start() > eventWindow.start() && eventWindow.start() > availableTime.end()) {
         newTimes.add(TimeRange.fromStartEnd(availableTime.start(), eventWindow.start(), false));
         continue;
