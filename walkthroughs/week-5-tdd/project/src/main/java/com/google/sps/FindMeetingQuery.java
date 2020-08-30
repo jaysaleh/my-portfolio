@@ -37,7 +37,7 @@ public final class FindMeetingQuery {
 
   /**
    * Returns the open windows for which {@code request} can be scheduled in,
-   * after making {@code events} TimeRanges unavailable in {@code availableTimes}.
+   * after making {@code events}' TimeRanges unavailable in {@code availableTimes}.
    */
   public Collection<TimeRange> assembleTime(Collection<Event> events, Collection<String> requiredAttendees, long duration) {
     Collection<TimeRange> availableTimes = new ArrayList<>();
