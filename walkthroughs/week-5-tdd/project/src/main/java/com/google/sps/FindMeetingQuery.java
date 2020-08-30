@@ -20,7 +20,7 @@ import com.google.sps.TimeRange;
 import com.google.common.collect.Iterables;
 
 /** 
- * Determines a list of available time slots to schedule a meeting given
+ * Determines available time slots to schedule a meeting given
  * already scheduled meetings. 
  */
 public final class FindMeetingQuery {
