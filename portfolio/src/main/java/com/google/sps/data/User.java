@@ -15,21 +15,26 @@
 package com.google.sps.data;
 
 import com.google.auto.value.AutoValue;
+import java.util.Optional;
 
 /** Stores user login data. */
 @AutoValue 
 public abstract class User {
   public abstract boolean loggedIn();
-  public abstract String loginUrl();
-  public abstract String logoutUrl();
+  public abstract Optional<String> loginUrl();
+  public abstract Optional<String> logoutUrl();
 
-  /** 
-   * Creates a User.
-   * @param loggedIn Indicates if user is logged in.
-   * @param loginUrl URL where user can login.
-   * @param logoutUrl URL where user can logout.
-   */
-  public static User create(boolean loggedIn, String loginUrl, String logoutUrl) {
-    return new AutoValue_User(loggedIn, loginUrl, logoutUrl);
+  /** Returns a Builder for a User. */
+  public static Builder builder() {
+    return new AutoValue_User.Builder().setLoginUrl(Optional.empty()).setLogoutUrl(Optional.empty());
+  }
+
+  /** Builder object for User. */
+  @AutoValue.Builder
+  public abstract static class Builder {
+    public abstract Builder setLoggedIn(boolean loggedIn);
+    public abstract Builder setLoginUrl(Optional<String> loginUrl);
+    public abstract Builder setLogoutUrl(Optional<String> logoutUrl);
+    public abstract User build();
   }
 }

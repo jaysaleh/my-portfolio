@@ -20,6 +20,7 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import java.util.stream.StreamSupport;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,14 +31,17 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/delete-data")
 public class DeleteServlet extends HttpServlet {
   private static final String COMMENT = "Comment";
-
+  
+  // TODO: Update to use transaction for deletion.
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query(COMMENT);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-    for (Entity entity : results.asIterable()) {
-      datastore.delete(entity.getKey());
-    }
+    Iterable<Entity> resultsIterable = results.asIterable();
+    
+    StreamSupport.stream(resultsIterable.spliterator(), false)
+      .map(entity->entity.getKey())
+      .forEach(datastore::delete);
   }
 }

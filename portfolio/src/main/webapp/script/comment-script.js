@@ -34,10 +34,10 @@ async function getUserLoginData() {
   const response = await fetch('/user-login');
   const userData = await response.json();
 
-  var loginButtonContainer = document.getElementById('login-button-container');
+  var loginButtonContainer = document.getElementById('login-container');
   var commentForm = document.getElementById('comment-form');
-  var loginButtonForm = document.getElementById('login-button-form');
-  var logoutButtonForm = document.getElementById('logout-button-form');
+  var loginButtonForm = document.getElementById('login-link');
+  var logoutButtonForm = document.getElementById('logout-link');
   var lineBreak = document.getElementById('line');
   var deleteButton = document.getElementById('delete-button');
 
@@ -49,7 +49,7 @@ async function getUserLoginData() {
     lineBreak.style.display = states.SHOW;
     
     /* Sets the logout link. */
-    logoutButtonForm.action = userData.logoutUrl;
+    logoutButtonForm.href = userData.logoutUrl.value;
     return;
   }
 
@@ -59,7 +59,7 @@ async function getUserLoginData() {
   lineBreak.style.display = states.HIDE;
 
   /* Sets the login link. */
-  loginButtonForm.action = userData.loginUrl;
+  loginButtonForm.href = userData.loginUrl.value;
 }
 
 /**
@@ -81,8 +81,7 @@ async function getData() {
 }
 
 /**
- * Forwards POST request to delete-data servlet and refreshes portfolio with
- * updated comments.
+ * Deletes comments and refreshes portfolio with updated comments.
  */
 async function deleteData() {
   const request = new Request('/delete-data', {method: 'POST'});
@@ -91,8 +90,8 @@ async function deleteData() {
 }
 
 /**
- * Retrieves URL of where to upload image to Blobstore and sets it as the action for the
- * comments section form.
+ * Retrieves URL of where to upload the image to Blobstore and sets it as
+ * the action for the comments section form.
  */
 async function populateBlobUrl() {
   const response = await fetch('/blobstore-upload-url');
