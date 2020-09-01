@@ -192,6 +192,7 @@ public class DataServlet extends HttpServlet {
       // Creates new Comment for JSON accessibility.
       Builder commentBuilder = Comment.builder().setId(id).setName(name).setEmail(email)
         .setCommentText(commentText).setSentimentScore(sentimentScore).setTimeStamp(timeStamp);
+
       if (!imageUrl.isEmpty()) {
         commentBuilder.setImageUrl(Optional.of(imageUrl));
       }

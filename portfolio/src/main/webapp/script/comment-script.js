@@ -14,6 +14,9 @@
 
 const POSITIVE_SENTIMENT_THRESHOLD = 0;
 
+/** Spaces out comment text from author name. */
+const commentHyphen = ' -';
+
 /**
  * Supported class states for showing and hiding containers.
  * @enum {string}
@@ -116,8 +119,8 @@ function createCommentImageDiv(text, email, timeStamp, imageUrl, sentimentScore)
   if (imageUrl.hasOwnProperty('value') && imageUrl.value != '') {
     imageCommentDiv.append(createImageDiv(imageUrl.value));
   }
+
   imageCommentDiv.append(createCommentDiv(text, email, timeStamp, sentimentScore));
-  
   imageCommentOuterDiv.append(imageCommentDiv);
   imageCommentOuterDiv.append(lineBreak);
 
