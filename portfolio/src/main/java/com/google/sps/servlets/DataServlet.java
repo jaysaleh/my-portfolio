@@ -34,6 +34,9 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
+import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.Sentiment;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -55,6 +58,7 @@ public class DataServlet extends HttpServlet {
   private static final String COMMENT_TEXT = "commentText";
   private static final String EMAIL = "email";
   private static final String IMAGE_URL = "imageUrl";
+  private static final String SENTIMENT_SCORE = "sentimentScore";
 
   // Supported image files.
   private static final String JPEG = "image/jpeg";
@@ -84,11 +88,26 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty(IMAGE_URL, uploadedUrl.isPresent() ? uploadedUrl.get() : "");
     commentEntity.setProperty(COMMENT_TEXT, commentText);
     commentEntity.setProperty(TIME_STAMP, timeStamp);
+    commentEntity.setProperty(SENTIMENT_SCORE, getSentiment(commentText));
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
     response.sendRedirect(REDIRECT_URL);
+  }
+
+  /**
+   * Returns sentiment analysis score of {@code commentText} ranging from -1 to 1.
+   * The closer to -1, the most likely the comment is bad. The closer to 1, the comment
+   * is most likely good.
+   */
+  private long getSentiment(String commentText) throws IOException {
+    Document doc = Document.newBuilder().setContent(commentText).setType(Document.Type.PLAIN_TEXT).build();
+    LanguageServiceClient languageService = LanguageServiceClient.create();
+    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+    long score = (long)(sentiment.getScore() * 100);
+    languageService.close();
+    return score;
   }
 
   /** 
@@ -167,11 +186,13 @@ public class DataServlet extends HttpServlet {
       String email = (String) entity.getProperty(EMAIL);
       String imageUrl = (String) entity.getProperty(IMAGE_URL);
       String commentText = (String) entity.getProperty(COMMENT_TEXT);
+      long sentimentScore = (long) entity.getProperty(SENTIMENT_SCORE);
       long timeStamp = (long) entity.getProperty(TIME_STAMP);
       
       // Creates new Comment for JSON accessibility.
-      Builder commentBuilder = Comment.builder().setId(id).setName(name)
-        .setEmail(email).setCommentText(commentText).setTimeStamp(timeStamp);
+      Builder commentBuilder = Comment.builder().setId(id).setName(name).setEmail(email)
+        .setCommentText(commentText).setSentimentScore(sentimentScore).setTimeStamp(timeStamp);
+
       if (!imageUrl.isEmpty()) {
         commentBuilder.setImageUrl(Optional.of(imageUrl));
       }
