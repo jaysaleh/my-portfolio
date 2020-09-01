@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 /** Spaces out comment text from author name. */
 const commentHyphen = ' -';
 
@@ -26,6 +25,7 @@ const states = {
 }
 
 getUserLoginData();
+populateBlobUrl();
 
 /**
  * Fetches user login data from servlet and adjusts comments section of portfolio
@@ -43,8 +43,7 @@ async function getUserLoginData() {
   var deleteButton = document.getElementById('delete-button');
 
   /* Hide/show containers depending on user login state. */
-  if (userData.loggedIn) {
-    console.log('USER LOGGED IN');
+  if(userData.loggedIn) {
     loginButtonContainer.style.display = states.HIDE;
     commentForm.style.display = states.SHOW;
     deleteButton.style.display = states.SHOW;
@@ -76,7 +75,7 @@ async function getData() {
   commentsListElement.innerHTML = '';
   for (comment of jsonData) {
     if(comment.commentText != '' && comment.name != '') {
-      commentsListElement.appendChild(createDivElement(comment.commentText, comment.email, comment.timeStamp));
+      commentsListElement.appendChild(createCommentImageDiv(comment.commentText, comment.email, comment.timeStamp, comment.imageUrl));
       commentsListElement.appendChild(document.createElement('br'));
     }
   }
@@ -91,16 +90,70 @@ async function deleteData() {
   getData();
 }
 
-/** 
+/**
+ * Retrieves URL of where to upload the image to Blobstore and sets it as
+ * the action for the comments section form.
+ */
+async function populateBlobUrl() {
+  const response = await fetch('/blobstore-upload-url');
+  const blobUploadUrl = await response.text();
+  var commentImageForm = document.getElementById("comment-image-form");
+  commentImageForm.action = blobUploadUrl;
+}
+
+/**
+ * Creates and returns a <div> containing the comment
+ * a user left and an image if they uploaded one.
+ */
+function createCommentImageDiv(text, email, timeStamp, imageUrl) {
+  const imageCommentOuterDiv = document.createElement('div');
+  const imageCommentDiv = document.createElement('div');
+  const lineBreak = document.createElement('hr');
+
+  imageCommentDiv.id = 'img-comment-div';
+  lineBreak.id = 'line';
+  
+  if (imageUrl.hasOwnProperty('value') && imageUrl.value != '') {
+    imageCommentDiv.append(createImageDiv(imageUrl.value));
+  }
+  imageCommentDiv.append(createCommentDiv(text, email, timeStamp));
+  
+  imageCommentOuterDiv.append(imageCommentDiv);
+  imageCommentOuterDiv.append(lineBreak);
+
+  return imageCommentOuterDiv;
+}
+
+/**
+ * Creates and returns a <div> element containing an <img>
+ * that displays the image stored at {@code imageUrl}.
+ */
+function createImageDiv(imageUrl) {
+  const imageDiv = document.createElement('div');
+  const image = document.createElement('img');
+
+  imageDiv.id = 'img-div';
+  image.id = 'img';
+  image.src = imageUrl;
+  
+  imageDiv.append(image);
+
+  return imageDiv;
+}
+
+/**
  * Creates and returns a <div> element containing {@code text}, {@code email},
  * and {@code timeStamp} from comment.
  */
-function createDivElement(text, email, timeStamp) {
+function createCommentDiv(text, email, timeStamp) {
+  const commentOuterDiv = document.createElement('div');
   const commentDiv = document.createElement('div');
+
   const textElement = document.createElement('p');
   const emailElement = document.createElement('h4');
   const dateElement = document.createElement('h5');
 
+  commentOuterDiv.id = 'comment-div'
   commentDiv.id = 'list-element';
   
   var date = new Date(timeStamp);
@@ -114,5 +167,6 @@ function createDivElement(text, email, timeStamp) {
   commentDiv.appendChild(emailElement);
   commentDiv.appendChild(dateElement);
 
-  return commentDiv;
+  commentOuterDiv.appendChild(commentDiv);
+  return commentOuterDiv;
 }
