@@ -67,6 +67,7 @@ public class DataServlet extends HttpServlet {
   private static final String COMMENT_INPUT = "comment-input";
   // Default value if comment section inputs are empty.
   private static final String DEFAULT_VALUE = "";
+  
   private static final String REDIRECT_URL = "/html/comments.html";
 
   @Override
@@ -88,6 +89,14 @@ public class DataServlet extends HttpServlet {
     datastore.put(commentEntity);
 
     response.sendRedirect(REDIRECT_URL);
+  }
+  
+  /**
+   * Returns email of currently logged in user.
+   */
+  private String getEmail() {
+    UserService userService = UserServiceFactory.getUserService();
+    return userService.getCurrentUser().getEmail();
   }
 
   /** 
@@ -178,7 +187,7 @@ public class DataServlet extends HttpServlet {
     }
 
     Gson gson = new Gson();
-    response.setContentType("text/html;");
+    response.setContentType("text/html");
     response.getWriter().println(gson.toJson(comments));
   }
 }
