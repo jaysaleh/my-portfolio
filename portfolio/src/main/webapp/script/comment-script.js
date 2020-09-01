@@ -17,6 +17,54 @@
 const commentHyphen = ' -';
 
 /**
+ * Supported class states for showing and hiding containers.
+ * @enum {string}
+ */
+const states = {
+  SHOW: 'block',
+  HIDE: 'none',
+}
+
+getUserLoginData();
+
+/**
+ * Fetches user login data from servlet and adjusts comments section of portfolio
+ * to hide comments if user is logged out.
+ */
+async function getUserLoginData() {
+  const response = await fetch('/user-login');
+  const userData = await response.json();
+
+  var loginButtonContainer = document.getElementById('login-container');
+  var commentForm = document.getElementById('comment-form');
+  var loginButtonForm = document.getElementById('login-link');
+  var logoutButtonForm = document.getElementById('logout-link');
+  var lineBreak = document.getElementById('line');
+  var deleteButton = document.getElementById('delete-button');
+
+  /* Hide/show containers depending on user login state. */
+  if (userData.loggedIn) {
+    console.log('USER LOGGED IN');
+    loginButtonContainer.style.display = states.HIDE;
+    commentForm.style.display = states.SHOW;
+    deleteButton.style.display = states.SHOW;
+    lineBreak.style.display = states.SHOW;
+    
+    /* Sets the logout link. */
+    logoutButtonForm.href = userData.logoutUrl.value;
+    return;
+  }
+
+  loginButtonContainer.style.display = states.SHOW;
+  commentForm.style.display = states.HIDE;
+  deleteButton.style.display = states.HIDE;
+  lineBreak.style.display = states.HIDE;
+
+  /* Sets the login link. */
+  loginButtonForm.href = userData.loginUrl.value;
+}
+
+/**
  * Fetches data from servlet and sets it in the comments section of portfolio.
  * Called whenever comments section is loaded.
  */
@@ -28,7 +76,7 @@ async function getData() {
   commentsListElement.innerHTML = '';
   for (comment of jsonData) {
     if(comment.commentText != '' && comment.name != '') {
-      commentsListElement.appendChild(createDivElement(comment.commentText, comment.name, comment.timeStamp));
+      commentsListElement.appendChild(createDivElement(comment.commentText, comment.email, comment.timeStamp));
       commentsListElement.appendChild(document.createElement('br'));
     }
   }
@@ -44,13 +92,13 @@ async function deleteData() {
 }
 
 /** 
- * Creates and returns a <div> element containing {@code text}, {@code name},
+ * Creates and returns a <div> element containing {@code text}, {@code email},
  * and {@code timeStamp} from comment.
  */
-function createDivElement(text, name, timeStamp) {
+function createDivElement(text, email, timeStamp) {
   const commentDiv = document.createElement('div');
   const textElement = document.createElement('p');
-  const nameElement = document.createElement('h4');
+  const emailElement = document.createElement('h4');
   const dateElement = document.createElement('h5');
 
   commentDiv.id = 'list-element';
@@ -59,11 +107,11 @@ function createDivElement(text, name, timeStamp) {
   var formattedDate = date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear();
 
   textElement.innerText = text;
-  nameElement.innerText = name;
+  emailElement.innerText = email;
   dateElement.innerText = formattedDate;
 
   commentDiv.appendChild(textElement);
-  commentDiv.appendChild(nameElement);
+  commentDiv.appendChild(emailElement);
   commentDiv.appendChild(dateElement);
 
   return commentDiv;
