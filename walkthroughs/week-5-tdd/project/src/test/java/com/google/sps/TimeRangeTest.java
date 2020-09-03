@@ -185,3 +185,4 @@ public final class TimeRangeTest {
     Assert.assertTrue(emptyEnd.overlaps(range));
   }
 }
+
