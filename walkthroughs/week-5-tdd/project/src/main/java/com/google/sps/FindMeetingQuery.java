@@ -59,7 +59,7 @@ public final class FindMeetingQuery {
   }
 
   /**
-   * Returns a collection of TimeRanges of TimeRanges in {@code availableTimes} that have been
+   * Returns a collection of TimeRanges in {@code availableTimes} that have been
    * adjusted to not include {@code eventWindow}.
    */
   public Collection<TimeRange> adjustAvailableTimes(Collection<TimeRange> availableTimes, TimeRange eventWindow) {
