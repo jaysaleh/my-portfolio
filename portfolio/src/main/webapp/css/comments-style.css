@@ -14,6 +14,10 @@ a:hover {
   color: #f6543c !important;
 }
 
+#bad {
+  color: red !important;
+}
+
 button,
 button:hover {
   border-radius: 25px;
@@ -139,6 +143,10 @@ form {
 .fa:hover {
   color: #0cca4a !important;
   opacity: 0.7;
+}
+
+#good {
+  color: green !important;
 }
 
 /* Header styling */
