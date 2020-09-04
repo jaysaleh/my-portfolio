@@ -151,55 +151,6 @@ public class DataServlet extends HttpServlet {
     return score;
   }
 
-  /** 
-   * Returns the URL that points to a file uploaded by {@code formInputElementName}, 
-   * or an empty optional if the user didn't upload an image file. 
-   */
-  private Optional<String> getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
-    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-    Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
-    List<BlobKey> blobKeys = blobs.get(formInputElementName);
-
-    // User submitted form in the local server without a file, so we can't get a URL.
-    if (blobKeys == null || blobKeys.isEmpty()) {
-      return Optional.empty();
-    }
-
-    BlobKey blobKey = blobKeys.get(0);
-
-    // User submitted form in the live server without a file, so we can't get a URL.
-    BlobInfo blobInfo = new BlobInfoFactory().loadBlobInfo(blobKey);
-    if (blobInfo.getSize() == 0) {
-      blobstoreService.delete(blobKey);
-      return Optional.empty();
-    }
-
-    String fileInfo = blobInfo.getContentType();
-
-    // Return empty optional if file is not a jpg, png or tiff image.
-    if (!fileInfo.equals(JPEG) && !fileInfo.equals(PNG) && !fileInfo.equals(TIFF)) {
-      return Optional.empty();
-    }
-
-    ImagesService imagesService = ImagesServiceFactory.getImagesService();
-    ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
-
-    try {
-      URL url = new URL(imagesService.getServingUrl(options));
-      return Optional.of(url.getPath());
-    } catch (MalformedURLException e) {
-      return Optional.of(imagesService.getServingUrl(options));
-    }
-  }
-  
-  /**
-   * Returns email of currently logged in user.
-   */
-  private String getEmail() {
-    UserService userService = UserServiceFactory.getUserService();
-    return userService.getCurrentUser().getEmail();
-  }
-
   /**
    * Returns value with {@code name} from the {@code request} form. 
    * If the {@code name} cannot be found, return {@code defaultValue}.
