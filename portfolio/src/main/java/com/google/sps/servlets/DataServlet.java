@@ -96,6 +96,20 @@ public class DataServlet extends HttpServlet {
     response.sendRedirect(REDIRECT_URL);
   }
 
+  /**
+   * Returns sentiment analysis score of {@code commentText} ranging from -1 to 1.
+   * The closer to -1, the most likely the comment is bad. The closer to 1, the comment
+   * is most likely good.
+   */
+  private long getSentiment(String commentText) throws IOException {
+    Document doc = Document.newBuilder().setContent(commentText).setType(Document.Type.PLAIN_TEXT).build();
+    LanguageServiceClient languageService = LanguageServiceClient.create();
+    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+    long score = (long)(sentiment.getScore() * 100);
+    languageService.close();
+    return score;
+  }
+
   /** 
    * Returns the URL that points to a file uploaded by {@code formInputElementName}, 
    * or an empty optional if the user didn't upload an image file. 
@@ -135,20 +149,6 @@ public class DataServlet extends HttpServlet {
   private String getEmail() {
     UserService userService = UserServiceFactory.getUserService();
     return userService.getCurrentUser().getEmail();
-  }
-
-  /**
-   * Returns sentiment analysis score of {@code commentText} ranging from -1 to 1.
-   * The closer to -1, the most likely the comment is bad. The closer to 1, the comment
-   * is most likely good.
-   */
-  private long getSentiment(String commentText) throws IOException {
-    Document doc = Document.newBuilder().setContent(commentText).setType(Document.Type.PLAIN_TEXT).build();
-    LanguageServiceClient languageService = LanguageServiceClient.create();
-    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
-    long score = (long)(sentiment.getScore() * 100);
-    languageService.close();
-    return score;
   }
 
   /**
