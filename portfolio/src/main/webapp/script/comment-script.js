@@ -92,6 +92,16 @@ async function deleteData() {
   getData();
 }
 
+async function getBlob(imageUrl) {
+  const requestUrl = new URL('/blob', window.location.origin);
+  requestUrl.searchParams.append('blob-key', imageUrl);
+  const response = await fetch(requestUrl);
+  
+  const responseBlob = await response.blob();
+  const url = await URL.createObjectURL(responseBlob).toString();
+  return url;
+}
+
 /**
  * Retrieves URL of where to upload the image to Blobstore and sets it as
  * the action for the comments section form.
@@ -117,7 +127,7 @@ function createCommentImageDiv(text, email, timeStamp, imageUrl, sentimentScore)
   lineBreak.id = 'line';
   
   if (imageUrl.hasOwnProperty('value') && imageUrl.value != '') {
-    imageCommentDiv.append(createImageDiv(imageUrl.value));
+    getBlob(imageUrl.value).then(result => imageCommentDiv.append(createImageDiv(result)));
   }
 
   imageCommentDiv.append(createCommentDiv(text, email, timeStamp, sentimentScore));
@@ -169,6 +179,7 @@ function createCommentDiv(text, email, timeStamp, sentimentScore) {
 
   textElement.innerText = text;
   emailElement.innerText = email;
+
   scoreElement.innerText = Math.abs(sentimentScore) + '% ' + scoreWord;
   dateElement.innerText = formattedDate;
 
