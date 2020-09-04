@@ -93,15 +93,12 @@ async function deleteData() {
 }
 
 async function getBlob(imageUrl) {
-  const myHeaders = new Headers();
-  myHeaders.append('blob-key', imageUrl);
-
-  const request = new Request('/blob', {method: 'GET', headers: myHeaders});
-
-  const response = await fetch(request);
+  const requestUrl = new URL('/blob', window.location.origin);
+  requestUrl.searchParams.append('blob-key', imageUrl);
+  const response = await fetch(requestUrl);
+  
   const responseBlob = await response.blob();
   const url = await URL.createObjectURL(responseBlob).toString();
-  console.log(url);
   return url;
 }
 
